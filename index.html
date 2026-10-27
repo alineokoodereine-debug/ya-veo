@@ -1,428 +1,122 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="format-detection" content="telephone=no">
-  <meta name="format-detection" content="email=no">
-  <meta name="theme-color" content="#0B1F3A">
-  <meta
-    name="description"
-    content="L’Adresse SARL, conciergerie de luxe à Libreville, Gabon. Séjours, mobilité privée, réservations et assistance personnalisée."
-  >
-  <title>L’Adresse SARL | L’art de l’hospitalité sur mesure</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Instrument+Sans:wght@400;500;600&display=swap"
-    rel="stylesheet"
-  >
-  <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="format-detection" content="telephone=no">
+<meta name="format-detection" content="email=no">
+<meta name="format-detection" content="address=no">
+<meta name="theme-color" content="#0B1F3A">
+<title>L’Adresse SARL | L’art de l’hospitalité sur mesure</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<style>
+/* RESPONSIVE EXTRA */
+.hero-pano{position:relative;min-height:84vh;display:flex;align-items:center;justify-content:center;text-align:center;color:#fff;overflow:hidden;padding:120px 20px 80px}
+.hero-pano-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0}
+.hero-pano-overlay{position:absolute;inset:0;background:linear-gradient(180deg,rgba(11,31,58,.5),rgba(11,31,58,.85));z-index:1}
+.hero-pano-content{position:relative;z-index:2;max-width:900px}
+@media(max-width:768px){
+.hero-pano{min-height:78vh;padding:90px 18px 50px}
+.hero-pano h1{font-size:38px !important;line-height:0.95}
+.hero-pano h2{font-size:20px !important}
+.hero-pano p{font-size:14px !important}
+.q-card{flex:0 0 86vw !important}
+.abonnement-grid{grid-template-columns:1fr !important}
+}
+.reviews-section{background:#F8F6F2;padding:70px 0;overflow:hidden}
+.reviews-header{text-align:center;padding:0 20px;margin-bottom:30px}
+.reviews-track{display:flex;gap:18px;overflow-x:auto;padding:10px 20px 30px;scroll-snap-type:x mandatory;scrollbar-width:none}
+.reviews-track::-webkit-scrollbar{display:none}
+.review-card{flex:0 0 320px;scroll-snap-align:start;background:#fff;border:1px solid var(--border);border-radius:20px;padding:22px}
+@media(max-width:560px){.review-card{flex:0 0 84vw}}
+.partners-ribbon{background:#0B1F3A;padding:28px 0;text-align:center}
+.partners-track{display:flex;gap:20px;justify-content:center;flex-wrap:wrap;padding:0 20px}
+.partner-logo{border:1px solid rgba(255,255,255,.18);color:rgba(255,255,255,.7);padding:10px 18px;border-radius:100px;font-family:'Cormorant Garamond';font-size:15px;letter-spacing:.1em}
+</style>
 </head>
 <body>
-  <header class="top-header">
-  <a class="brand" href="index.html" aria-label="L’Adresse SARL">
-    <div class="brand-icon">L</div>
-    <div class="brand-name">L’ADRESSE SARL</div>
-  </a>
-  <nav class="nav" id="mainNav">
-    <a href="index.html">Accueil</a>
-    <a href="qui-sommes-nous.html">Qui sommes-nous</a>
-    <a href="service-sejours.html">Séjours</a>
-    <a href="service-mobilite.html">Mobilité</a>
-    <a href="service-conciergerie.html">Conciergerie</a>
-    <a href="travel.html">Travel</a>
-    <a href="business.html">Business</a>
-    <a href="prestige.html">Prestige</a>
-    <a href="blog.html">Blog</a>
-    <a href="abonnements.html">Abonnements</a>
-    <a href="espace-client.html">Mon espace client</a>
-  </nav>
-  <div style="display:flex;gap:10px;align-items:center">
-    <a class="btn-contact hide-mobile" href="abonnements.html">Abonnements</a>
-    <button class="burger" id="burgerBtn" type="button">☰</button>
-  </div>
+
+<header class="top-header">
+<a class="brand" href="index.html"><div class="brand-icon">L</div><div class="brand-name">L’ADRESSE SARL</div></a>
+<nav class="nav" id="mainNav">
+<a href="index.html">Accueil</a>
+<a href="qui-sommes-nous.html">Qui sommes-nous</a>
+<a href="index.html#services-cards">Services</a>
+<a href="blog.html">Blog</a>
+<a href="espace-client.html">Mon espace client</a>
+</nav>
+<button class="burger" id="burgerBtn">☰</button>
 </header>
-  <main>
-    <!-- HERO -->
-    <section class="hero-pano" style="background-image:url('a1.jpeg');">
-  <div class="hero-pano-content">
-    <span class="eyebrow">Glass · Libreville · Port-Gentil</span>
-    <h1>Conciergerie de Luxe</h1>
-    <h2>Votre temps, notre excellence.</h2>
-    <p>L’art de l’hospitalité sur mesure. Un seul interlocuteur, une organisation complète, une expérience sans compromis. Glass, Libreville.</p>
-    <div class="hero-btns">
-      <a class="btn-gold" href="#services-cards">Demander une réservation</a>
-      <a class="btn-outline" href="#services">Découvrir nos services</a>
-    </div>
-  </div>
+
+<section class="hero-pano">
+<img class="hero-pano-img" src="a1.jpeg" alt="Libreville" onerror="this.src='https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=1600&q=80'">
+<div class="hero-pano-overlay"></div>
+<div class="hero-pano-content">
+<span class="eyebrow">Glass · Libreville · Port-Gentil</span>
+<h1>Conciergerie de Luxe</h1>
+<h2>Votre temps, notre excellence.</h2>
+<p>Un seul interlocuteur, une organisation complète, une expérience sans compromis.</p>
+<div class="hero-btns"><a class="btn-gold" href="#services-cards">Demander une réservation</a><a class="btn-outline" href="qui-sommes-nous.html">Découvrir</a></div>
+</div>
 </section>
-    <!-- PRÉSENTATION DES SERVICES -->
-    <section class="services-intro" id="services">
-      <small>Nos services</small>
-      <h2>Trois expertises dédiées à votre confort</h2>
-      <div class="services-grid-3">
-        <article class="svc3">
-          <div class="icon">
-            <img src="icon3.png" alt="" loading="lazy">
-          </div>
-          <h3>Réservations privées</h3>
-          <p>
-            Restaurants, hôtels d’exception et villas.
-            Les commissions éventuelles dépendent des conditions
-            convenues avec chaque partenaire.
-          </p>
-        </article>
-        <article class="svc3">
-          <div class="icon">
-            <img src="icon1.png" alt="" loading="lazy">
-          </div>
-          <h3>Événements & expériences</h3>
-          <p>
-            Soirées privées, accès VIP, excursions et expériences
-            personnalisées au Gabon.
-          </p>
-        </article>
-        <article class="svc3">
-          <div class="icon">
-            <img src="icon2.png" alt="" loading="lazy">
-          </div>
-          <h3>Assistance personnelle</h3>
-          <p id="prix-accueil">
-            Chauffeur berline : 20 000 FCFA/jour.
-            SUV Premium : 35 000 FCFA/jour.
-            Tarifs à confirmer selon disponibilité et conditions.
-          </p>
-        </article>
-      </div>
-    </section>
-    <!-- CARTES DES SERVICES -->
-    <section class="section-cards" id="services-cards">
-      <div class="section-header">
-        <h2>L’Adresse — Nos services</h2>
-        <p>
-          Découvrez nos services et accédez à la page correspondante
-          pour envoyer votre demande.
-        </p>
-      </div>
-      <div class="cards-wrapper">
-        <div class="cards-scroll is-centered" id="cardsScroll">
-          <article class="q-card">
-            <div class="q-card-img">
-              <img
-                src="https://images.unsplash.com/photo-1566073771259-6a8506099945?w=600"
-                alt="Hôtel et séjour haut de gamme"
-                loading="lazy"
-              >
-            </div>
-            <div class="q-card-body">
-              <h3>Conciergerie personnalisée</h3>
-              <p>
-                Assistance personnalisée, organisation quotidienne
-                et demandes spéciales.
-              </p>
-              <a class="q-btn" href="service-conciergerie.html">
-                Voir plus
-              </a>
-            </div>
-          </article>
-          <article class="q-card">
-            <div class="q-card-img">
-              <img
-                src="https://images.unsplash.com/photo-1611892440504-42a792e24d32?w=600"
-                alt="Hébergement pour un séjour"
-                loading="lazy"
-              >
-            </div>
-            <div class="q-card-body">
-              <h3>Exclusive Access – Séjours</h3>
-              <p>
-                Hébergements et services complémentaires.
-                Les disponibilités et tarifs doivent être confirmés.
-              </p>
-              <a class="q-btn" href="service-sejours.html">
-                Voir plus
-              </a>
-            </div>
-          </article>
-          <article class="q-card">
-            <div class="q-card-img">
-              <img
-                src="https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?w=600"
-                alt="Véhicule pour un déplacement privé"
-                loading="lazy"
-              >
-            </div>
-            <div class="q-card-body">
-              <h3>Mobilité & chauffeur privé</h3>
-              <p>
-                Transferts, déplacements et véhicules premium
-                sur demande, selon disponibilité.
-              </p>
-              <a class="q-btn" href="service-mobilite.html">
-                Voir plus
-              </a>
-            </div>
-          </article>
-        </div>
-      </div>
-    </section>
-    <!-- ABONNEMENTS -->
-    <section class="abonnements-section" id="abonnements">
-      <div class="container">
-        <div class="abonnement-intro">
-          <small>Nos formules d’abonnement</small>
-          <h2>Nos cartes d’abonnement</h2>
-          <p id="abos-desc">
-            Les frais de conciergerie sont distincts des prestations
-            achetées pour le compte du client. Les conditions de chaque
-            formule sont communiquées avant toute souscription.
-          </p>
-        </div>
-        <div
-          class="abonnement-grid"
-          id="abosGrid"
-          aria-live="polite"
-          aria-busy="true"
-        >
-          <p id="abosStatus" role="status">
-            Chargement des abonnements...
-          </p>
-        </div>
-      </div>
-    </section>
-  </main>
-  <!-- FOOTER -->
-  
-  <script>
-    "use strict";
-    const SHEET_URL = ""; // Mode démonstration : aucune connexion à la production.
-    const WHATSAPP_NUMBER = "24162516457";
-    const abosGrid = document.getElementById("abosGrid");
-    const burger = document.getElementById("burgerBtn");
-    const nav = document.getElementById("mainNav");
-    /**
-     * Crée un élément HTML en utilisant textContent pour afficher
-     * les données externes comme du texte, et non comme du HTML.
-     */
-    function createTextElement(tag, className, value) {
-      const element = document.createElement(tag);
-      if (className) {
-        element.className = className;
-      }
-      element.textContent = value == null ? "" : String(value);
-      return element;
-    }
-    function setAbosStatus(message, canRetry = false) {
-      abosGrid.replaceChildren();
-      const status = document.createElement("div");
-      status.style.gridColumn = "1 / -1";
-      const paragraph = createTextElement("p", "", message);
-      paragraph.setAttribute("role", "status");
-      status.appendChild(paragraph);
-      if (canRetry) {
-        const retryButton = createTextElement(
-          "button",
-          "btn-gold",
-          "Réessayer"
-        );
-        retryButton.type = "button";
-        retryButton.addEventListener("click", loadAbos);
-        status.appendChild(retryButton);
-      }
-      abosGrid.appendChild(status);
-    }
-    function isActive(value) {
-      return String(value ?? "").trim().toLocaleLowerCase("fr") === "oui";
-    }
-    function createAbonnementCard(abonnement) {
-      const card = document.createElement("article");
-      const badgeText = String(abonnement.badge ?? "").trim();
-      const nom = String(abonnement.nom ?? "").trim();
-      const prix = String(abonnement.prix ?? "").trim();
-      const periode = String(abonnement.periode ?? "").trim();
-      const isFeatured = badgeText.toLocaleLowerCase("fr").includes("demandé");
-      card.className = isFeatured
-        ? "abonnement-card featured"
-        : "abonnement-card";
-      const top = document.createElement("div");
-      top.className = "abonnement-top";
-      if (badgeText) {
-        top.appendChild(
-          createTextElement("span", "badge-abonnement", badgeText)
-        );
-      }
-      top.appendChild(createTextElement("h3", "", nom || "Abonnement"));
-      const price = document.createElement("div");
-      price.className = "price-abonnement";
-      price.appendChild(document.createTextNode(prix || "Sur demande"));
-      if (prix && periode) {
-        const periodElement = createTextElement(
-          "small",
-          "",
-          " FCFA / " + periode
-        );
-        price.appendChild(periodElement);
-      } else if (prix) {
-        price.appendChild(
-          createTextElement("small", "", " FCFA")
-        );
-      }
-      top.appendChild(price);
-      card.appendChild(top);
-      const list = document.createElement("ul");
-      list.className = "abonnement-list";
-      const rawFeatures = abonnement["Fonctionnalités | Avantages"];
-      const features = String(rawFeatures ?? "")
-        .split("|")
-        .map(feature => feature.trim())
-        .filter(Boolean);
-      if (features.length) {
-        features.forEach(feature => {
-          list.appendChild(createTextElement("li", "", feature));
-        });
-      } else {
-        list.appendChild(
-          createTextElement(
-            "li",
-            "",
-            "Les détails de cette formule sont disponibles sur demande."
-          )
-        );
-      }
-      card.appendChild(list);
-      const requestButton = createTextElement(
-        "button",
-        "btn-whatsapp",
-        "Demander cet abonnement"
-      );
-      requestButton.type = "button";
-      requestButton.addEventListener("click", () => {
-        const message =
-          "Bonjour, je souhaite obtenir des informations sur l’abonnement : " +
-          nom;
-        const whatsappUrl =
-          "https://wa.me/" +
-          WHATSAPP_NUMBER +
-          "?text=" +
-          encodeURIComponent(message);
-        window.open(whatsappUrl, "_blank", "noopener,noreferrer");
-      });
-      card.appendChild(requestButton);
-      return card;
-    }
-    async function loadAbos() {
-      abosGrid.setAttribute("aria-busy", "false");
-      const plans = [
-        {nom:"Carte Premium", prix:"150 000", delai:"Délai de réponse : 2 heures maximum.", badge:"Premium"},
-        {nom:"Carte Luxe", prix:"350 000", delai:"Délai de réponse : 1 heure maximum.", badge:"Luxe"},
-        {nom:"Carte Prestige", prix:"1 050 000", delai:"Délai Ultra VIP indiqué : 15 minutes maximum, à confirmer.", badge:"Prestige"}
-      ];
-      abosGrid.replaceChildren();
-      plans.forEach(plan => {
-        const card=document.createElement("article"); card.className="abonnement-card";
-        const badge=document.createElement("span"); badge.className="badge-abonnement"; badge.textContent=plan.badge;
-        const title=document.createElement("h3"); title.textContent=plan.nom;
-        const price=document.createElement("div"); price.className="price-abonnement"; price.textContent=plan.prix;
-        const period=document.createElement("small"); period.textContent=" FCFA / mois"; price.appendChild(period);
-        const detail=document.createElement("p"); detail.className="demo-plan-detail"; detail.textContent=plan.delai;
-        const more=document.createElement("button"); more.type="button"; more.className="btn-whatsapp"; more.textContent="Savoir plus";
-        more.addEventListener("click",()=>alert(plan.nom+"\n"+plan.delai+"\nLes prestations détaillées et conditions seront confirmées par L’Adresse."));
-        const request=document.createElement("a"); request.className="btn-gold"; request.style.cssText="display:block;text-align:center;margin-top:12px;border-radius:100px;padding:12px"; request.textContent="Solliciter cet abonnement";
-        const message="Bonjour, je suis intéressé(e) par cet abonnement : "+plan.nom+". Pourriez-vous me transmettre les détails et conditions ?";
-        request.href="https://wa.me/24162516457?text="+encodeURIComponent(message); request.target="_blank"; request.rel="noopener noreferrer";
-        card.append(badge,title,price,detail,more,request); abosGrid.appendChild(card);
-      });
-    }
-    // Menu mobile
-    function closeMenu() {
-      nav.classList.remove("open");
-      burger.setAttribute("aria-expanded", "false");
-      burger.setAttribute("aria-label", "Ouvrir le menu");
-      burger.textContent = "☰";
-    }
-    function toggleMenu() {
-      const isOpen = nav.classList.toggle("open");
-      burger.setAttribute("aria-expanded", String(isOpen));
-      burger.setAttribute(
-        "aria-label",
-        isOpen ? "Fermer le menu" : "Ouvrir le menu"
-      );
-      burger.textContent = isOpen ? "✕" : "☰";
-    }
-    burger.addEventListener("click", toggleMenu);
-    nav.querySelectorAll("a").forEach(link => {
-      link.addEventListener("click", closeMenu);
-    });
-    document.addEventListener("keydown", event => {
-      if (event.key === "Escape") {
-        closeMenu();
-      }
-    });
-    // Chargement initial
-    loadAbos();
-  </script>
-<!-- AVIS CLIENTS FICTIFS AVEC ANIMATION -->
+
+<section class="section-cards" id="services-cards">
+<div class="section-header"><h2>L’Adresse — Nos services</h2><p>Travel (ex-Séjours) + Mobilité + Conciergerie + Business + Prestige</p></div>
+<div class="cards-wrapper"><div class="cards-scroll is-centered">
+<article class="q-card"><div class="q-card-img"><img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?w=600" loading="lazy"></div><div class="q-card-body"><h3>Conciergerie personnalisée</h3><a class="q-btn" href="service-conciergerie.html">Voir plus</a></div></article>
+<article class="q-card"><div class="q-card-img"><img src="https://images.unsplash.com/photo-1611892440504-42a792e24d32?w=600" loading="lazy"></div><div class="q-card-body"><h3>Travel – Séjours</h3><p style="font-size:13px;color:var(--muted)">5 appartements + 5 hôtels, 3 photos chacun</p><a class="q-btn" href="travel.html">Voir plus</a></div></article>
+<article class="q-card"><div class="q-card-img"><img src="https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?w=600" loading="lazy"></div><div class="q-card-body"><h3>Mobilité & chauffeur</h3><a class="q-btn" href="service-mobilite.html">Voir plus</a></div></article>
+<article class="q-card"><div class="q-card-img"><img src="https://images.unsplash.com/photo-1497366754035-f200968a6e72?w=600" loading="lazy"></div><div class="q-card-body"><h3>Business</h3><a class="q-btn" href="business.html">Voir plus</a></div></article>
+<article class="q-card"><div class="q-card-img"><img src="https://images.unsplash.com/photo-1519125323398-675f0ddb6308?w=600" loading="lazy"></div><div class="q-card-body"><h3>Prestige</h3><a class="q-btn" href="prestige.html">Voir plus</a></div></article>
+</div></div>
+</section>
+
+<section class="abonnements-section" id="abonnements"><div class="container">
+<div class="abonnement-intro"><small>Nos formules</small><h2>Nos cartes d’abonnement</h2></div>
+<div class="abonnement-grid" id="abosGrid"></div>
+</div></section>
+
+<!-- RESEÑAS FICTICIAS ANIMADAS -->
 <section class="reviews-section" id="avis">
-  <div class="reviews-header">
-    <small style="letter-spacing:.28em;text-transform:uppercase;color:#9a7940;font-weight:700;font-size:11px">Témoignages</small>
-    <h2>Ils nous font confiance à Libreville</h2>
-    <p>Avis fictifs de démonstration – animés au scroll</p>
-  </div>
-  <div class="reviews-track" id="reviewsTrack">
-    <article class="review-card"><div class="review-stars">★★★★★</div><p class="review-text">"Service impeccable pour nos déplacements professionnels. Chauffeur à l'heure, SUV Premium très confortable. On se sent en sécurité."</p><div class="review-author"><div class="review-avatar">MK</div><div><strong>Marie K.</strong><small>Libreville · Business · 12 séjours</small></div></div></article>
-    <article class="review-card"><div class="review-stars">★★★★★</div><p class="review-text">"J'ai demandé une villa pour ma famille à Glass. En 2h tout était organisé. La discrétion du mode confidentiel est rassurante."</p><div class="review-author"><div class="review-avatar">JP</div><div><strong>Jean-Paul O.</strong><small>Port-Gentil · Premium · 8 mois</small></div></div></article>
-    <article class="review-card"><div class="review-stars">★★★★★</div><p class="review-text">"Chef privé à domicile pour un anniversaire. Organisation parfaite, même le nombre de personnes a été géré automatiquement. Bravo !"</p><div class="review-author"><div class="review-avatar">SL</div><div><strong>Sarah L.</strong><small>Libreville · Luxe · Événement</small></div></div></article>
-    <article class="review-card"><div class="review-stars">★★★★★</div><p class="review-text">"Carte Prestige ultra réactive – 12 minutes de réponse un dimanche. Mon assistant gère tout, même les courses urgentes."</p><div class="review-author"><div class="review-avatar">AD</div><div><strong>Alain D.</strong><small>Diplomate · Prestige · 2 ans</small></div></div></article>
-    <article class="review-card"><div class="review-stars">★★★★☆</div><p class="review-text">"Appartement Premium très propre, check-in fluide. Le formulaire sans sélecteur de pays pour le téléphone est beaucoup plus simple."</p><div class="review-author"><div class="review-avatar">FT</div><div><strong>Fatou T.</strong><small>Expatriée · Séjours · 3 mois</small></div></div></article>
-  </div>
+<div class="reviews-header"><small style="letter-spacing:.28em;text-transform:uppercase;color:#9a7940;font-weight:700;font-size:11px">Témoignages</small><h2>Ils nous font confiance</h2><p style="color:var(--muted);font-size:13px">Avis fictifs de démonstration – animés</p></div>
+<div class="reviews-track" id="reviewsTrack">
+<article class="review-card"><div style="color:#C9A86A">★★★★★</div><p style="font-family:'Cormorant Garamond';font-style:italic;margin:10px 0">"Service impeccable pour nos déplacements. Chauffeur à l'heure, SUV très confortable."</p><strong style="font-size:13px">Marie K. · Libreville</strong></article>
+<article class="review-card"><div style="color:#C9A86A">★★★★★</div><p style="font-family:'Cormorant Garamond';font-style:italic;margin:10px 0">"Villa pour ma famille à Glass. En 2h tout était organisé. Mode confidentiel rassurant."</p><strong style="font-size:13px">Jean-Paul O. · Port-Gentil</strong></article>
+<article class="review-card"><div style="color:#C9A86A">★★★★★</div><p style="font-family:'Cormorant Garamond';font-style:italic;margin:10px 0">"Chef privé à domicile. Número de personas gestionado automáticamente. Bravo !"</p><strong style="font-size:13px">Sarah L. · Événement</strong></article>
+<article class="review-card"><div style="color:#C9A86A">★★★★★</div><p style="font-family:'Cormorant Garamond';font-style:italic;margin:10px 0">"Teléfono sin selector de país, mucho más simple. Appartement Premium muy limpio."</p><strong style="font-size:13px">Fatou T. · Expatriée</strong></article>
+</div>
 </section>
-<!-- CINTA PARTENAIRES -->
+
+<!-- CINTA 4 PARTENAIRES -->
 <section class="partners-ribbon">
-  <div class="partners-label">Nos partenaires de confiance</div>
-  <div class="partners-track">
-    <span class="partner-logo">RADISSON BLU LBV</span>
-    <span class="partner-logo">ONOMO HOTEL</span>
-    <span class="partner-logo">VILLA GLASS</span>
-    <span class="partner-logo">TOYOTA GABON</span>
-    <span class="partner-logo">AFRICA LOGISTICS</span>
-    <span class="partner-logo">FLY GABON</span>
-    <span class="partner-logo">GABON PRESTIGE CARS</span>
-  </div>
+<div style="font-size:11px;letter-spacing:.28em;text-transform:uppercase;color:#E9D9B8;margin-bottom:14px">Nos partenaires de confiance</div>
+<div class="partners-track">
+<span class="partner-logo">【entity-RADISSON BLU¦canonical_name=RADISSON BLU】</span>
+<span class="partner-logo">ONOMO HOTEL</span>
+<span class="partner-logo">TOYOTA GABON</span>
+<span class="partner-logo">FLY GABON</span>
+</div>
 </section>
+
+<footer class="footer-universal"><div class="footer-bottom"><span>© 2026 L’Adresse SARL</span><span>Glass, Libreville</span></div></footer>
+
 <script>
-// Simple auto-scroll animation for reviews
+// Abonnements - savoir plus abre página (no alert)
+const abosGrid=document.getElementById('abosGrid');
+const plans=[
+{nom:"Carte Premium",prix:"150 000",page:"abonnement-premium.html"},
+{nom:"Carte Luxe",prix:"350 000",page:"abonnement-luxe.html"},
+{nom:"Carte Prestige",prix:"1 050 000",page:"abonnement-prestige.html"}
+];
+abosGrid.innerHTML=plans.map(p=>`<article class="abonnement-card"><span class="badge-abonnement">${p.nom}</span><h3>${p.nom}</h3><div class="price-abonnement">${p.prix}<small> FCFA/mois</small></div><a class="btn-whatsapp" style="display:block;text-align:center;text-decoration:none;margin-top:12px" href="${p.page}">Savoir plus</a><a class="btn-gold" style="display:block;text-align:center;margin-top:8px;border-radius:100px;padding:12px" href="https://wa.me/24162516457?text=${encodeURIComponent('Je souhaite '+p.nom)}">Solliciter</a></article>`).join('');
+
+// Burger + reviews auto-scroll
+const burger=document.getElementById('burgerBtn'),nav=document.getElementById('mainNav');
+burger.addEventListener('click',()=>{const o=nav.classList.toggle('open');burger.textContent=o?'✕':'☰';});
 const track=document.getElementById('reviewsTrack');
-let isDown=false,startX,scrollLeft;
-if(track){
-  track.addEventListener('mousedown',e=>{isDown=true;track.classList.add('active');startX=e.pageX-track.offsetLeft;scrollLeft=track.scrollLeft;});
-  track.addEventListener('mouseleave',()=>isDown=false);
-  track.addEventListener('mouseup',()=>isDown=false);
-  track.addEventListener('mousemove',e=>{if(!isDown)return;e.preventDefault();const x=e.pageX-track.offsetLeft;track.scrollLeft=scrollLeft-(x-startX)*2;});
-  // auto scroll
-  let scrollAmount=0;
-  setInterval(()=>{if(!isDown){track.scrollLeft+=0.5; if(track.scrollLeft>=track.scrollWidth/2) track.scrollLeft=0;}},30);
-  // reveal animation
-  const observer=new IntersectionObserver(entries=>{entries.forEach(en=>{if(en.isIntersecting){en.target.style.opacity='1';en.target.style.transform='translateY(0)';}});},{threshold:0.1});
-  document.querySelectorAll('.review-card').forEach((c,i)=>{c.style.opacity='0';c.style.transform='translateY(30px)';c.style.transition=`all .6s ease ${i*0.15}s`;observer.observe(c);});
-}
-</script>
-<footer class="footer-universal">
-  <div class="footer-grid">
-    <div class="footer-brand">
-      <div style="display:flex;align-items:center;gap:12px;margin-bottom:14px"><div class="brand-icon" style="border-color:#C9A86A;color:#C9A86A">L</div><div class="brand-name">L’ADRESSE SARL</div></div>
-      <p>Conciergerie de luxe à Libreville. Séjours, mobilité privée, réservations et assistance personnalisée. Glass, Libreville – Extension Port-Gentil.</p>
-      <p style="margin-top:12px">WhatsApp: <a href="https://wa.me/24162516457" style="display:inline;color:#E9D9B8">+241 62 51 64 57</a></p>
-    </div>
-    <div><h4>Services</h4><a href="service-sejours.html">Séjours Premium</a><a href="service-mobilite.html">Mobilité & Chauffeur</a><a href="service-conciergerie.html">Conciergerie</a><a href="travel.html">Travel</a><a href="business.html">Business</a><a href="prestige.html">Prestige</a></div>
-    <div><h4>Entreprise</h4><a href="qui-sommes-nous.html">Qui sommes-nous</a><a href="blog.html">Blog</a><a href="abonnements.html">Abonnements</a><a href="espace-client.html">Espace client</a><a href="demande.html">Demande personnalisée</a></div>
-    <div><h4>Contact & Légal</h4><p>Glass, Libreville · Gabon</p><a href="politique-confidentialite.html">Confidentialité</a><a href="cgv.html">CGV</a><a href="mentions-legales.html">Mentions légales</a><p style="margin-top:10px;font-size:11px">Traitement standard ou confidentiel disponible.</p></div>
-  </div>
-  <div class="footer-bottom"><span>© 2026 L’Adresse SARL — Démonstration non contractuelle.</span><span>Glass, Libreville · Confidentialité renforcée · 2 Sheets séparés</span></div>
-</footer>
-<script>
-const burger=document.getElementById('burgerBtn');const nav=document.getElementById('mainNav');
-if(burger&&nav){burger.addEventListener('click',()=>{const o=nav.classList.toggle('open');burger.textContent=o?'✕':'☰';});nav.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{nav.classList.remove('open');burger.textContent='☰';}));}
+let auto=setInterval(()=>{track.scrollLeft+=0.6;if(track.scrollLeft>=track.scrollWidth-track.clientWidth-10)track.scrollLeft=0;},30);
+track.addEventListener('touchstart',()=>clearInterval(auto),{passive:true});
 </script>
 </body>
 </html>
