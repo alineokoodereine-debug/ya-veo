@@ -1,25 +1,8 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Conciergerie personnalisée L’Adresse SARL à Libreville">
-<meta name="theme-color" content="#10243a">
-<title>Conciergerie – L’Adresse SARL</title>
+<!DOCTYPE html><html lang="fr"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Mobilité & Chauffeur – L’Adresse SARL</title>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
-<style>
-.config-body input:not([type=checkbox]):not([type=radio]),.config-body select,.config-body textarea{box-sizing:border-box;font:inherit;max-width:100%}
-.config-body input:focus,.config-body select:focus,.config-body textarea:focus{outline:2px solid var(--gold);outline-offset:2px}
-.config-grid .opt{cursor:pointer} .config-grid .opt input{margin-right:8px}
-.config-tabs button{cursor:pointer} .form-note{font-size:13px;line-height:1.5;opacity:.85;margin:10px 0}
-.form-error{color:#9b1c1c;font-size:14px;margin:10px 0} .form-actions{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-top:18px}
-.form-actions-right{display:flex;gap:8px;flex-wrap:wrap} .form-actions button{cursor:pointer}
-.conditional-field{display:none} .conditional-field.visible{display:block;animation:fadeIn .3s}
-@keyframes fadeIn{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:translateY(0)}}
-.simple-tel{width:100%;padding:12px;border:1px solid #d6dbe4;border-radius:10px;font:inherit}
-</style>
-</head>
-<body>
+<style>.field-label{display:block;margin:12px 0 6px;font-size:13px;font-weight:600;color:var(--navy)} .form-field{width:100%;padding:12px;border-radius:10px;border:1px solid var(--border);background:#fff} .simple-tel{width:100%;padding:12px;border:1px solid #d6dbe4;border-radius:10px} .conditional-field{display:none} .conditional-field.visible{display:block;animation:fadeIn .3s} @keyframes fadeIn{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:translateY(0)}} .form-actions{display:flex;justify-content:space-between;gap:10px;margin-top:22px} </style>
+</head><body>
 <header class="top-header">
   <a class="brand" href="index.html" aria-label="L’Adresse SARL">
     <div class="brand-icon">L</div>
@@ -43,12 +26,8 @@
     <button class="burger" id="burgerBtn" type="button">☰</button>
   </div>
 </header>
-<section class="hero-pano" style="background-image:url('https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=1600&q=80');">
-  <div class="hero-pano-content"><span class="eyebrow">L’Adresse · Conciergerie</span><h1>Conciergerie personnalisée</h1><h2>Quotidien, Business ou Événement</h2><p>Un interlocuteur dédié. Traitement standard ou confidentiel disponible.</p><div class="hero-btns"><a class="btn-gold" href="#cfgBody">Faire une demande</a><a class="btn-outline" href="qui-sommes-nous.html">Qui sommes-nous</a></div></div>
-</section>
-<section style="padding:80px 0;background:var(--cream)"><div class="container"><div class="config-wrap">
-<div class="config-tabs"><button class="active" type="button" data-s="1">1. Besoin</button><button type="button" data-s="2">2. Personnaliser</button><button type="button" data-s="3">3. Demande</button></div>
-<div class="config-body" id="cfgBody"></div></div></div></section>
+<section class="hero-pano" style="background-image:url('https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?auto=format&fit=crop&w=1600&q=80');"><div class="hero-pano-content"><span class="eyebrow">Mobilité & Chauffeur privé</span><h1>Déplacez-vous en toute sérénité</h1><h2>Transferts, véhicules de prestige</h2><p>Berline 20.000 FCFA/j · SUV Premium 35.000 FCFA/j · Téléphone simple sans sélecteur pays.</p><div class="hero-btns"><a class="btn-gold" href="#cfgBody">Réserver</a><a class="btn-outline" href="service-sejours.html">Séjours</a></div></div></section>
+<section style="padding:80px 0"><div class="container"><div class="config-wrap"><div class="config-tabs"><button class="active" data-s="1">1. Trajet</button><button data-s="2">2. Véhicule</button><button data-s="3">3. Personnaliser</button><button data-s="4">4. Demande</button></div><div class="config-body" id="cfgBody"><p>Chargement…</p></div></div></div></section>
 <footer class="footer-universal">
   <div class="footer-grid">
     <div class="footer-brand">
@@ -67,75 +46,44 @@ const burger=document.getElementById('burgerBtn');const nav=document.getElementB
 if(burger&&nav){burger.addEventListener('click',()=>{const o=nav.classList.toggle('open');burger.textContent=o?'✕':'☰';});nav.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{nav.classList.remove('open');burger.textContent='☰';}));}
 </script>
 <script>
-'use strict';
-const SHEET_URL = "https://script.google.com/macros/s/AKfycbww-7Nn7ro4OZ-R1oVuoLSdY6P7OWOHJzLl0I4KNazjOXjGYWlmxFzpq-ti7sHGA2zP/exec";
-const state = {type:null,services:[],conf:'standard',budget:'proposition',budgetVal:'',nom:'',tel:'',membres:'',cuisine:'',prefCul:'non',voiture:'',desc:'',website:''};
-let prixVoitures=[];
-const servsQuotidien=["Courses urgentes & Cadeaux","Pressing & Blanchisserie","Gestion de colis & Livraisons","Entretien du domicile","Ménage & Rangement","Nounou & Garde d'enfants","Voiture & Chauffeur","Chef privé","Autre type de service – Précisez"];
-const servsBusiness=["Assistant(e) dédié(e) – Secrétariat, agenda, RDV","Voiture & Chauffeur","Chef privé","Gestion de colis & Livraisons","Courses urgentes & Cadeaux","Autre type de service – Précisez"];
-const servsEvenement=["Fête & Surprise (anniversaire, demande en mariage, baby shower...)","Courses & Cadeaux","Voiture & Chauffeur","Chef privé","Ménage & Rangement après fête","Autre besoin – Expliquez-nous"];
-const servsPersonnalises=["Service personnalisé – Expliquez-nous votre besoin"];
-const servicesRequiringPersons=["Nounou & Garde d'enfants","Chef privé","Fête & Surprise (anniversaire, demande en mariage, baby shower...)","Ménage & Rangement","Ménage & Rangement après fête"];
-function needsPersons(){return state.services.some(s=>servicesRequiringPersons.some(r=>s.includes(r.split(' ')[0])||s===r));}
-function escapeHTML(v){return String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
-async function loadPrix(){try{const r=await fetch('https://api.npoint.io/placeholder');}catch{}}
-function isAutre(){return state.services.some(s=>s.toLowerCase().includes('autre')||s.toLowerCase().includes('précisez')||s.toLowerCase().includes('expliquez'));}
-function setError(m){const el=document.getElementById('cfgError');if(el)el.textContent=m||'';}
-function collect(){const body=document.getElementById('cfgBody');if(!body)return;body.querySelectorAll('input,select,textarea').forEach(el=>{if(el.name)state[el.name]=el.value;}); body.querySelectorAll('input[type=checkbox][name=serviceChk]').forEach(ch=>{if(ch.checked&&!state.services.includes(ch.value))state.services.push(ch.value); if(!ch.checked)state.services=state.services.filter(v=>v!==ch.value);}); const confEl=body.querySelector('input[name=conf]:checked'); if(confEl)state.conf=confEl.value; const prefEl=body.querySelector('input[name=prefCul]:checked'); if(prefEl)state.prefCul=prefEl.value; const budEl=body.querySelector('input[name=budget]:checked'); if(budEl)state.budget=budEl.value;}
-function render(step){
-  const body=document.getElementById('cfgBody');
-  if(step===1){
-    body.innerHTML=`<div style="padding:24px"><h3 style="color:var(--navy);margin-bottom:12px">Quel est votre besoin ?</h3><div class="config-grid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px">
-    ${[['Quotidien','Courses, pressing, colis, domicile'],['Business','Secrétariat, chauffeur, chef'],['Événement','Fête, surprise, après-fête'],['Personnalisé','Expliquez-nous']].map(([t,d])=>`<label class="opt" style="border:1px solid var(--border);padding:16px;border-radius:12px;cursor:pointer"><input type="radio" name="typeNeed" value="${t}" ${state.type===t?'checked':''}> <strong>${t}</strong><br><small style="color:var(--muted)">${d}</small></label>`).join('')}
-    </div><div class="form-actions"><span></span><button class="btn-gold" id="to2">Continuer</button></div><p id="cfgError" class="form-error"></p></div>`;
-    body.querySelectorAll('input[name=typeNeed]').forEach(r=>r.addEventListener('change',e=>{state.type=e.target.value; state.services=[];}));
-    document.getElementById('to2').addEventListener('click',()=>{const sel=body.querySelector('input[name=typeNeed]:checked'); if(!sel){setError('Choisissez un besoin');return;} state.type=sel.value; render(2);});
-  } else if(step===2){
-    let list=[]; if(state.type==='Quotidien')list=servsQuotidien; else if(state.type==='Business')list=servsBusiness; else if(state.type==='Événement')list=servsEvenement; else list=servsPersonnalises;
-    body.innerHTML=`<div style="padding:24px"><h3 style="color:var(--navy)">Personnaliser : ${escapeHTML(state.type)}</h3><p class="form-note">Sélectionnez un ou plusieurs services. Le champ nombre de personnes apparaîtra seulement si nécessaire (nounou, chef, fête, ménage).</p><div style="display:grid;gap:10px;margin-top:12px">${list.map(s=>`<label style="display:flex;align-items:center;gap:8px;border:1px solid var(--border);padding:12px;border-radius:10px;cursor:pointer"><input type="checkbox" name="serviceChk" value="${escapeHTML(s)}" ${state.services.includes(s)?'checked':''}> ${escapeHTML(s)}</label>`).join('')}</div><div style="margin-top:16px"><label style="font-size:13px;font-weight:600">Véhicule si besoin</label><select name="voiture" class="simple-tel"><option value="">Non précisé</option><option ${state.voiture==='Berline'?'selected':''}>Berline</option><option ${state.voiture==='SUV Premium'?'selected':''}>SUV Premium</option></select></div><div id="conditionalPersons" class="conditional-field ${needsPersons()?'visible':''}" style="margin-top:16px"><label style="font-size:13px;font-weight:600">Nombre de personnes / foyer (requis pour ce service)</label><input name="membres" type="number" min="1" placeholder="Ex: 3" value="${escapeHTML(state.membres)}" class="simple-tel"></div><div class="form-actions"><button class="btn-gold" style="background:transparent;color:var(--navy);border:1px solid var(--border)" id="back1">Retour</button><button class="btn-gold" id="to3">Continuer</button></div><p id="cfgError" class="form-error"></p></div>`;
-    body.querySelectorAll('input[name=serviceChk]').forEach(ch=>ch.addEventListener('change',()=>{collect(); const cond=document.getElementById('conditionalPersons'); if(cond){ if(needsPersons())cond.classList.add('visible'); else cond.classList.remove('visible'); }}));
-    document.getElementById('back1').addEventListener('click',()=>render(1));
-    document.getElementById('to3').addEventListener('click',()=>{collect(); if(state.services.length===0){setError('Choisissez au moins un service');return;} render(3);});
-  } else if(step===3){
-    const showPersons = needsPersons();
-    body.innerHTML=`<div style="padding:24px"><h3 style="color:var(--navy)">Votre demande</h3>
-    <div style="display:flex;gap:12px;margin:14px 0;padding:12px;background:#f7f3ef;border-radius:10px"><label><input type="radio" name="conf" value="standard" ${state.conf==='standard'?'checked':''}> Standard</label><label><input type="radio" name="conf" value="confidentielle" ${state.conf==='confidentielle'?'checked':''}> Confidentielle</label></div>
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
-      <label>Nom<input name="nom" value="${escapeHTML(state.nom)}" class="simple-tel" placeholder="Votre nom"></label>
-      <label>Téléphone (sans sélecteur pays)<input name="tel" value="${escapeHTML(state.tel)}" class="simple-tel" placeholder="+241 62 51 64 57 ou 062..."></label>
-    </div>
-    ${showPersons?`<div style="margin-top:12px"><label>Nombre de personnes (requis pour ${escapeHTML(state.services.join(', '))})<input name="membres" type="number" min="1" value="${escapeHTML(state.membres)}" class="simple-tel"></label></div>`:''}
-    <div style="margin-top:12px"><label>Préférence culinaire ?<div style="display:flex;gap:10px;margin-top:6px"><label><input type="radio" name="prefCul" value="non" ${state.prefCul==='non'?'checked':''}> Non</label><label><input type="radio" name="prefCul" value="oui" ${state.prefCul==='oui'?'checked':''}> Oui</label></div></label></div>
-    ${state.prefCul==='oui'?`<div style="margin-top:12px"><label>Précisez cuisine<input name="cuisine" value="${escapeHTML(state.cuisine)}" class="simple-tel"></label></div>`:''}
-    <div style="margin-top:12px"><label>Description<textarea name="desc" style="width:100%;min-height:90px;padding:12px;border:1px solid #d6dbe4;border-radius:10px">${escapeHTML(state.desc)}</textarea></label></div>
-    <div style="margin-top:12px"><label>Budget <div style="display:flex;gap:10px;margin-top:6px"><label><input type="radio" name="budget" value="proposition" ${state.budget==='proposition'?'checked':''}> Sur mesure</label><label><input type="radio" name="budget" value="avec" ${state.budget==='avec'?'checked':''}> Avec budget</label></div></label>${state.budget==='avec'?`<input name="budgetVal" value="${escapeHTML(state.budgetVal)}" placeholder="Ex: 150 000 FCFA" class="simple-tel" style="margin-top:8px">`:''}</div>
-    <input type="text" name="website" value="" style="position:absolute;left:-9999px">
-    <div class="form-actions"><button id="back2" style="background:transparent;border:1px solid var(--border);padding:12px 18px;border-radius:10px;cursor:pointer">Retour</button><div class="form-actions-right"><button id="sendWA" class="btn-gold">Envoyer WhatsApp</button><button id="sendMail" style="background:#fff;border:1px solid var(--border);padding:12px 18px;border-radius:10px;cursor:pointer">Envoyer Email</button></div></div><p id="cfgError" class="form-error"></p></div>`;
-    body.querySelectorAll('input[name=conf]').forEach(r=>r.addEventListener('change',e=>{collect(); state.conf=e.target.value; render(3);}));
-    body.querySelectorAll('input[name=prefCul]').forEach(r=>r.addEventListener('change',e=>{collect(); state.prefCul=e.target.value; render(3);}));
-    body.querySelectorAll('input[name=budget]').forEach(r=>r.addEventListener('change',e=>{collect(); state.budget=e.target.value; render(3);}));
-    document.getElementById('back2').addEventListener('click',()=>{collect(); render(2);});
-    document.getElementById('sendWA').addEventListener('click',()=>{collect(); sendRequest('whatsapp');});
-    document.getElementById('sendMail').addEventListener('click',()=>{collect(); sendRequest('gmail');});
-  }
-  document.querySelectorAll('.config-tabs button').forEach((b,i)=>{b.classList.toggle('active', (i+1)===step);});
+const SHEET_URL="https://script.google.com/macros/s/AKfycbww-7Nn7ro4OZ-R1oVuoLSdY6P7OWOHJzLl0I4KNazjOXjGYWlmxFzpq-ti7sHGA2zP/exec";
+const state={type:"",origine:"",destination:"",date:"",heure:"",heberg:"",services:[],conf:"standard",nom:"",tel:"",membres:"",voiture:"",desc:"",budget:"proposition",budgetVal:"",website:""};
+const vehicles=[{name:"Berline - 20 000 FCFA/j",price:"20000"},{name:"SUV Premium - 35 000 FCFA/j",price:"35000"}];
+function todayLocal(){const d=new Date();return d.toISOString().slice(0,10);}
+function escapeHTML(v){return String(v).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
+function render(s){
+const body=document.getElementById('cfgBody');
+if(s===1){body.innerHTML=`<div style="padding:24px"><label class="field-label">Type de trajet<select name="type" class="form-field"><option value="">Choisir</option><option ${state.type==='Transfert aéroport'?'selected':''}>Transfert aéroport</option><option ${state.type==='Mise à disposition'?'selected':''}>Mise à disposition</option><option ${state.type==='Course urbaine'?'selected':''}>Course urbaine</option></select></label><label class="field-label">Départ<input name="origine" value="${escapeHTML(state.origine)}" class="form-field" placeholder="Ex: Aéroport LBV"></label><label class="field-label">Destination<input name="destination" value="${escapeHTML(state.destination)}" class="form-field" placeholder="Ex: Glass"></label><div style="display:grid;grid-template-columns:1fr 1fr;gap:12px"><label class="field-label">Date<input name="date" type="date" value="${state.date}" class="form-field"></label><label class="field-label">Heure<input name="heure" type="time" value="${state.heure}" class="form-field"></label></div><div class="form-actions"><span></span><button class="btn-gold" id="to2">Continuer</button></div><p id="cfgError" style="color:#9b1c1c"></p></div>`;
+document.getElementById('to2').addEventListener('click',()=>{collect(); if(!state.type||!state.origine||!state.destination||!state.date||!state.heure){document.getElementById('cfgError').textContent='Remplissez trajet, date et heure';return;} render(2);});
+}else if(s===2){
+body.innerHTML=`<div style="padding:24px"><h3>Véhicule</h3><div style="display:grid;gap:10px;margin-top:12px">${vehicles.map((v,i)=>`<label style="border:1px solid var(--border);padding:12px;border-radius:10px;cursor:pointer"><input type="radio" name="heberg" value="${v.name}" ${state.heberg===v.name?'checked':''}> ${v.name}</label>`).join('')}</div><div id="conditionalPersons" class="conditional-field ${state.heberg?'visible':''}" style="margin-top:16px"><label class="field-label">Nombre de passagers (affiché car véhicule sélectionné)</label><input name="membres" type="number" min="1" value="${escapeHTML(state.membres)}" class="simple-tel" placeholder="Ex: 2"></div><div class="form-actions"><button id="back1" style="background:transparent;border:1px solid var(--border);padding:12px;border-radius:10px">Retour</button><button class="btn-gold" id="to3">Continuer</button></div><p id="cfgError" style="color:#9b1c1c"></p></div>`;
+body.querySelectorAll('input[name=heberg]').forEach(r=>r.addEventListener('change',e=>{state.heberg=e.target.value; const c=document.getElementById('conditionalPersons'); if(c){if(state.heberg)c.classList.add('visible');} collect();}));
+document.getElementById('back1').addEventListener('click',()=>render(1));
+document.getElementById('to3').addEventListener('click',()=>{collect(); if(!state.heberg){document.getElementById('cfgError').textContent='Choisissez un véhicule';return;} render(3);});
+}else if(s===3){
+body.innerHTML=`<div style="padding:24px"><h3>Personnaliser</h3><p style="font-size:13px;color:#665f57">Services additionnels (optionnel)</p><div style="display:grid;gap:8px;margin-top:10px"><label><input type="checkbox" value="Siège bébé" name="svcChk" ${state.services.includes('Siège bébé')?'checked':''}> Siège bébé</label><label><input type="checkbox" value="Eau & rafraîchissements" name="svcChk" ${state.services.includes('Eau & rafraîchissements')?'checked':''}> Eau & rafraîchissements</label><label><input type="checkbox" value="Autre besoin – Expliquez-nous" name="svcChk" ${state.services.includes('Autre besoin – Expliquez-nous')?'checked':''}> Autre besoin</label></div><label class="field-label">Infos complémentaires<textarea name="desc" class="form-field" style="min-height:80px">${escapeHTML(state.desc)}</textarea></label><div class="form-actions"><button id="back2" style="background:transparent;border:1px solid var(--border);padding:12px;border-radius:10px">Retour</button><button class="btn-gold" id="to4">Continuer</button></div></div>`;
+body.querySelectorAll('input[name=svcChk]').forEach(ch=>ch.addEventListener('change',()=>collect()));
+document.getElementById('back2').addEventListener('click',()=>render(2));
+document.getElementById('to4').addEventListener('click',()=>{collect(); render(4);});
+}else if(s===4){
+body.innerHTML=`<div style="padding:24px"><h3>Demande</h3><div style="display:flex;gap:12px;margin:12px 0;padding:10px;background:#f7f3ef;border-radius:10px"><label><input type="radio" name="conf" value="standard" ${state.conf==='standard'?'checked':''}> Standard</label><label><input type="radio" name="conf" value="confidentielle" ${state.conf==='confidentielle'?'checked':''}> Confidentielle</label></div><div style="display:grid;grid-template-columns:1fr 1fr;gap:12px"><label class="field-label">Nom<input name="nom" value="${escapeHTML(state.nom)}" class="simple-tel"></label><label class="field-label">Téléphone simple (sans sélecteur)<input name="tel" value="${escapeHTML(state.tel)}" class="simple-tel" placeholder="+241 6X XX XX XX ou 06X"></label></div><div class="conditional-field visible" style="margin-top:12px"><label class="field-label">Nombre de passagers (nécessaire car véhicule choisi)</label><input name="membres" type="number" min="1" value="${escapeHTML(state.membres)}" class="simple-tel"></div><div style="margin-top:12px"><label class="field-label">Budget<select name="budget" class="form-field"><option value="proposition" ${state.budget==='proposition'?'selected':''}>Sur mesure</option><option value="avec" ${state.budget==='avec'?'selected':''}>Avec budget</option></select></label>${state.budget==='avec'?`<input name="budgetVal" value="${escapeHTML(state.budgetVal)}" class="simple-tel" placeholder="Budget" style="margin-top:8px">`:''}</div><div class="form-actions"><button id="back3" style="background:transparent;border:1px solid var(--border);padding:12px;border-radius:10px">Retour</button><div style="display:flex;gap:8px"><button id="sendWA" class="btn-gold">WhatsApp</button><button id="sendMail" style="background:#fff;border:1px solid var(--border);padding:12px;border-radius:10px">Email</button></div></div><p id="cfgError" style="color:#9b1c1c;margin-top:12px"></p></div>`;
+body.querySelectorAll('input[name=conf]').forEach(r=>r.addEventListener('change',e=>{state.conf=e.target.value;}));
+document.getElementById('back3').addEventListener('click',()=>render(3));
+document.getElementById('sendWA').addEventListener('click',()=>submit('WhatsApp'));
+document.getElementById('sendMail').addEventListener('click',()=>submit('E-mail'));
 }
-function buildTxt(){return `L’ADRESSE SARL – DEMANDE DE CONCIERGERIE\nBesoin : ${state.type||''}\nServices : ${state.services.join(' | ')}\nVéhicule : ${state.voiture||'Non précisé'}\nConfidentialité : ${state.conf}\nNom : ${state.conf==='standard'?state.nom:'Non renseigné'}\nTéléphone : ${state.tel}\nPersonnes / foyer : ${needsPersons()?(state.membres||'Non renseigné'):'Non requis pour ce service'}\nPréf culinaire : ${state.prefCul==='oui'?state.cuisine:'Non précisée'}\nDescription : ${state.desc||'Non précisée'}\nBudget : ${state.budget==='avec'?state.budgetVal:'Sur mesure'}`;}
-function sendToSheet(source){const payload={service:'CONCIERGERIE',type:state.type,formule:state.type,services:state.services.join(', '),conf:state.conf,nom:state.conf==='standard'?state.nom:'',tel:state.tel,membres:needsPersons()?state.membres:'',voiture:state.voiture,cuisine:state.conf==='standard'?state.cuisine:'',desc:state.desc,budget:state.budget,budgetVal:state.budgetVal,source:source,website:state.website}; try{fetch(SHEET_URL,{method:'POST',mode:'no-cors',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify(payload),keepalive:true});}catch{}}
-function setErrorLocal(m){const el=document.getElementById('cfgError'); if(el)el.textContent=m;}
-function sendRequest(source){
-  setErrorLocal('');
-  if(!state.type||state.services.length===0){setErrorLocal('Choisissez un besoin et au moins un service');return;}
-  if(!state.tel.trim()){setErrorLocal('Saisissez votre téléphone (ex: +241 62... ou 062...)');return;}
-  const telClean=state.tel.replace(/\s/g,''); if(telClean.length<8){setErrorLocal('Téléphone trop court');return;}
-  if(needsPersons()&&(!state.membres||Number(state.membres)<1)){setErrorLocal('Indiquez le nombre de personnes pour ce service');return;}
-  if(isAutre()&&!state.desc.trim()){setErrorLocal('Précisez votre besoin');return;}
-  if(state.budget==='avec'&&!state.budgetVal.trim()){setErrorLocal('Indiquez votre budget');return;}
-  if(state.website.trim())return;
-  sendToSheet(source);
-  const msg=(state.conf==='confidentielle'?'[DEMANDE CONFIDENTIELLE]\n':'')+buildTxt();
-  if(source==='whatsapp'){window.open('https://wa.me/24162516457?text='+encodeURIComponent(msg),'_blank');}else{window.location.href='mailto:magangabridge@gmail.com?subject='+encodeURIComponent('Demande conciergerie – '+(state.type||''))+'&body='+encodeURIComponent(msg);}
+document.querySelectorAll('.config-tabs button').forEach((b,i)=>b.classList.toggle('active',i+1===s));
 }
-document.addEventListener('DOMContentLoaded',()=>{render(1); document.querySelectorAll('.config-tabs button').forEach(b=>b.addEventListener('click',()=>render(Number(b.dataset.s))));});
+function collect(){const b=document.getElementById('cfgBody'); b.querySelectorAll('input,select,textarea').forEach(el=>{if(el.name)state[el.name]=el.value;}); state.services=[]; b.querySelectorAll('input[name=svcChk]:checked').forEach(ch=>state.services.push(ch.value)); const c=b.querySelector('input[name=conf]:checked'); if(c)state.conf=c.value;}
+function submit(src){
+collect();
+const err=document.getElementById('cfgError');
+if(!state.tel.trim()){err.textContent='Téléphone requis';return;}
+if(state.tel.replace(/\D/g,'').length<8){err.textContent='Téléphone trop court';return;}
+if(!state.membres||Number(state.membres)<1){err.textContent='Nombre de passagers requis (véhicule sélectionné)';return;}
+const msg=`DEMANDE MOBILITE\nType: ${state.type}\nDépart: ${state.origine} -> ${state.destination}\nDate: ${state.date} ${state.heure}\nVéhicule: ${state.heberg}\nPassagers: ${state.membres}\nTel: ${state.tel}\nConf: ${state.conf}\nServices: ${state.services.join(', ')}`;
+if(src==='WhatsApp'){window.open('https://wa.me/24162516457?text='+encodeURIComponent((state.conf==='confidentielle'?'[CONFIDENTIEL] ':'')+msg),'_blank');}else{window.location.href='mailto:magangabridge@gmail.com?subject=Mobilité&body='+encodeURIComponent(msg);}
+}
+document.addEventListener('DOMContentLoaded',()=>{render(1); document.querySelectorAll('.config-tabs button').forEach(b=>b.addEventListener('click',()=>{const s=Number(b.dataset.s); if(s===1)render(1);}));});
 </script>
 </body></html>
