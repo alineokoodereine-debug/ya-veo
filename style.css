@@ -213,6 +213,7 @@ body{background:#fff;-webkit-tap-highlight-color:transparent}
 .hero-pano h2{
   font-family:'Cormorant Garamond',serif;
   font-size:clamp(20px, 3vw, 28px);
+  font-weight:400;
   color:#E9D9B8;
   margin-bottom:16px;
 }
@@ -230,11 +231,63 @@ body{background:#fff;-webkit-tap-highlight-color:transparent}
   flex-wrap:wrap;
   margin-top:10px;
 }
-.hero-pano .btn-gold{padding:15px 30px;border-radius:100px;text-transform:uppercase;letter-spacing:0.08em}
+.hero-pano .btn-gold{padding:15px 30px;border-radius:100px;font-size:13px;letter-spacing:0.08em;text-transform:uppercase}
 .hero-pano .btn-outline{border:1px solid rgba(255,255,255,0.35);color:#fff;padding:14px 28px;border-radius:100px;background:rgba(255,255,255,0.06);backdrop-filter:blur(6px)}
+.hero-pano .btn-outline:hover{background:rgba(255,255,255,0.12)}
 
+/* fix burger */
 .top-header .nav.open{transform:translateY(0);opacity:1;pointer-events:auto}
 @media(max-width:900px){
   .top-header .nav{position:fixed;top:69px;left:0;right:0;background:#fff;padding:28px;flex-direction:column;align-items:flex-start;gap:20px;box-shadow:0 20px 40px rgba(0,0,0,0.12);transform:translateY(-110%);opacity:0;pointer-events:none;transition:.35s}
   .burger{display:flex;align-items:center;justify-content:center}
 }
+
+
+/* REVIEWS SECTION */
+.reviews-section{background:#F8F6F2;padding:90px 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border);overflow:hidden}
+.reviews-header{text-align:center;max-width:700px;margin:0 auto 50px;padding:0 24px}
+.reviews-header h2{font-size:clamp(32px,4vw,48px);color:var(--navy);line-height:1.05}
+.reviews-header p{color:var(--muted);margin-top:10px}
+.reviews-track{display:flex;gap:24px;overflow-x:auto;scroll-snap-type:x mandatory;padding:10px 32px 30px;scrollbar-width:none}
+.reviews-track::-webkit-scrollbar{display:none}
+.review-card{flex:0 0 360px;scroll-snap-align:start;background:#fff;border:1px solid var(--border);border-radius:20px;padding:28px;box-shadow:0 12px 30px rgba(11,31,58,.06);transition:.5s transform, .5s opacity}
+.review-card:hover{transform:translateY(-6px);box-shadow:0 20px 40px rgba(11,31,58,.12)}
+.review-stars{color:#C9A86A;font-size:16px;margin-bottom:14px;letter-spacing:2px}
+.review-text{font-size:15px;line-height:1.6;color:#2a3347;margin-bottom:20px;font-family:'Cormorant Garamond',serif;font-style:italic}
+.review-author{display:flex;align-items:center;gap:12px}
+.review-avatar{width:44px;height:44px;border-radius:50%;background:linear-gradient(135deg,#0B1F3A,#C9A86A);display:grid;place-items:center;color:#fff;font-weight:700;font-size:14px}
+.review-author strong{font-size:13px;color:var(--navy)}
+.review-author small{display:block;font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em}
+
+/* PARTNERS RIBBON */
+.partners-ribbon{background:#0B1F3A;color:#fff;padding:32px 0;border-top:1px solid rgba(201,168,106,.2);overflow:hidden}
+.partners-label{text-align:center;font-size:11px;letter-spacing:.28em;text-transform:uppercase;color:var(--gold-light);margin-bottom:18px}
+.partners-track{display:flex;gap:50px;align-items:center;justify-content:center;flex-wrap:wrap;opacity:.85}
+.partner-logo{font-family:'Cormorant Garamond',serif;font-size:18px;letter-spacing:.12em;color:rgba(255,255,255,.7);border:1px solid rgba(255,255,255,.15);padding:10px 20px;border-radius:100px;transition:.3s}
+.partner-logo:hover{color:#fff;border-color:var(--gold);background:rgba(255,255,255,.06)}
+
+/* FOOTER UNIVERSAL */
+.footer-universal{background:#0B1F3A;color:#fff;padding:60px 5% 30px;margin-top:0}
+.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1.2fr;gap:40px;max-width:1280px;margin:0 auto}
+.footer-brand .brand-name{color:#fff}
+.footer-universal h4{font-size:13px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold-light);margin-bottom:18px}
+.footer-universal a,.footer-universal p{font-size:13px;line-height:1.8;color:rgba(255,255,255,.7);display:block;margin-bottom:6px}
+.footer-universal a:hover{color:#fff}
+.footer-bottom{border-top:1px solid rgba(255,255,255,.12);margin-top:40px;padding-top:20px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;font-size:12px;color:rgba(255,255,255,.5)}
+@media(max-width:900px){.footer-grid{grid-template-columns:1fr 1fr}.reviews-track{padding:10px 18px}}
+@media(max-width:560px){.footer-grid{grid-template-columns:1fr}.review-card{flex:0 0 85vw}}
+
+/* ABO DETAIL */
+.abo-detail{max-width:900px;margin:0 auto;padding:60px 24px}
+.abo-detail h1{font-size:clamp(36px,5vw,56px);color:var(--navy);line-height:1}
+.abo-detail .price{font-family:'Cormorant Garamond';font-size:42px;color:var(--navy);margin:16px 0}
+.abo-detail ul{list-style:none;margin:24px 0;display:grid;gap:12px}
+.abo-detail ul li{padding-left:28px;position:relative;font-size:14px;color:#4b5565;line-height:1.6}
+.abo-detail ul li::before{content:'✓';position:absolute;left:0;color:var(--gold);font-weight:700}
+
+/* CONDITIONAL FIELDS */
+.conditional-field{display:none}
+.conditional-field.visible{display:block;animation:fadeIn .3s ease}
+@keyframes fadeIn{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:translateY(0)}}
+.simple-tel{width:100%;padding:12px 14px;border:1px solid #d6dbe4;border-radius:10px;font:inherit}
+.simple-tel:focus{outline:2px solid var(--gold);outline-offset:2px}
