@@ -1,1 +1,64 @@
-<!DOCTYPE html><html lang="fr"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#0B1F3A"><meta name="description" content="Formulaire de démonstration pour une demande L’Adresse"><title>Demande personnalisée | L’Adresse SARL</title><link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet"><link rel="stylesheet" href="style.css"></head><body><header class="top-header"><a class="brand" href="index.html"><div class="brand-icon">L</div><div class="brand-name">L’ADRESSE SARL</div></a><nav class="nav"><a href="index.html">Accueil</a><a href="qui-sommes-nous.html">Qui sommes-nous</a><a href="travel.html">Travel</a><a href="business.html">Business</a><a href="prestige.html">Prestige</a><a href="blog.html">Blog</a><a href="abonnements.html">Abonnements</a><a href="espace-client.html">Mon espace client</a></nav></header><main class=""><section class="demo-hero"><div><span class="demo-eyebrow">L’Adresse SARL</span><h1>Votre demande personnalisée</h1><p>Présentez votre besoin. Cette page de démonstration ne transmet pas encore les informations à un système de réception.</p></div></section><section class="demo-container"><form class="demo-form" id="requestForm"><label>Nom et prénom<input name="nom" autocomplete="name" required></label><label>Adresse e-mail<input name="email" type="email" autocomplete="email" required></label><label>Téléphone<input name="telephone" type="tel" autocomplete="tel" required></label><label>Ville<select name="ville" required><option value="">Choisir</option><option>Libreville</option><option>Port-Gentil</option><option>Autre ville du Gabon</option><option>Autre pays</option></select></label><label>Quartier de résidence<input name="quartier" required></label><label>Type de demande<select name="type" required><option value="">Choisir</option><option>Conciergerie</option><option>Réseau de confiance</option><option>Travel</option><option>Business</option><option>Prestige</option><option>Mobilité</option></select></label><label class="full">Décrivez votre besoin<textarea name="description" required></textarea></label><label class="full"><span><input type="checkbox" required style="width:auto"> J’accepte que mes informations soient utilisées pour traiter ma demande de démonstration.</span></label><div class="full"><button class="demo-btn gold" type="submit">Vérifier le formulaire</button><p id="formStatus" role="status" class="demo-note">Aucune donnée ne sera envoyée ou enregistrée.</p></div></form><script>document.getElementById('requestForm').addEventListener('submit',function(e){e.preventDefault();document.getElementById('formStatus').textContent='Formulaire de démonstration validé localement. Aucune donnée n’a été envoyée ni enregistrée.';});</script></section></main><footer class="footer" style="background:#0B1F3A;color:#fff;padding:35px 5%;margin-top:30px"><strong>L’ADRESSE SARL</strong><p style="margin:10px 0">Glass, Libreville · Gabon · WhatsApp : <a href="https://wa.me/24162516457">+241 62 51 64 57</a></p><p><a href="index.html">Accueil</a> · <a href="cgv.html">CGV</a> · <a href="politique-confidentialite.html">Confidentialité</a> · <a href="mentions-legales.html">Mentions légales</a></p><small>© 2026 L’Adresse SARL — Démonstration non contractuelle.</small></footer></body></html>
+<!DOCTYPE html><html lang="fr"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#0B1F3A"><meta name="description" content="Formulaire de démonstration pour une demande L’Adresse"><title>Demande personnalisée | L’Adresse SARL</title><link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet"><link rel="stylesheet" href="style.css"></head><body><header class="top-header">
+  <a class="brand" href="index.html" aria-label="L’Adresse SARL">
+    <div class="brand-icon">L</div>
+    <div class="brand-name">L’ADRESSE SARL</div>
+  </a>
+  <nav class="nav" id="mainNav">
+    <a href="index.html">Accueil</a>
+    <a href="qui-sommes-nous.html">Qui sommes-nous</a>
+    <a href="service-sejours.html">Séjours</a>
+    <a href="service-mobilite.html">Mobilité</a>
+    <a href="service-conciergerie.html">Conciergerie</a>
+    <a href="travel.html">Travel</a>
+    <a href="business.html">Business</a>
+    <a href="prestige.html">Prestige</a>
+    <a href="blog.html">Blog</a>
+    <a href="abonnements.html">Abonnements</a>
+    <a href="espace-client.html">Mon espace client</a>
+  </nav>
+  <div style="display:flex;gap:10px;align-items:center">
+    <a class="btn-contact hide-mobile" href="abonnements.html">Abonnements</a>
+    <button class="burger" id="burgerBtn" type="button">☰</button>
+  </div>
+</header><main class=""><section class="hero-pano" style="background-image:url('https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=1600&q=80'); min-height:72vh;">
+  <div class="hero-pano-content"><span class="eyebrow">L’Adresse · Demande personnalisée</span><h1>Votre demande personnalisée</h1><h2>Traitement standard ou confidentiel</h2><p>Choisissez le mode de traitement. Notre équipe vous répond avec discrétion absolue.</p><div class="hero-btns"><a class="btn-gold" href="#form">Remplir le formulaire</a><a class="btn-outline" href="https://wa.me/24162516457">WhatsApp direct</a></div></div>
+</section><section class="demo-container"><form class="demo-form" id="requestForm"><label>Nom et prénom<input name="nom" autocomplete="name" required></label><label>Adresse e-mail<input name="email" type="email" autocomplete="email" required></label><label>Téléphone<input class="simple-tel" name="telephone" placeholder="+241 6X XX XX XX ou 06X"  type="tel" autocomplete="tel" required></label><label>Ville<select name="ville" required><option value="">Choisir</option><option>Libreville</option><option>Port-Gentil</option><option>Autre ville du Gabon</option><option>Autre pays</option></select></label><label>Quartier de résidence<input name="quartier" required></label><label>Type de demande<select name="type" required><option value="">Choisir</option><option>Conciergerie</option><option>Réseau de confiance</option><option>Travel</option><option>Business</option><option>Prestige</option><option>Mobilité</option></select></label><label class="full">Décrivez votre besoin<textarea name="description" required></textarea></label><label class="full"><span><input type="checkbox" required style="width:auto"> J’accepte que mes informations soient utilisées pour traiter ma demande de démonstration.</span></label><div class="full"><button class="demo-btn gold" type="submit">Vérifier le formulaire</button><p id="formStatus" role="status" class="demo-note">Aucune donnée ne sera envoyée ou enregistrée.</p></div></form><script>document.getElementById('requestForm').addEventListener('submit',function(e){e.preventDefault();document.getElementById('formStatus').textContent='Formulaire de démonstration validé localement. Aucune donnée n’a été envoyée ni enregistrée.';});</script></section></main><footer class="footer-universal">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <div style="display:flex;align-items:center;gap:12px;margin-bottom:14px"><div class="brand-icon" style="border-color:#C9A86A;color:#C9A86A">L</div><div class="brand-name">L’ADRESSE SARL</div></div>
+      <p>Conciergerie de luxe à Libreville. Séjours, mobilité privée, réservations et assistance personnalisée. Glass, Libreville – Extension Port-Gentil.</p>
+      <p style="margin-top:12px">WhatsApp: <a href="https://wa.me/24162516457" style="display:inline;color:#E9D9B8">+241 62 51 64 57</a></p>
+    </div>
+    <div><h4>Services</h4><a href="service-sejours.html">Séjours Premium</a><a href="service-mobilite.html">Mobilité & Chauffeur</a><a href="service-conciergerie.html">Conciergerie</a><a href="travel.html">Travel</a><a href="business.html">Business</a><a href="prestige.html">Prestige</a></div>
+    <div><h4>Entreprise</h4><a href="qui-sommes-nous.html">Qui sommes-nous</a><a href="blog.html">Blog</a><a href="abonnements.html">Abonnements</a><a href="espace-client.html">Espace client</a><a href="demande.html">Demande personnalisée</a></div>
+    <div><h4>Contact & Légal</h4><p>Glass, Libreville · Gabon</p><a href="politique-confidentialite.html">Confidentialité</a><a href="cgv.html">CGV</a><a href="mentions-legales.html">Mentions légales</a><p style="margin-top:10px;font-size:11px">Traitement standard ou confidentiel disponible.</p></div>
+  </div>
+  <div class="footer-bottom"><span>© 2026 L’Adresse SARL — Démonstration non contractuelle.</span><span>Glass, Libreville · Confidentialité renforcée · 2 Sheets séparés</span></div>
+</footer>
+<script>
+const burger=document.getElementById('burgerBtn');const nav=document.getElementById('mainNav');
+if(burger&&nav){burger.addEventListener('click',()=>{const o=nav.classList.toggle('open');burger.textContent=o?'✕':'☰';});nav.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{nav.classList.remove('open');burger.textContent='☰';}));}
+</script>
+<script>
+const servicesRequiringPersons=["Nounou","Garde","Chef privé","Fête","ménage"];
+function togglePersons(){
+  const type=document.querySelector('select[name=type]')?.value||'';
+  const desc=document.querySelector('textarea[name=description]')?.value||'';
+  const need=servicesRequiringPersons.some(k=>type.includes(k)||desc.includes(k));
+  const personsField=document.getElementById('conditionalPersons');
+  if(personsField){ if(need) personsField.classList.add('visible'); else personsField.classList.remove('visible');}
+}
+document.addEventListener('DOMContentLoaded',()=>{
+  const form=document.getElementById('requestForm');
+  if(form){
+    const personsDiv=document.createElement('div');
+    personsDiv.id='conditionalPersons';
+    personsDiv.className='conditional-field';
+    personsDiv.innerHTML='<label>Nombre de personnes (affiché car service le requiert)<input name="membres" type="number" min="1" class="simple-tel" placeholder="Ex: 3"></label>';
+    form.insertBefore(personsDiv, form.querySelector('textarea').parentElement.nextSibling);
+    form.querySelector('select[name=type]')?.addEventListener('change',togglePersons);
+    form.querySelector('textarea[name=description]')?.addEventListener('input',togglePersons);
+  }
+});
+</script>
+</body></html>
