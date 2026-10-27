@@ -11,11 +11,23 @@
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
 <style>
-/* RESPONSIVE EXTRA */
+/* HERO */
 .hero-pano{position:relative;min-height:84vh;display:flex;align-items:center;justify-content:center;text-align:center;color:#fff;overflow:hidden;padding:120px 20px 80px}
 .hero-pano-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0}
 .hero-pano-overlay{position:absolute;inset:0;background:linear-gradient(180deg,rgba(11,31,58,.5),rgba(11,31,58,.85));z-index:1}
 .hero-pano-content{position:relative;z-index:2;max-width:900px}
+/* TU SECCION RESTAURADA */
+.services-intro{background:#F8F6F2;padding:80px 0 60px;text-align:center;border-bottom:1px solid var(--border)}
+.services-intro small{font-size:11px;letter-spacing:.28em;text-transform:uppercase;color:var(--muted);font-weight:600;display:block;margin-bottom:10px}
+.services-intro h2{font-family:'Instrument Sans';font-size:14px;font-weight:500;color:var(--navy)}
+.services-grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:0;max-width:1000px;margin:40px auto 0;border-top:1px solid var(--border)}
+.svc3{padding:40px 32px;text-align:center;border-right:1px solid var(--border)}
+.svc3:last-child{border-right:none}
+.svc3 .icon{background:#fff;border:1px solid var(--border-gold);width:56px;height:56px;border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 18px}
+.svc3 h3{font-family:'Cormorant Garamond';font-size:16px;color:var(--navy);margin-bottom:10px}
+.svc3 p{font-size:12.5px;color:var(--muted);line-height:1.6}
+/* FONDO BEIGE PARA 5 SERVICIOS */
+.section-cards{background:#F8F3ED !important;padding:80px 0}
 @media(max-width:768px){
 .hero-pano{min-height:78vh;padding:90px 18px 50px}
 .hero-pano h1{font-size:38px !important;line-height:0.95}
@@ -23,16 +35,23 @@
 .hero-pano p{font-size:14px !important}
 .q-card{flex:0 0 86vw !important}
 .abonnement-grid{grid-template-columns:1fr !important}
+.services-grid-3{grid-template-columns:1fr}.svc3{border-right:none;border-bottom:1px solid var(--border)}
 }
-.reviews-section{background:#F8F6F2;padding:70px 0;overflow:hidden}
+.reviews-section{background:#fff;padding:70px 0;overflow:hidden;border-top:1px solid var(--border)}
 .reviews-header{text-align:center;padding:0 20px;margin-bottom:30px}
 .reviews-track{display:flex;gap:18px;overflow-x:auto;padding:10px 20px 30px;scroll-snap-type:x mandatory;scrollbar-width:none}
 .reviews-track::-webkit-scrollbar{display:none}
-.review-card{flex:0 0 320px;scroll-snap-align:start;background:#fff;border:1px solid var(--border);border-radius:20px;padding:22px}
+.review-card{flex:0 0 320px;scroll-snap-align:start;background:#F8F6F2;border:1px solid var(--border);border-radius:20px;padding:22px}
 @media(max-width:560px){.review-card{flex:0 0 84vw}}
-.partners-ribbon{background:#0B1F3A;padding:28px 0;text-align:center}
-.partners-track{display:flex;gap:20px;justify-content:center;flex-wrap:wrap;padding:0 20px}
-.partner-logo{border:1px solid rgba(255,255,255,.18);color:rgba(255,255,255,.7);padding:10px 18px;border-radius:100px;font-family:'Cormorant Garamond';font-size:15px;letter-spacing:.1em}
+/* PARTENAIRES COMO TU FOTO */
+.partners-section{background:#F8F6F2;padding:70px 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.partners-header{max-width:1000px;margin:0 auto 24px;padding:0 32px}
+.partners-header small{font-size:10px;letter-spacing:.28em;text-transform:uppercase;color:var(--muted);font-weight:600}
+.partners-header h2{font-family:'Cormorant Garamond';font-size:32px;color:var(--navy);margin:8px 0}
+.partners-header p{font-size:13px;color:var(--muted)}
+.partners-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;max-width:1000px;margin:0 auto;padding:0 32px}
+.partner-box{border:1px dashed #c8cdd8;background:#fff;border-radius:8px;padding:18px;text-align:center;font-size:11px;color:var(--muted);letter-spacing:.08em}
+@media(max-width:900px){.partners-grid{grid-template-columns:1fr 1fr}}
 </style>
 </head>
 <body>
@@ -57,12 +76,23 @@
 <h1>Conciergerie de Luxe</h1>
 <h2>Votre temps, notre excellence.</h2>
 <p>Un seul interlocuteur, une organisation complète, une expérience sans compromis.</p>
-<div class="hero-btns"><a class="btn-gold" href="#services-cards">Demander une réservation</a><a class="btn-outline" href="qui-sommes-nous.html">Découvrir</a></div>
+<div class="hero-btns"><a class="btn-gold" href="#services-intro">Demander une réservation</a><a class="btn-outline" href="qui-sommes-nous.html">Découvrir</a></div>
+</div>
+</section>
+
+<!-- SECCION RESTAURADA QUE TE GUSTABA -->
+<section class="services-intro" id="services-intro">
+<small>NOS SERVICES</small>
+<h2>Trois expertises dédiées à votre confort</h2>
+<div class="services-grid-3">
+<div class="svc3"><div class="icon">◫</div><h3>Réservations privées</h3><p>Restaurants, hôtels d'exception et villas. Les commissions éventuelles dépendent des conditions convenues avec chaque partenaire.</p></div>
+<div class="svc3"><div class="icon">◇</div><h3>Événements & expériences</h3><p>Soirées privées, accès VIP, excursions et expériences personnalisées au Gabon.</p></div>
+<div class="svc3"><div class="icon">◍</div><h3>Assistance personnelle</h3><p>Chauffeur berline : 20 000 FCFA/jour, SUV Premium : 35 000 FCFA/jour. Tarifs à confirmer selon disponibilité et conditions.</p></div>
 </div>
 </section>
 
 <section class="section-cards" id="services-cards">
-<div class="section-header"><h2>L’Adresse — Nos services</h2><p>Travel (ex-Séjours) + Mobilité + Conciergerie + Business + Prestige</p></div>
+<div class="section-header"><h2>Exclusive Access – Nos services</h2><p>Découvrez nos services et accédez à la page correspondante pour envoyer votre demande.</p></div>
 <div class="cards-wrapper"><div class="cards-scroll is-centered">
 <article class="q-card"><div class="q-card-img"><img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?w=600" loading="lazy"></div><div class="q-card-body"><h3>Conciergerie personnalisée</h3><a class="q-btn" href="service-conciergerie.html">Voir plus</a></div></article>
 <article class="q-card"><div class="q-card-img"><img src="https://images.unsplash.com/photo-1611892440504-42a792e24d32?w=600" loading="lazy"></div><div class="q-card-body"><h3>Travel – Séjours</h3><p style="font-size:13px;color:var(--muted)">5 appartements + 5 hôtels, 3 photos chacun</p><a class="q-btn" href="travel.html">Voir plus</a></div></article>
@@ -77,45 +107,43 @@
 <div class="abonnement-grid" id="abosGrid"></div>
 </div></section>
 
-<!-- RESEÑAS FICTICIAS ANIMADAS -->
 <section class="reviews-section" id="avis">
-<div class="reviews-header"><small style="letter-spacing:.28em;text-transform:uppercase;color:#9a7940;font-weight:700;font-size:11px">Témoignages</small><h2>Ils nous font confiance</h2><p style="color:var(--muted);font-size:13px">Avis fictifs de démonstration – animés</p></div>
+<div class="reviews-header"><small style="letter-spacing:.28em;text-transform:uppercase;color:#9a7940;font-weight:700;font-size:11px">Témoignages</small><h2>Ils nous font confiance</h2><p style="color:var(--muted);font-size:13px">Avis fictifs – animés</p></div>
 <div class="reviews-track" id="reviewsTrack">
 <article class="review-card"><div style="color:#C9A86A">★★★★★</div><p style="font-family:'Cormorant Garamond';font-style:italic;margin:10px 0">"Service impeccable pour nos déplacements. Chauffeur à l'heure, SUV très confortable."</p><strong style="font-size:13px">Marie K. · Libreville</strong></article>
-<article class="review-card"><div style="color:#C9A86A">★★★★★</div><p style="font-family:'Cormorant Garamond';font-style:italic;margin:10px 0">"Villa pour ma famille à Glass. En 2h tout était organisé. Mode confidentiel rassurant."</p><strong style="font-size:13px">Jean-Paul O. · Port-Gentil</strong></article>
+<article class="review-card"><div style="color:#C9A86A">★★★★★</div><p style="font-family:'Cormorant Garamond';font-style:italic;margin:10px 0">"Villa pour ma famille à Glass. En 2h tout était organisé."</p><strong style="font-size:13px">Jean-Paul O. · Port-Gentil</strong></article>
 <article class="review-card"><div style="color:#C9A86A">★★★★★</div><p style="font-family:'Cormorant Garamond';font-style:italic;margin:10px 0">"Chef privé à domicile. Número de personas gestionado automáticamente. Bravo !"</p><strong style="font-size:13px">Sarah L. · Événement</strong></article>
-<article class="review-card"><div style="color:#C9A86A">★★★★★</div><p style="font-family:'Cormorant Garamond';font-style:italic;margin:10px 0">"Teléfono sin selector de país, mucho más simple. Appartement Premium muy limpio."</p><strong style="font-size:13px">Fatou T. · Expatriée</strong></article>
+<article class="review-card"><div style="color:#C9A86A">★★★★★</div><p style="font-family:'Cormorant Garamond';font-style:italic;margin:10px 0">"Teléfono sin selector, mucho más simple. Appartement Premium muy limpio."</p><strong style="font-size:13px">Fatou T. · Expatriée</strong></article>
 </div>
 </section>
 
-<!-- CINTA 4 PARTENAIRES -->
-<section class="partners-ribbon">
-<div style="font-size:11px;letter-spacing:.28em;text-transform:uppercase;color:#E9D9B8;margin-bottom:14px">Nos partenaires de confiance</div>
-<div class="partners-track">
-<span class="partner-logo">【entity-RADISSON BLU¦canonical_name=RADISSON BLU】</span>
-<span class="partner-logo">ONOMO HOTEL</span>
-<span class="partner-logo">TOYOTA GABON</span>
-<span class="partner-logo">FLY GABON</span>
+<!-- PARTENAIRES COMO EN TU CAPTURA -->
+<section class="partners-section">
+<div class="partners-header"><small>UN RÉSEAU À CONSTRUIRE AVEC SOIN</small><h2>Nos partenaires</h2><p>Les logos et liens officiels seront ajoutés après validation par L’Adresse.</p></div>
+<div class="partners-grid">
+<div class="partner-box">【entity-RADISSON BLU¦canonical_name=RADISSON BLU】 – Partenaire hôtelier</div>
+<div class="partner-box">ONOMO HOTEL – Business</div>
+<div class="partner-box">TOYOTA GABON – Mobilité</div>
+<div class="partner-box">FLY GABON – Travel</div>
 </div>
 </section>
 
-<footer class="footer-universal"><div class="footer-bottom"><span>© 2026 L’Adresse SARL</span><span>Glass, Libreville</span></div></footer>
+<footer class="footer-universal">
+<div class="footer-grid">
+<div><div style="display:flex;align-items:center;gap:10px;margin-bottom:12px"><div class="brand-icon" style="border-color:#C9A86A;color:#C9A86A">L</div><div class="brand-name" style="color:#fff">L’ADRESSE SARL</div></div><p>Glass, Libreville</p><p>WhatsApp: <a href="https://wa.me/24162516457" style="color:#E9D9B8">+241 62 51 64 57</a></p></div>
+<div><h4>NAVIGATION</h4><a href="index.html">Accueil</a><a href="index.html#services-cards">Nos services</a><a href="qui-sommes-nous.html">Qui sommes-nous</a><a href="abonnements.html">Abonnements</a><a href="blog.html">Blog</a></div>
+<div><h4>INFORMATIONS LÉGALES</h4><a href="politique-confidentialite.html">Politique de confidentialité</a><a href="mentions-legales.html">Mentions légales</a><a href="cgv.html">CGV et conditions</a><a href="politique-cookies.html">Cookies</a></div>
+</div>
+<div class="footer-bottom"><span>© 2026 L’Adresse SARL – Tous droits réservés.</span><span>Discrétion – Obligation de moyens</span></div>
+</footer>
 
 <script>
-// Abonnements - savoir plus abre página (no alert)
 const abosGrid=document.getElementById('abosGrid');
-const plans=[
-{nom:"Carte Premium",prix:"150 000",page:"abonnement-premium.html"},
-{nom:"Carte Luxe",prix:"350 000",page:"abonnement-luxe.html"},
-{nom:"Carte Prestige",prix:"1 050 000",page:"abonnement-prestige.html"}
-];
+const plans=[{nom:"Carte Premium",prix:"150 000",page:"abonnement-premium.html"},{nom:"Carte Luxe",prix:"350 000",page:"abonnement-luxe.html"},{nom:"Carte Prestige",prix:"1 050 000",page:"abonnement-prestige.html"}];
 abosGrid.innerHTML=plans.map(p=>`<article class="abonnement-card"><span class="badge-abonnement">${p.nom}</span><h3>${p.nom}</h3><div class="price-abonnement">${p.prix}<small> FCFA/mois</small></div><a class="btn-whatsapp" style="display:block;text-align:center;text-decoration:none;margin-top:12px" href="${p.page}">Savoir plus</a><a class="btn-gold" style="display:block;text-align:center;margin-top:8px;border-radius:100px;padding:12px" href="https://wa.me/24162516457?text=${encodeURIComponent('Je souhaite '+p.nom)}">Solliciter</a></article>`).join('');
-
-// Burger + reviews auto-scroll
 const burger=document.getElementById('burgerBtn'),nav=document.getElementById('mainNav');
 burger.addEventListener('click',()=>{const o=nav.classList.toggle('open');burger.textContent=o?'✕':'☰';});
-const track=document.getElementById('reviewsTrack');
-let auto=setInterval(()=>{track.scrollLeft+=0.6;if(track.scrollLeft>=track.scrollWidth-track.clientWidth-10)track.scrollLeft=0;},30);
+const track=document.getElementById('reviewsTrack');let auto=setInterval(()=>{track.scrollLeft+=0.6;if(track.scrollLeft>=track.scrollWidth-track.clientWidth-10)track.scrollLeft=0;},30);
 track.addEventListener('touchstart',()=>clearInterval(auto),{passive:true});
 </script>
 </body>
