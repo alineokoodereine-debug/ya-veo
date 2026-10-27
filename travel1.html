@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="format-detection" content="telephone=no">
+<meta name="format-detection" content="email=no">
+<meta name="theme-color" content="#0B1F3A">
+<title>Travel – Séjours Premium | L’Adresse SARL</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<style>
+*{ -webkit-tap-highlight-color:transparent }
+.hero-pano{position:relative;min-height:84vh;display:flex;align-items:center;justify-content:center;text-align:center;color:#fff;overflow:hidden;padding:120px 20px 80px}
+.hero-pano-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0}
+.hero-pano-overlay{position:absolute;inset:0;background:linear-gradient(180deg,rgba(11,31,58,.55),rgba(11,31,58,.88));z-index:1}
+.hero-pano-content{position:relative;z-index:2;max-width:920px}
+.form-field{width:100%;padding:12px;border-radius:10px;border:1px solid var(--border);background:#fff;font:inherit}
+.simple-tel{width:100%;padding:12px 14px;border:1px solid #d6dbe4;border-radius:10px;font:inherit}
+.conditional-field{display:none}.conditional-field.visible{display:block;animation:fadeIn .3s}@keyframes fadeIn{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:translateY(0)}}
+.hotel-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;margin-top:12px}
+.hotel-card{border:1.5px solid var(--border);border-radius:14px;overflow:hidden;background:#fff;cursor:pointer;transition:.25s}
+.hotel-card:hover{transform:translateY(-3px);box-shadow:0 12px 24px rgba(11,31,58,.08)}
+.hotel-card.selected{border-color:#0B1F3A;box-shadow:0 0 0 2px #C9A86A}
+.hotel-imgs{display:grid;grid-template-columns:2fr 1fr;grid-template-rows:1fr 1fr;gap:2px;height:180px}
+.hotel-imgs img{width:100%;height:100%;object-fit:cover;display:block}
+.hotel-imgs img:first-child{grid-row:span 2}
+.hotel-info{padding:12px 14px}
+.tabs{display:flex;gap:8px;margin:16px 0;flex-wrap:wrap}
+.tabs button{padding:10px 16px;border-radius:100px;border:1px solid var(--border);background:#fff;cursor:pointer;font-size:13px}
+.tabs button.active{background:#0B1F3A;color:#fff;border-color:#0B1F3A}
+@media(max-width:768px){.hero-pano{min-height:78vh;padding:90px 18px 50px}.hero-pano h1{font-size:38px !important}.hotel-grid{grid-template-columns:1fr}.hotel-imgs{height:200px}}
+</style>
+</head>
+<body>
+
+<header class="top-header">
+<a class="brand" href="index.html"><div class="brand-icon">L</div><div class="brand-name">L’ADRESSE SARL</div></a>
+<nav class="nav" id="mainNav">
+<a href="index.html">Accueil</a>
+<a href="qui-sommes-nous.html">Qui sommes-nous</a>
+<a href="index.html#services-cards">Services</a>
+<a href="blog.html">Blog</a>
+<a href="espace-client.html">Mon espace client</a>
+</nav>
+<button class="burger" id="burgerBtn">☰</button>
+</header>
+
+<section class="hero-pano">
+<img class="hero-pano-img" src="https://images.unsplash.com/photo-1611892440504-42a792e24d32?auto=format&fit=crop&w=1600&q=80" alt="Séjours Libreville">
+<div class="hero-pano-overlay"></div>
+<div class="hero-pano-content">
+<span class="eyebrow">L’Adresse Travel · Ex-Séjours</span>
+<h1>Travel – Séjours Premium</h1>
+<h2>5 Appartements + 5 Hôtels – 3 photos chacun</h2>
+<p>Questionnaire zone ajouté + téléphone simple sans sélecteur + voyageurs condicional</p>
+<div class="hero-btns"><a class="btn-gold" href="#cfgBody">Organiser mon séjour</a><a class="btn-outline" href="index.html#services-cards">Voir services</a></div>
+</div>
+</section>
+
+<section style="padding:80px 0;background:var(--cream)"><div class="container">
+<div class="config-wrap">
+<div class="config-tabs"><button class="active" data-s="1">1. Zone</button><button data-s="2">2. Hébergement</button><button data-s="3">3. Dates</button><button data-s="4">4. Demande</button></div>
+<div class="config-body" id="cfgBody"><p>Chargement…</p></div>
+</div>
+</div></section>
+
+<footer class="footer-universal">
+<div class="footer-grid">
+<div><p>L’ADRESSE SARL - Glass, Libreville</p><p>WhatsApp: <a href="https://wa.me/24162516457" style="color:#E9D9B8">+241 62 51 64 57</a></p></div>
+<div><h4>Services</h4><a href="index.html#services-cards">Tous nos services</a></div>
+<div><h4>Liens</h4><a href="index.html">Accueil</a><a href="blog.html">Blog</a></div>
+<div><h4>Légal</h4><a href="cgv.html">CGV</a></div>
+</div>
+<div class="footer-bottom"><span>© 2026 L’Adresse SARL</span></div>
+</footer>
+
+<script>
+const burger=document.getElementById('burgerBtn'),nav=document.getElementById('mainNav');
+burger.addEventListener('click',()=>{const o=nav.classList.toggle('open');burger.textContent=o?'✕':'☰';});
+
+const SHEET_URL="https://script.google.com/macros/s/AKfycbww-7Nn7ro4OZ-R1oVuoLSdY6P7OWOHJzLl0I4KNazjOXjGYWlmxFzpq-ti7sHGA2zP/exec";
+const WA="24162516457";
+const state={type:"Court séjour",zone:"",heberg:"",dateArr:"",dateDep:"",voy:"",conf:"standard",nom:"",tel:"",desc:"",budget:"proposition"};
+
+const appartements=[
+{name:"Appartement Premium Glass",desc:"2 chambres, vue lagune, Glass – Exemple",imgs:["https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?w=600&q=80","https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=300&q=80","https://images.unsplash.com/photo-1560184611-6a68d2a4e84b?w=300&q=80"]},
+{name:"Appartement Standing Batterie IV",desc:"3 chambres, terrasse, Batterie IV",imgs:["https://images.unsplash.com/photo-1502672023488-70e25813eb80?w=600&q=80","https://images.unsplash.com/photo-1493809842364-78817add58d1?w=300&q=80","https://images.unsplash.com/photo-1484154218962-a197022b5858?w=300&q=80"]},
+{name:"Villa avec Piscine – Sablière",desc:"Villa 4 chambres, piscine privée, Sablière",imgs:["https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=600&q=80","https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=300&q=80","https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=300&q=80"]},
+{name:"Studio Haut Standing – Centre Ville",desc:"Studio équipé, idéal affaires",imgs:["https://images.unsplash.com/photo-1554995207-c18c203602cb?w=600&q=80","https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af?w=300&q=80","https://images.unsplash.com/photo-1598928506311-c55ded91a20c?w=300&q=80"]},
+{name:"Villa d’Exception – Pointe-Denis",desc:"Accès plage, 5 chambres, Pointe-Denis",imgs:["https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=600&q=80","https://images.unsplash.com/photo-1600585154526-990dced4db0d?w=300&q=80","https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?w=300&q=80"]}
+];
+const hotels=[
+{name:"【entity-Radisson Blu¦canonical_name=Radisson Blu】 Okoumé Palace",desc:"Hôtel 5*, piscine, bord de mer – LBV",imgs:["https://images.unsplash.com/photo-1566073771259-6a8506099945?w=600&q=80","https://images.unsplash.com/photo-1551882547-b79c1d5a7a2d?w=300&q=80","https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=300&q=80"]},
+{name:"Onomo Hotel Libreville",desc:"Centre ville, business, exemple",imgs:["https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?w=600&q=80","https://images.unsplash.com/photo-1578683010236-d716f9a3f461?w=300&q=80","https://images.unsplash.com/photo-1611892440504-42a792e24d32?w=300&q=80"]},
+{name:"Hôtel Boulevard",desc:"Vue ville, restaurant, exemple",imgs:["https://images.unsplash.com/photo-1551882547-b79c1d5a7a2d?w=600&q=80","https://images.unsplash.com/photo-1564501049412-61c2a3083791?w=300&q=80","https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?w=300&q=80"]},
+{name:"Villa Hôtel – Port-Gentil",desc:"Extension Port-Gentil, à confirmer",imgs:["https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?w=600&q=80","https://images.unsplash.com/photo-1566073771259-6a8506099945?w=300&q=80","https://images.unsplash.com/photo-1551882547-b79c1d5a7a2d?w=300&q=80"]},
+{name:"Lodge Écotourisme – Lambaréné",desc:"Dans le pays, nature, exemple démo",imgs:["https://images.unsplash.com/photo-1449157291145-7efd050a4d0e?w=600&q=80","https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?w=300&q=80","https://images.unsplash.com/photo-1564501049412-61c2a3083791?w=300&q=80"]}
+];
+let activeTab='appart';
+
+function esc(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
+
+function render(step){
+const body=document.getElementById('cfgBody');
+if(step===1){
+body.innerHTML=`<div style="padding:24px"><h3>Où souhaitez-vous séjourner ? (Mini questionnaire nouveau)</h3><p style="font-size:13px;color:#665f57;margin:8px 0 14px">Choisissez la zone – cela nous aide à filtrer l'hébergement.</p>
+<label style="display:block;margin:12px 0 6px;font-weight:600">Type<select id="type" class="form-field"><option ${state.type==='Court séjour'?'selected':''}>Court séjour</option><option ${state.type==='Long séjour'?'selected':''}>Long séjour</option><option ${state.type==='Affaires'?'selected':''}>Affaires</option><option ${state.type==='Familial'?'selected':''}>Familial</option></select></label>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px;margin-top:16px">
+<label style="border:1px solid var(--border);padding:14px;border-radius:12px;cursor:pointer"><input type="radio" name="zone" value="Dans Libreville" ${state.zone==='Dans Libreville'?'checked':''}> <strong>Dans Libreville</strong><br><small style="color:var(--muted)">Glass, Batterie IV, Sablière</small></label>
+<label style="border:1px solid var(--border);padding:14px;border-radius:12px;cursor:pointer"><input type="radio" name="zone" value="Autour de Libreville" ${state.zone==='Autour de Libreville'?'checked':''}> <strong>Autour de Libreville</strong><br><small style="color:var(--muted)">Cap Esterias, Pointe-Denis</small></label>
+<label style="border:1px solid var(--border);padding:14px;border-radius:12px;cursor:pointer"><input type="radio" name="zone" value="Dans le pays" ${state.zone==='Dans le pays'?'checked':''}> <strong>Dans le pays</strong><br><small style="color:var(--muted)">Port-Gentil, Lambaréné</small></label>
+</div>
+<div style="text-align:right;margin-top:20px"><button class="btn-gold" id="to2">Continuer</button></div><p id="err" style="color:#9b1c1c"></p></div>`;
+document.getElementById('to2').onclick=()=>{
+const z=document.querySelector('input[name=zone]:checked');
+if(!z){document.getElementById('err').textContent='Choisissez la zone (Libreville / Autour / Pays)';return;}
+state.zone=z.value; state.type=document.getElementById('type').value; render(2);
+};
+}else if(step===2){
+body.innerHTML=`<div style="padding:24px"><h3>Hébergement – Zone: ${esc(state.zone)}</h3>
+<div class="tabs"><button class="${activeTab==='appart'?'active':''}" id="tabA">Appartements (5)</button><button class="${activeTab==='hotel'?'active':''}" id="tabH">Hôtels (5)</button></div>
+<div id="grid" class="hotel-grid"></div>
+<div style="display:flex;justify-content:space-between;margin-top:20px"><button id="b1" style="background:transparent;border:1px solid var(--border);padding:12px;border-radius:10px">Retour</button><button class="btn-gold" id="to3">Continuer</button></div><p id="err" style="color:#9b1c1c"></p></div>`;
+function draw(){
+const grid=document.getElementById('grid'); const list=activeTab==='appart'?appartements:hotels;
+grid.innerHTML=list.map(it=>`
+<div class="hotel-card ${state.heberg===it.name?'selected':''}" data-name="${esc(it.name)}">
+<div class="hotel-imgs"><img src="${it.imgs[0]}" alt="" loading="lazy"><img src="${it.imgs[1]}" alt="" loading="lazy"><img src="${it.imgs[2]}" alt="" loading="lazy"></div>
+<div class="hotel-info"><h4 style="font-size:14px;color:var(--navy)">${esc(it.name)}</h4><p style="font-size:12px;color:var(--muted)">${esc(it.desc)}</p></div>
+</div>`).join('');
+grid.querySelectorAll('.hotel-card').forEach(c=>c.onclick=()=>{state.heberg=c.dataset.name;draw();});
+}
+draw();
+document.getElementById('tabA').onclick=()=>{activeTab='appart';render(2);};
+document.getElementById('tabH').onclick=()=>{activeTab='hotel';render(2);};
+document.getElementById('b1').onclick=()=>render(1);
+document.getElementById('to3').onclick=()=>{if(!state.heberg){document.getElementById('err').textContent='Choisissez un hébergement parmi les 10 exemples (3 photos chacun)';return;}render(3);};
+}else if(step===3){
+body.innerHTML=`<div style="padding:24px"><h3>Dates & Voyageurs – Condicional</h3><p style="font-size:13px;color:#665f57">Nombre de voyageurs aparece porque elegiste <strong>${esc(state.heberg)}</strong></p>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px"><label>Arrivée<input type="date" id="arr" value="${state.dateArr}" class="form-field"></label><label>Départ<input type="date" id="dep" value="${state.dateDep}" class="form-field"></label></div>
+<div class="conditional-field visible" style="margin-top:16px"><label style="font-weight:600">Nombre de voyageurs (requis car hébergement choisi)<input type="number" id="voy" min="1" value="${state.voy}" class="simple-tel" placeholder="Ex: 2"></label></div>
+<div style="display:flex;justify-content:space-between;margin-top:20px"><button id="b2" style="background:transparent;border:1px solid var(--border);padding:12px;border-radius:10px">Retour</button><button class="btn-gold" id="to4">Continuer</button></div><p id="err" style="color:#9b1c1c"></p></div>`;
+document.getElementById('b2').onclick=()=>render(2);
+document.getElementById('to4').onclick=()=>{
+const arr=document.getElementById('arr').value, dep=document.getElementById('dep').value, voy=document.getElementById('voy').value;
+if(!arr||!dep||!voy){document.getElementById('err').textContent='Remplissez dates y voyageurs (condicional)';return;}
+state.dateArr=arr; state.dateDep=dep; state.voy=voy; render(4);
+};
+}else{
+body.innerHTML=`<div style="padding:24px"><h3>Demande finale – Téléphone simple</h3>
+<div style="display:flex;gap:12px;margin:12px 0;padding:10px;background:#f7f3ef;border-radius:10px"><label><input type="radio" name="conf" value="standard" ${state.conf==='standard'?'checked':''}> Standard</label><label><input type="radio" name="conf" value="confidentielle" ${state.conf==='confidentielle'?'checked':''}> Confidentielle</label></div>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:12px"><label>Nom<input id="nom" value="${esc(state.nom)}" class="simple-tel" placeholder="Votre nom"></label><label>Téléphone simple (sans sélecteur)<input id="tel" value="${esc(state.tel)}" class="simple-tel" placeholder="+241 62 XX XX XX ou 06X"></label></div>
+<label style="display:block;margin-top:12px">Description<textarea id="desc" class="form-field" style="min-height:90px">${esc(state.desc)}</textarea></label>
+<div style="display:flex;justify-content:space-between;margin-top:20px"><button id="b3" style="background:transparent;border:1px solid var(--border);padding:12px;border-radius:10px">Retour</button><div style="display:flex;gap:8px"><button id="wa" class="btn-gold">WhatsApp</button><button id="mail" style="background:#fff;border:1px solid var(--border);padding:12px;border-radius:10px">Email</button></div></div><p id="err" style="color:#9b1c1c"></p></div>`;
+document.getElementById('b3').onclick=()=>render(3);
+document.getElementById('wa').onclick=()=>submit('WhatsApp');
+document.getElementById('mail').onclick=()=>submit('Email');
+}
+document.querySelectorAll('.config-tabs button').forEach((b,i)=>b.classList.toggle('active',i+1===step));
+}
+function submit(src){
+const tel=document.getElementById('tel').value, nom=document.getElementById('nom').value, desc=document.getElementById('desc').value;
+const err=document.getElementById('err');
+if(tel.replace(/\D/g,'').length<8){err.textContent='Téléphone invalide – utilisez +241 ou 06X (sin selector)';return;}
+const conf=document.querySelector('input[name=conf]:checked')?.value||state.conf;
+const msg=`TRAVEL - DEMANDE\\nZone: ${state.zone}\\nType: ${state.type}\\nHeberg: ${state.heberg}\\nDates: ${state.dateArr} -> ${state.dateDep}\\nVoyageurs: ${state.voy} (condicional, aparece porque hay hébergement)\\nTel: ${tel}\\nNom: ${nom}\\nConf: ${conf}\\nDesc: ${desc}`;
+if(src==='WhatsApp'){window.open('https://wa.me/'+WA+'?text='+encodeURIComponent((conf==='confidentielle'?'[CONFIDENTIEL] ':'')+msg),'_blank');}
+else{window.location.href='mailto:magangabridge@gmail.com?subject=Travel '+encodeURIComponent(state.zone)+'&body='+encodeURIComponent(msg);}
+try{fetch(SHEET_URL,{method:'POST',mode:'no-cors',headers:{'Content-Type':'text/plain'},body:JSON.stringify({service:'TRAVEL',zone:state.zone,type:state.type,hebergement:state.heberg,dateArr:state.dateArr,dateDep:state.dateDep,voy:state.voy,tel,nom,conf,desc,source:src})});}catch{}
+}
+document.addEventListener('DOMContentLoaded',()=>render(1));
+</script>
+</body>
+</html>
