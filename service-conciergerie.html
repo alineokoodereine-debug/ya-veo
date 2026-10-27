@@ -2,28 +2,35 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="format-detection" content="telephone=no"><meta name="format-detection" content="email=no">
+<meta name="format-detection" content="telephone=no"><meta name="format-detection" content="email=no"><meta name="format-detection" content="address=no">
 <meta name="theme-color" content="#0B1F3A">
 <title>Conciergerie Personnalisée | L’Adresse SARL</title>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
 <style>
-*{-webkit-tap-highlight-color:transparent}
+*{ -webkit-tap-highlight-color:transparent }
 .hero-pano{position:relative;min-height:84vh;display:flex;align-items:center;justify-content:center;text-align:center;color:#fff;overflow:hidden;padding:120px 20px 80px}
 .hero-pano-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0}
 .hero-pano-overlay{position:absolute;inset:0;background:linear-gradient(180deg,rgba(11,31,58,.55),rgba(11,31,58,.88));z-index:1}
 .hero-pano-content{position:relative;z-index:2;max-width:920px}
 .form-field,.simple-tel{width:100%;padding:12px 14px;border:1px solid #d6dbe4;border-radius:10px;font:inherit;background:#fff}
+.field-label{font-size:13px;font-weight:600;color:var(--navy);margin-bottom:6px;display:block}
 .conditional-field{display:none}.conditional-field.visible{display:block;animation:fadeIn .3s}@keyframes fadeIn{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:translateY(0)}}
-/* FIX BUG TEXTO DETRÁS */
-.opt-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px}
+.opt-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:12px}
 .opt-card{border:1.5px solid var(--border);border-radius:14px;padding:0;overflow:hidden;background:#fff;cursor:pointer;transition:.2s;display:flex;align-items:stretch}
-.opt-card.selected{border-color:#0B1F3A;box-shadow:0 0 0 2px #C9A86A}
-.opt-card img{width:90px;min-width:90px;object-fit:cover;display:block;flex-shrink:0}
+.opt-card.selected{border-color:#0B1F3A;box-shadow:0 0 0 2px #C9A86A;background:#FFFEF8}
+.opt-card img{width:88px;min-width:88px;object-fit:cover;display:block;flex-shrink:0}
 .opt-card .opt-text{padding:12px 14px;flex:1}
-.opt-card .opt-text strong{display:block;font-size:14px;color:var(--navy)}
-.opt-card .opt-text small{color:var(--muted);font-size:12px;display:block;margin-top:4px}
-@media(max-width:768px){.hero-pano{min-height:78vh;padding:90px 18px 50px}.hero-pano h1{font-size:38px !important}.opt-card img{width:76px;min-width:76px}}
+.opt-card .opt-text strong{display:block;font-size:13.5px;color:var(--navy);line-height:1.2}
+.opt-card .opt-text small{color:var(--muted);font-size:11.5px;display:block;margin-top:4px}
+.besoin-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.besoin-card{border:1.5px solid var(--border);border-radius:12px;padding:14px;background:#fff;cursor:pointer;text-align:center;font-weight:600;font-size:13px;transition:.2s}
+.besoin-card.selected{border-color:#0B1F3A;box-shadow:0 0 0 2px #C9A86A;background:#0B1F3A;color:#fff}
+.budget-box{display:flex;gap:10px;margin-top:10px}
+.budget-box label{flex:1;border:1px solid var(--border);border-radius:10px;padding:10px 12px;cursor:pointer;font-size:13px;background:#fff;text-align:center}
+.budget-box label.selected{border-color:#0B1F3A;box-shadow:0 0 0 2px #C9A86A;background:#0B1F3A;color:#fff}
+.extra-box{border:1px solid var(--border);background:#fff;border-radius:12px;padding:12px;margin-top:12px}
+@media(max-width:768px){.hero-pano{min-height:78vh;padding:90px 18px 50px}.hero-pano h1{font-size:34px !important}.besoin-grid{grid-template-columns:1fr}.opt-card img{width:70px;min-width:70px}}
 </style>
 </head>
 <body>
@@ -39,66 +46,190 @@
 <div class="hero-pano-content">
 <span class="eyebrow">L’Adresse Conciergerie</span>
 <h1>Conciergerie Personnalisée</h1>
-<h2>Nounou, Chef privé, Ménage, Fête – nombre de personnes condicional</h2>
-<p>Bug de imagen con texto detrás arreglado con flex + z-index</p>
+<h2>Quotidien exact de tu captura + Événement DJ & Danseuses con duración</h2>
+<p>Bug texto detrás imagen arreglado – flex + z-index</p>
 <div class="hero-btns"><a class="btn-gold" href="#cfg">Demander</a></div>
 </div>
 </section>
 
-<section style="padding:80px 0;background:var(--cream)" id="cfg"><div class="container">
+<section style="padding:80px 0;background:#F8F3ED" id="cfg"><div class="container">
 <div class="config-wrap">
-<div class="config-tabs"><button class="active" data-s="1">1. Service</button><button data-s="2">2. Personnes</button><button data-s="3">3. Demande</button></div>
+<div class="config-tabs"><button class="active" data-s="1">1. Besoin</button><button data-s="2">2. Personnaliser</button><button data-s="3">3. Demande</button></div>
 <div class="config-body" id="cfgBody"></div>
 </div>
 </div></section>
 
-<footer class="footer-universal"><div class="footer-grid"><div><p>L’ADRESSE SARL – Glass</p><p><a href="https://wa.me/24162516457" style="color:#E9D9B8">WhatsApp</a></p></div><div><h4>Services</h4><a href="index.html#services-cards">Tous</a></div><div><h4>Liens</h4><a href="index.html">Accueil</a></div><div><h4>Légal</h4><a href="cgv.html">CGV</a></div></div><div class="footer-bottom"><span>© 2026 L’Adresse</span></div></footer>
+<footer class="footer-universal"><div class="footer-grid"><div><p>L’ADRESSE SARL – Glass</p><p><a href="https://wa.me/24162516457" style="color:#E9D9B8">WhatsApp +241 62 51 64 57</a></p></div><div><h4>Navigation</h4><a href="index.html">Accueil</a><a href="index.html#services-cards">Services</a></div><div><h4>Légal</h4><a href="cgv.html">CGV</a></div></div><div class="footer-bottom"><span>© 2026 L’Adresse</span></div></footer>
 
 <script>
-const SHEET_URL="https://script.google.com/macros/s/AKfycbww-7Nn7ro4OZ-R1oVuoLSdY6P7OWOHJzLl0I4KNazjOXjGYWlmxFzpq-ti7sHGA2zP/exec";const WA="24162516457";
-const state={service:"",nb:"",date:"",conf:"standard",nom:"",tel:"",desc:""};
-const services=[
-{key:"Nounou",label:"Nounou / Garde d'enfants",img:"https://images.unsplash.com/photo-1596462502278-27bfdc403348?w=200&q=80",needNb:true,desc:"Garde à domicile, journée / soirée"},
-{key:"Chef",label:"Chef privé",img:"https://images.unsplash.com/photo-1556910103-1c02745a30bf?w=200&q=80",needNb:true,desc:"Dîner privé, 2 à 20 personnes"},
-{key:"Menage",label:"Ménage Premium",img:"https://images.unsplash.com/photo-1581578731548-c64695cc6952?w=200&q=80",needNb:false,desc:"Nettoyage haut standing"},
-{key:"Fete",label:"Organisation Fête",img:"https://images.unsplash.com/photo-1511795409834-ef04bbd61622?w=200&q=80",needNb:true,desc:"Anniversaire, événement privé"},
-{key:"Courses",label:"Courses & Livraisons",img:"https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?w=200&q=80",needNb:false,desc:"Courses, pharmacie, etc."}
-];
+const SHEET_URL="https://script.google.com/macros/s/AKfycbww-7Nn7ro4OZ-R1oVuoLSdY6P7OWOHJzLl0I4KNazjOXjGYWlmxFzpq-ti7sHGA2zP/exec";
+const WA="24162516457";
+const state={
+  besoin:"", services:[], ville:"", lieu:"", personnes:"", 
+  prefCul:"Non", prefDetail:"", 
+  securiteNb:"1 agent",
+  djDuree:"", danseDuree:"", danseNb:"2",
+  conf:"Standard", nom:"", tel:"", description:"", budget:"ouvert", budgetMontant:""
+};
+
+const DATA={
+  Quotidien:[
+    {key:"Courses",label:"Courses urgentes & Cadeaux",desc:"Supermarché, pharmacie, cadeaux",img:"https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?w=200&q=80"},
+    {key:"Pressing",label:"Pressing & Blanchisserie",desc:"Collecte, repassage, livraison",img:"https://images.unsplash.com/photo-1582735689369-4fe89db7114c?w=200&q=80"},
+    {key:"Colis",label:"Gestion de colis & Livraisons",desc:"Réception et distribution",img:"https://images.unsplash.com/photo-1580674684081-7617fbf3d5c5?w=200&q=80"},
+    {key:"Entretien",label:"Entretien du domicile",desc:"Petits travaux, maintenance",img:"https://images.unsplash.com/photo-1581578731548-c64695cc6952?w=200&q=80"},
+    {key:"Menage",label:"Ménage & Rangement",desc:"Haut standing, équipe vérifiée",img:"https://images.unsplash.com/photo-1527515637462-cff94eecc1ac?w=200&q=80"},
+    {key:"Nounou",label:"Nounou & Garde d'enfants",desc:"Journée, soirée – personnes requis",img:"https://images.unsplash.com/photo-1596462502278-27bfdc403348?w=200&q=80"},
+    {key:"Voiture",label:"Voiture & Chauffeur",desc:"Déplacement quotidien",img:"https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?w=200&q=80"},
+    {key:"Chef",label:"Chef privé",desc:"Dîner à domicile – personnes requis",img:"https://images.unsplash.com/photo-1556910103-1c02745a30bf?w=200&q=80"},
+    {key:"AutreQuo",label:"Autre type de service – Précisez",desc:"Décrivez votre besoin",img:"https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=200&q=80"}
+  ],
+  Business:[
+    {key:"Assistant",label:"Assistant administratif / Bilingue",desc:"Secrétariat, traduction, RDV",img:"https://images.unsplash.com/photo-1521791136064-7986c2920216?w=200&q=80"},
+    {key:"Securite",label:"Sécurité – Agent privé",desc:"Limite 5 + Escort policier",img:"https://images.unsplash.com/photo-1593113598332-cd288d649433?w=200&q=80"},
+    {key:"Reunion",label:"Organisation Réunion / Séminaire",desc:"Salle, traiteur, matériel",img:"https://images.unsplash.com/photo-1515187029135-18ee286d815b?w=200&q=80"},
+    {key:"Deplacement",label:"Déplacement d'affaires + Chauffeur",desc:"Transferts, mise à disposition",img:"https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?w=200&q=80"},
+    {key:"AccueilVIP",label:"Accueil VIP Aéroport",desc:"Fast-track, porteur, lounge",img:"https://images.unsplash.com/photo-1436491865332-7a61a109cc05?w=200&q=80"},
+    {key:"Installation",label:"Installation expatrié / Bureau",desc:"Logement, école, démarches",img:"https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=200&q=80"}
+  ],
+  Événement:[
+    {key:"Fete",label:"Fête – Anniversaire / Baby shower / Mariage",desc:"Organisation complète",img:"https://images.unsplash.com/photo-1511795409834-ef04bbd61622?w=200&q=80"},
+    {key:"Deco",label:"Décoration & Fleurs",desc:"Thème, table, arche",img:"https://images.unsplash.com/photo-1527529482837-4698179dc6ce?w=200&q=80"},
+    {key:"ChefFete",label:"Chef privé + Serveurs événement",desc:"Buffet, cocktail – personnes requis",img:"https://images.unsplash.com/photo-1556910103-1c02745a30bf?w=200&q=80"},
+    {key:"DJ",label:"DJ / Son & Lumière",desc:"Matériel + technicien – durée demandée",img:"https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=200&q=80"},
+    {key:"Danse",label:"Danseuses / Danseurs / Groupe tradi",desc:"Spectacle – durée + nombre",img:"https://images.unsplash.com/photo-1518834107812-67b0b288f04a?w=200&q=80"},
+    {key:"PhotoVideo",label:"Photographe / Vidéaste",desc:"Reportage discret",img:"https://images.unsplash.com/photo-1519741497674-611481863552?w=200&q=80"},
+    {key:"Chapiteau",label:"Location Chapiteau / Mobilier",desc:"Tentes, chaises, tables",img:"https://images.unsplash.com/photo-1519167758481-83f550bb49b3?w=200&q=80"},
+    {key:"MC",label:"Maître de cérémonie / Animateur",desc:"Animation soirée",img:"https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&q=80"}
+  ],
+  Personnalisée:[
+    {key:"SurMesure",label:"Demande entièrement personnalisée",desc:"Expliquez-nous tout",img:"https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=200&q=80"},
+    {key:"ConciergePerso",label:"Concierge dédié 24/7",desc:"Un interlocuteur unique",img:"https://images.unsplash.com/photo-1551836022-deb4988cc6c0?w=200&q=80"}
+  ]
+};
+
 function esc(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
+
 function render(step){
-const body=document.getElementById('cfgBody');
-if(step===1){
-body.innerHTML=`<div style="padding:24px"><h3>Quel service ? – Bug texto detrás imagen arreglado</h3><div class="opt-grid" style="margin-top:14px">${services.map(s=>`<div class="opt-card ${state.service===s.key?'selected':''}" data-key="${s.key}"><img src="${s.img}" loading="lazy"><div class="opt-text"><strong>${s.label}</strong><small>${s.desc}${s.needNb?' – personnes requis':''}</small></div></div>`).join('')}</div><div style="text-align:right;margin-top:20px"><button class="btn-gold" id="to2">Continuer</button></div><p id="err" style="color:#9b1c1c"></p></div>`;
-body.querySelectorAll('.opt-card').forEach(c=>c.onclick=()=>{state.service=c.dataset.key;render(1);});
-document.getElementById('to2').onclick=()=>{if(!state.service){document.getElementById('err').textContent='Choisissez un service';return;}render(2);};
-}else if(step===2){
-const need=services.find(s=>s.key===state.service)?.needNb;
-body.innerHTML=`<div style="padding:24px"><h3>Personnes – Condicional</h3>
-<div class="${need?'conditional-field visible':'conditional-field'}" id="nbWrap"><label style="font-weight:600">Nombre de personnes (requis pour ${esc(state.service)} – Nounou, Chef, Fête)<input type="number" id="nb" value="${state.nb}" class="simple-tel" placeholder="Ex: 4"></label></div>
-<label style="display:block;margin-top:12px">Date<input type="date" id="date" value="${state.date}" class="form-field"></label>
-<div style="display:flex;justify-content:space-between;margin-top:20px"><button id="b1" style="background:transparent;border:1px solid var(--border);padding:12px;border-radius:10px">Retour</button><button class="btn-gold" id="to3">Continuer</button></div><p id="err" style="color:#9b1c1c"></p></div>`;
-document.getElementById('b1').onclick=()=>render(1);
-document.getElementById('to3').onclick=()=>{if(need && !document.getElementById('nb').value){document.getElementById('err').textContent='Indiquez nombre de personnes – condicional';return;}state.nb=document.getElementById('nb')?.value||'';state.date=document.getElementById('date').value;render(3);};
-}else{
-body.innerHTML=`<div style="padding:24px"><h3>Demande – Téléphone simple</h3>
-<div style="display:flex;gap:12px;margin:12px 0"><label><input type="radio" name="conf" value="standard" ${state.conf==='standard'?'checked':''}> Standard</label><label><input type="radio" name="conf" value="confidentielle" ${state.conf==='confidentielle'?'checked':''}> Confidentielle</label></div>
-<div style="display:grid;grid-template-columns:1fr 1fr;gap:12px"><label>Nom<input id="nom" value="${esc(state.nom)}" class="simple-tel"></label><label>Tél simple<input id="tel" value="${esc(state.tel)}" class="simple-tel" placeholder="+241..."></label></div>
-<label style="display:block;margin-top:12px">Détails<textarea id="desc" class="form-field" style="min-height:90px">${esc(state.desc)}</textarea></label>
-<div style="display:flex;justify-content:space-between;margin-top:20px"><button id="b2" style="background:transparent;border:1px solid var(--border);padding:12px;border-radius:10px">Retour</button><div style="display:flex;gap:8px"><button id="wa" class="btn-gold">WhatsApp</button><button id="mail" style="background:#fff;border:1px solid var(--border);padding:12px;border-radius:10px">Email</button></div></div><p id="err" style="color:#9b1c1c"></p></div>`;
-document.getElementById('b2').onclick=()=>render(2);
-document.getElementById('wa').onclick=()=>submit('WhatsApp');document.getElementById('mail').onclick=()=>submit('Email');
+  const body=document.getElementById('cfgBody');
+  if(step===1){
+    body.innerHTML=`<div style="padding:24px">
+    <p style="font-size:13px;color:#665f57;margin-bottom:14px">Choisissez le type de demande qui correspond le mieux à votre besoin.</p>
+    <div class="besoin-grid">${Object.keys(DATA).map(k=>`<div class="besoin-card ${state.besoin===k?'selected':''}" data-k="${k}">${k}</div>`).join('')}</div>
+    <div style="text-align:right;margin-top:20px"><button class="btn-gold" id="to2">Continuer →</button></div><p id="err" style="color:#9b1c1c;margin-top:10px"></p></div>`;
+    body.querySelectorAll('.besoin-card').forEach(c=>c.onclick=()=>{state.besoin=c.dataset.k; state.services=[]; render(1);});
+    document.getElementById('to2').onclick=()=>{if(!state.besoin){document.getElementById('err').textContent='Choisissez Quotidien / Business / Événement / Personnalisée';return;} render(2);};
+
+  }else if(step===2){
+    const list=DATA[state.besoin]||[];
+    const hasChef=state.services.includes('Chef')||state.services.includes('ChefFete');
+    const hasSec=state.services.includes('Securite');
+    const hasDJ=state.services.includes('DJ');
+    const hasDanse=state.services.includes('Danse');
+    body.innerHTML=`<div style="padding:24px">
+      <div style="background:#F8F3ED;padding:10px 14px;border-radius:8px;margin-bottom:14px;font-size:13px"><strong>${esc(state.besoin)}</strong> – Sélectionnez un ou plusieurs services</div>
+      <div class="opt-grid">${list.map(s=>{
+        const sel=state.services.includes(s.key);
+        return `<div class="opt-card ${sel?'selected':''}" data-key="${s.key}"><img src="${s.img}" loading="lazy"><div class="opt-text"><strong>${s.label}</strong><small>${s.desc}</small></div></div>`;
+      }).join('')}</div>
+
+      ${hasSec?`<div class="extra-box"><span class="field-label">Sécurité – Combien d'agents ? (limite 5 + Escort policier)</span>
+      <select id="secNb" class="form-field" style="margin-top:8px">
+        <option>1 agent</option><option>2 agents</option><option>3 agents</option><option>4 agents</option><option>5 agents</option><option>Escort policier (plus de 5 / besoin officiel)</option>
+      </select></div>`:''}
+
+      ${hasDJ?`<div class="extra-box"><span class="field-label">DJ – Pour combien de temps ?</span>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:8px">
+          <input id="djDuree" class="form-field" placeholder="Ex: 4 heures, 19h-02h" value="${esc(state.djDuree)}">
+          <select class="form-field" id="djStyle"><option>Mix généraliste</option><option>Afro / Coupé-décalé</option><option>Amapiano</option><option>RnB / Slow</option><option>Traditionnel gabonais</option></select>
+        </div>
+      </div>`:''}
+
+      ${hasDanse?`<div class="extra-box"><span class="field-label">Danseuses / Danseurs – Durée & Nombre</span>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:8px">
+          <input id="danseDuree" class="form-field" placeholder="Durée – Ex: 2h, 30 min x 3 passages" value="${esc(state.danseDuree)}">
+          <input id="danseNb" class="form-field" placeholder="Nombre – Ex: 2 danseuses, 4 danseurs" value="${esc(state.danseNb)}">
+        </div>
+      </div>`:''}
+
+      <div style="margin-top:22px;border-top:1px solid var(--border);padding-top:18px">
+        <h4 style="font-size:14px;margin-bottom:10px">Ville & Lieu de Résidence (non obligatoire – clients à l'étranger acceptés)</h4>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+          <label><span class="field-label">Ville</span><input id="ville" class="form-field" placeholder="Libreville, Port-Gentil, Paris..." value="${esc(state.ville)}"></label>
+          <label><span class="field-label">Lieu de Résidence</span><input id="lieu" class="form-field" placeholder="Glass, Batterie IV..." value="${esc(state.lieu)}"></label>
+        </div>
+        <label style="margin-top:12px;display:block"><span class="field-label">Personnes / foyer (facultatif)</span><input id="pers" class="simple-tel" value="${esc(state.personnes)}"></label>
+        
+        <div class="${hasChef?'conditional-field visible':'conditional-field'}" style="margin-top:16px;border:1px solid var(--border);padding:12px;border-radius:12px;background:#fff">
+          <label class="field-label">Avez-vous une préférence culinaire ?</label>
+          <div style="display:flex;gap:10px;margin-top:8px">
+            <label style="border:1px solid var(--border);padding:8px 14px;border-radius:20px;cursor:pointer;background:${state.prefCul==='Non'?'#0B1F3A;color:#fff':''}"><input type="radio" name="pref" value="Non" ${state.prefCul==='Non'?'checked':''} style="display:none"> Non</label>
+            <label style="border:1px solid var(--border);padding:8px 14px;border-radius:20px;cursor:pointer;background:${state.prefCul==='Oui'?'#0B1F3A;color:#fff':''}"><input type="radio" name="pref" value="Oui" ${state.prefCul==='Oui'?'checked':''} style="display:none"> Oui</label>
+          </div>
+          <div class="${state.prefCul==='Oui'?'conditional-field visible':'conditional-field'}" style="margin-top:10px">
+            <input id="prefDetail" class="form-field" placeholder="Végétarien, halal, allergies..." value="${esc(state.prefDetail)}">
+          </div>
+        </div>
+      </div>
+
+      <div style="display:flex;justify-content:space-between;margin-top:22px"><button id="b1" style="background:transparent;border:1px solid var(--border);padding:12px;border-radius:10px">← Retour</button><button class="btn-gold" id="to3">Personnaliser →</button></div><p id="err" style="color:#9b1c1c;margin-top:10px"></p></div>`;
+
+    body.querySelectorAll('.opt-card').forEach(c=>{
+      c.onclick=()=>{const k=c.dataset.key; if(state.services.includes(k)) state.services=state.services.filter(x=>x!==k); else state.services.push(k); render(2);};
+    });
+    const secEl=document.getElementById('secNb'); if(secEl) secEl.onchange=e=>state.securiteNb=e.target.value;
+    ['djDuree','danseDuree','danseNb'].forEach(id=>{const el=document.getElementById(id); if(el) el.oninput=e=>state[id]=e.target.value;});
+    body.querySelectorAll('input[name=pref]').forEach(r=>r.onchange=e=>{state.prefCul=e.target.value; render(2);});
+    ['ville','lieu','pers','prefDetail'].forEach(id=>{const el=document.getElementById(id); if(el) el.oninput=e=>{if(id==='ville') state.ville=e.target.value; if(id==='lieu') state.lieu=e.target.value; if(id==='pers') state.personnes=e.target.value; if(id==='prefDetail') state.prefDetail=e.target.value;};});
+    document.getElementById('b1').onclick=()=>render(1);
+    document.getElementById('to3').onclick=()=>{if(state.services.length===0){document.getElementById('err').textContent='Sélectionnez au moins un service';return;} render(3);};
+
+  }else{
+    const isConf=state.conf==='Confidentielle';
+    body.innerHTML=`<div style="padding:24px">
+      <div style="background:#F8F3ED;padding:10px 14px;border-radius:8px;margin-bottom:14px;font-size:13px"><strong>${esc(state.besoin)} – ${state.services.join(', ')}</strong></div>
+      <div style="display:flex;gap:10px;margin:12px 0">
+        <label style="flex:1;border:1.5px solid ${!isConf?'#0B1F3A':'var(--border)'};border-radius:10px;padding:10px;text-align:center;cursor:pointer;background:${!isConf?'#0B1F3A;color:#fff':''}"><input type="radio" name="conf" value="Standard" ${!isConf?'checked':''} style="display:none"> Standard</label>
+        <label style="flex:1;border:1.5px solid ${isConf?'#0B1F3A':'var(--border)'};border-radius:10px;padding:10px;text-align:center;cursor:pointer;background:${isConf?'#0B1F3A;color:#fff':''}"><input type="radio" name="conf" value="Confidentielle" ${isConf?'checked':''} style="display:none"> Confidentielle 🔒</label>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+        <div class="${isConf?'conditional-field':'conditional-field visible'}"><label class="field-label">Nom complet</label><input id="nom" class="simple-tel" value="${esc(state.nom)}"></div>
+        <div><label class="field-label">Téléphone *</label><input id="tel" class="simple-tel" placeholder="+241..." value="${esc(state.tel)}"></div>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px">
+        <label><span class="field-label">Ville</span><input id="ville3" class="form-field" value="${esc(state.ville)}"></label>
+        <label><span class="field-label">Lieu de Résidence</span><input id="lieu3" class="form-field" value="${esc(state.lieu)}"></label>
+      </div>
+      <label style="display:block;margin-top:12px"><span class="field-label">Description (facultatif)</span><textarea id="desc" class="form-field" style="min-height:90px">${esc(state.description)}</textarea></label>
+      <div style="margin-top:18px"><span class="field-label">Budget</span>
+        <div class="budget-box"><label class="${state.budget==='ouvert'?'selected':''}"><input type="radio" name="budget" value="ouvert" ${state.budget==='ouvert'?'checked':''} style="display:none"> Budget ouvert</label><label class="${state.budget==='defini'?'selected':''}"><input type="radio" name="budget" value="defini" ${state.budget==='defini'?'checked':''} style="display:none"> J'ai un budget</label></div>
+        <div class="${state.budget==='defini'?'conditional-field visible':'conditional-field'}" style="margin-top:10px"><input id="budgetMontant" class="form-field" placeholder="Montant FCFA" value="${esc(state.budgetMontant)}"></div>
+      </div>
+      <div style="display:flex;justify-content:space-between;margin-top:22px"><button id="b2" style="background:transparent;border:1px solid var(--border);padding:12px 16px;border-radius:10px">← Retour</button><div style="display:flex;gap:8px"><button id="wa" class="btn-gold">WhatsApp</button><button id="mail" style="background:#0B1F3A;color:#fff;border:none;padding:12px 18px;border-radius:100px;font-size:13px">Email</button></div></div><p id="err" style="color:#9b1c1c;margin-top:10px"></p></div>`;
+    body.querySelectorAll('input[name=conf]').forEach(r=>r.onchange=e=>{state.conf=e.target.value; render(3);});
+    body.querySelectorAll('input[name=budget]').forEach(r=>r.onchange=e=>{state.budget=e.target.value; render(3);});
+    const bind=(id,key)=>{const el=document.getElementById(id); if(el) el.oninput=e=>state[key]=e.target.value;};
+    bind('nom','nom'); bind('tel','tel'); bind('ville3','ville'); bind('lieu3','lieu'); bind('desc','description'); bind('budgetMontant','budgetMontant');
+    document.getElementById('b2').onclick=()=>render(2);
+    document.getElementById('wa').onclick=()=>submit('WhatsApp'); document.getElementById('mail').onclick=()=>submit('Email');
+  }
+  document.querySelectorAll('.config-tabs button').forEach((b,i)=>b.classList.toggle('active',i+1===step));
 }
-document.querySelectorAll('.config-tabs button').forEach((b,i)=>b.classList.toggle('active',i+1===step));
-}
+
 function submit(src){
-const tel=document.getElementById('tel').value,nom=document.getElementById('nom').value;
-if(tel.replace(/\D/g,'').length<8){document.getElementById('err').textContent='Tel invalide';return;}
-const conf=document.querySelector('input[name=conf]:checked')?.value||state.conf;
-const msg=`CONCIERGERIE DEMANDE\\nService: ${state.service}\\nNb personnes: ${state.nb||'N/A'} (condicional)\\nDate: ${state.date}\\nTel: ${tel} Nom: ${nom}\\nConf: ${conf}\\nDesc: ${document.getElementById('desc').value}`;
-if(src==='WhatsApp')window.open('https://wa.me/'+WA+'?text='+encodeURIComponent((conf==='confidentielle'?'[CONFIDENTIEL] ':'')+msg),'_blank'); else window.location.href='mailto:magangabridge@gmail.com?subject=Conciergerie&body='+encodeURIComponent(msg);
-try{fetch(SHEET_URL,{method:'POST',mode:'no-cors',body:JSON.stringify({service:'CONCIERGERIE',...state,tel,nom,conf,source:src})});}catch{}
+  const tel=document.getElementById('tel')?.value||state.tel;
+  if(!tel || tel.replace(/\D/g,'').length<8){document.getElementById('err').textContent='Téléphone invalide – +241...';return;}
+  const msg=`CONCIERGERIE ${state.besoin}\nServices: ${state.services.join(', ')}\nSécurité: ${state.securiteNb}\nDJ durée: ${state.djDuree||'N/A'}\nDanse: ${state.danseNb} – ${state.danseDuree||'N/A'}\nVille: ${state.ville}\nLieu: ${state.lieu}\nPers: ${state.personnes||'N/A'}\nChef pref: ${state.prefCul} ${state.prefDetail||''}\nConf: ${state.conf}\nNom: ${state.conf==='Confidentielle'?'[CONFIDENTIEL]':state.nom}\nTel: ${tel}\nBudget: ${state.budget==='ouvert'?'ouvert':state.budgetMontant}\nDesc: ${state.description}`;
+  const finalMsg=(state.conf==='Confidentielle'?'[CONFIDENTIEL] ':'')+msg;
+  if(src==='WhatsApp') window.open('https://wa.me/'+WA+'?text='+encodeURIComponent(finalMsg),'_blank');
+  else window.location.href='mailto:magangabridge@gmail.com?subject=Conciergerie '+encodeURIComponent(state.besoin)+'&body='+encodeURIComponent(finalMsg);
+  try{ fetch(SHEET_URL,{method:'POST',mode:'no-cors',headers:{'Content-Type':'text/plain'},body:JSON.stringify({service:'CONCIERGERIE',...state,tel,source:src})}); }catch{}
 }
-document.addEventListener('DOMContentLoaded',()=>{render(1);const b=document.getElementById('burgerBtn'),n=document.getElementById('mainNav');b.onclick=()=>{const o=n.classList.toggle('open');b.textContent=o?'✕':'☰';};});
+document.addEventListener('DOMContentLoaded',()=>{
+  render(1);
+  const b=document.getElementById('burgerBtn'),n=document.getElementById('mainNav');
+  b.onclick=()=>{const o=n.classList.toggle('open');b.textContent=o?'✕':'☰';};
+});
 </script>
 </body>
 </html>
