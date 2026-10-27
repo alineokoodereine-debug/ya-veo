@@ -1,89 +1,104 @@
-<!DOCTYPE html><html lang="fr"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Mobilité & Chauffeur – L’Adresse SARL</title>
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="format-detection" content="telephone=no"><meta name="format-detection" content="email=no">
+<meta name="theme-color" content="#0B1F3A">
+<title>Conciergerie Personnalisée | L’Adresse SARL</title>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
-<style>.field-label{display:block;margin:12px 0 6px;font-size:13px;font-weight:600;color:var(--navy)} .form-field{width:100%;padding:12px;border-radius:10px;border:1px solid var(--border);background:#fff} .simple-tel{width:100%;padding:12px;border:1px solid #d6dbe4;border-radius:10px} .conditional-field{display:none} .conditional-field.visible{display:block;animation:fadeIn .3s} @keyframes fadeIn{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:translateY(0)}} .form-actions{display:flex;justify-content:space-between;gap:10px;margin-top:22px} </style>
-</head><body>
+<style>
+*{-webkit-tap-highlight-color:transparent}
+.hero-pano{position:relative;min-height:84vh;display:flex;align-items:center;justify-content:center;text-align:center;color:#fff;overflow:hidden;padding:120px 20px 80px}
+.hero-pano-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0}
+.hero-pano-overlay{position:absolute;inset:0;background:linear-gradient(180deg,rgba(11,31,58,.55),rgba(11,31,58,.88));z-index:1}
+.hero-pano-content{position:relative;z-index:2;max-width:920px}
+.form-field,.simple-tel{width:100%;padding:12px 14px;border:1px solid #d6dbe4;border-radius:10px;font:inherit;background:#fff}
+.conditional-field{display:none}.conditional-field.visible{display:block;animation:fadeIn .3s}@keyframes fadeIn{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:translateY(0)}}
+/* FIX BUG TEXTO DETRÁS */
+.opt-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px}
+.opt-card{border:1.5px solid var(--border);border-radius:14px;padding:0;overflow:hidden;background:#fff;cursor:pointer;transition:.2s;display:flex;align-items:stretch}
+.opt-card.selected{border-color:#0B1F3A;box-shadow:0 0 0 2px #C9A86A}
+.opt-card img{width:90px;min-width:90px;object-fit:cover;display:block;flex-shrink:0}
+.opt-card .opt-text{padding:12px 14px;flex:1}
+.opt-card .opt-text strong{display:block;font-size:14px;color:var(--navy)}
+.opt-card .opt-text small{color:var(--muted);font-size:12px;display:block;margin-top:4px}
+@media(max-width:768px){.hero-pano{min-height:78vh;padding:90px 18px 50px}.hero-pano h1{font-size:38px !important}.opt-card img{width:76px;min-width:76px}}
+</style>
+</head>
+<body>
 <header class="top-header">
-  <a class="brand" href="index.html" aria-label="L’Adresse SARL">
-    <div class="brand-icon">L</div>
-    <div class="brand-name">L’ADRESSE SARL</div>
-  </a>
-  <nav class="nav" id="mainNav">
-    <a href="index.html">Accueil</a>
-    <a href="qui-sommes-nous.html">Qui sommes-nous</a>
-    <a href="service-sejours.html">Séjours</a>
-    <a href="service-mobilite.html">Mobilité</a>
-    <a href="service-conciergerie.html">Conciergerie</a>
-    <a href="travel.html">Travel</a>
-    <a href="business.html">Business</a>
-    <a href="prestige.html">Prestige</a>
-    <a href="blog.html">Blog</a>
-    <a href="abonnements.html">Abonnements</a>
-    <a href="espace-client.html">Mon espace client</a>
-  </nav>
-  <div style="display:flex;gap:10px;align-items:center">
-    <a class="btn-contact hide-mobile" href="abonnements.html">Abonnements</a>
-    <button class="burger" id="burgerBtn" type="button">☰</button>
-  </div>
+<a class="brand" href="index.html"><div class="brand-icon">L</div><div class="brand-name">L’ADRESSE SARL</div></a>
+<nav class="nav" id="mainNav"><a href="index.html">Accueil</a><a href="qui-sommes-nous.html">Qui sommes-nous</a><a href="index.html#services-cards">Services</a><a href="blog.html">Blog</a><a href="espace-client.html">Mon espace client</a></nav>
+<button class="burger" id="burgerBtn">☰</button>
 </header>
-<section class="hero-pano" style="background-image:url('https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?auto=format&fit=crop&w=1600&q=80');"><div class="hero-pano-content"><span class="eyebrow">Mobilité & Chauffeur privé</span><h1>Déplacez-vous en toute sérénité</h1><h2>Transferts, véhicules de prestige</h2><p>Berline 20.000 FCFA/j · SUV Premium 35.000 FCFA/j · Téléphone simple sans sélecteur pays.</p><div class="hero-btns"><a class="btn-gold" href="#cfgBody">Réserver</a><a class="btn-outline" href="service-sejours.html">Séjours</a></div></div></section>
-<section style="padding:80px 0"><div class="container"><div class="config-wrap"><div class="config-tabs"><button class="active" data-s="1">1. Trajet</button><button data-s="2">2. Véhicule</button><button data-s="3">3. Personnaliser</button><button data-s="4">4. Demande</button></div><div class="config-body" id="cfgBody"><p>Chargement…</p></div></div></div></section>
-<footer class="footer-universal">
-  <div class="footer-grid">
-    <div class="footer-brand">
-      <div style="display:flex;align-items:center;gap:12px;margin-bottom:14px"><div class="brand-icon" style="border-color:#C9A86A;color:#C9A86A">L</div><div class="brand-name">L’ADRESSE SARL</div></div>
-      <p>Conciergerie de luxe à Libreville. Séjours, mobilité privée, réservations et assistance personnalisée. Glass, Libreville – Extension Port-Gentil.</p>
-      <p style="margin-top:12px">WhatsApp: <a href="https://wa.me/24162516457" style="display:inline;color:#E9D9B8">+241 62 51 64 57</a></p>
-    </div>
-    <div><h4>Services</h4><a href="service-sejours.html">Séjours Premium</a><a href="service-mobilite.html">Mobilité & Chauffeur</a><a href="service-conciergerie.html">Conciergerie</a><a href="travel.html">Travel</a><a href="business.html">Business</a><a href="prestige.html">Prestige</a></div>
-    <div><h4>Entreprise</h4><a href="qui-sommes-nous.html">Qui sommes-nous</a><a href="blog.html">Blog</a><a href="abonnements.html">Abonnements</a><a href="espace-client.html">Espace client</a><a href="demande.html">Demande personnalisée</a></div>
-    <div><h4>Contact & Légal</h4><p>Glass, Libreville · Gabon</p><a href="politique-confidentialite.html">Confidentialité</a><a href="cgv.html">CGV</a><a href="mentions-legales.html">Mentions légales</a><p style="margin-top:10px;font-size:11px">Traitement standard ou confidentiel disponible.</p></div>
-  </div>
-  <div class="footer-bottom"><span>© 2026 L’Adresse SARL — Démonstration non contractuelle.</span><span>Glass, Libreville · Confidentialité renforcée · 2 Sheets séparés</span></div>
-</footer>
+
+<section class="hero-pano">
+<img class="hero-pano-img" src="https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=1600&q=80" alt="Conciergerie">
+<div class="hero-pano-overlay"></div>
+<div class="hero-pano-content">
+<span class="eyebrow">L’Adresse Conciergerie</span>
+<h1>Conciergerie Personnalisée</h1>
+<h2>Nounou, Chef privé, Ménage, Fête – nombre de personnes condicional</h2>
+<p>Bug de imagen con texto detrás arreglado con flex + z-index</p>
+<div class="hero-btns"><a class="btn-gold" href="#cfg">Demander</a></div>
+</div>
+</section>
+
+<section style="padding:80px 0;background:var(--cream)" id="cfg"><div class="container">
+<div class="config-wrap">
+<div class="config-tabs"><button class="active" data-s="1">1. Service</button><button data-s="2">2. Personnes</button><button data-s="3">3. Demande</button></div>
+<div class="config-body" id="cfgBody"></div>
+</div>
+</div></section>
+
+<footer class="footer-universal"><div class="footer-grid"><div><p>L’ADRESSE SARL – Glass</p><p><a href="https://wa.me/24162516457" style="color:#E9D9B8">WhatsApp</a></p></div><div><h4>Services</h4><a href="index.html#services-cards">Tous</a></div><div><h4>Liens</h4><a href="index.html">Accueil</a></div><div><h4>Légal</h4><a href="cgv.html">CGV</a></div></div><div class="footer-bottom"><span>© 2026 L’Adresse</span></div></footer>
+
 <script>
-const burger=document.getElementById('burgerBtn');const nav=document.getElementById('mainNav');
-if(burger&&nav){burger.addEventListener('click',()=>{const o=nav.classList.toggle('open');burger.textContent=o?'✕':'☰';});nav.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{nav.classList.remove('open');burger.textContent='☰';}));}
-</script>
-<script>
-const SHEET_URL="https://script.google.com/macros/s/AKfycbww-7Nn7ro4OZ-R1oVuoLSdY6P7OWOHJzLl0I4KNazjOXjGYWlmxFzpq-ti7sHGA2zP/exec";
-const state={type:"",origine:"",destination:"",date:"",heure:"",heberg:"",services:[],conf:"standard",nom:"",tel:"",membres:"",voiture:"",desc:"",budget:"proposition",budgetVal:"",website:""};
-const vehicles=[{name:"Berline - 20 000 FCFA/j",price:"20000"},{name:"SUV Premium - 35 000 FCFA/j",price:"35000"}];
-function todayLocal(){const d=new Date();return d.toISOString().slice(0,10);}
-function escapeHTML(v){return String(v).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
-function render(s){
+const SHEET_URL="https://script.google.com/macros/s/AKfycbww-7Nn7ro4OZ-R1oVuoLSdY6P7OWOHJzLl0I4KNazjOXjGYWlmxFzpq-ti7sHGA2zP/exec";const WA="24162516457";
+const state={service:"",nb:"",date:"",conf:"standard",nom:"",tel:"",desc:""};
+const services=[
+{key:"Nounou",label:"Nounou / Garde d'enfants",img:"https://images.unsplash.com/photo-1596462502278-27bfdc403348?w=200&q=80",needNb:true,desc:"Garde à domicile, journée / soirée"},
+{key:"Chef",label:"Chef privé",img:"https://images.unsplash.com/photo-1556910103-1c02745a30bf?w=200&q=80",needNb:true,desc:"Dîner privé, 2 à 20 personnes"},
+{key:"Menage",label:"Ménage Premium",img:"https://images.unsplash.com/photo-1581578731548-c64695cc6952?w=200&q=80",needNb:false,desc:"Nettoyage haut standing"},
+{key:"Fete",label:"Organisation Fête",img:"https://images.unsplash.com/photo-1511795409834-ef04bbd61622?w=200&q=80",needNb:true,desc:"Anniversaire, événement privé"},
+{key:"Courses",label:"Courses & Livraisons",img:"https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?w=200&q=80",needNb:false,desc:"Courses, pharmacie, etc."}
+];
+function esc(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
+function render(step){
 const body=document.getElementById('cfgBody');
-if(s===1){body.innerHTML=`<div style="padding:24px"><label class="field-label">Type de trajet<select name="type" class="form-field"><option value="">Choisir</option><option ${state.type==='Transfert aéroport'?'selected':''}>Transfert aéroport</option><option ${state.type==='Mise à disposition'?'selected':''}>Mise à disposition</option><option ${state.type==='Course urbaine'?'selected':''}>Course urbaine</option></select></label><label class="field-label">Départ<input name="origine" value="${escapeHTML(state.origine)}" class="form-field" placeholder="Ex: Aéroport LBV"></label><label class="field-label">Destination<input name="destination" value="${escapeHTML(state.destination)}" class="form-field" placeholder="Ex: Glass"></label><div style="display:grid;grid-template-columns:1fr 1fr;gap:12px"><label class="field-label">Date<input name="date" type="date" value="${state.date}" class="form-field"></label><label class="field-label">Heure<input name="heure" type="time" value="${state.heure}" class="form-field"></label></div><div class="form-actions"><span></span><button class="btn-gold" id="to2">Continuer</button></div><p id="cfgError" style="color:#9b1c1c"></p></div>`;
-document.getElementById('to2').addEventListener('click',()=>{collect(); if(!state.type||!state.origine||!state.destination||!state.date||!state.heure){document.getElementById('cfgError').textContent='Remplissez trajet, date et heure';return;} render(2);});
-}else if(s===2){
-body.innerHTML=`<div style="padding:24px"><h3>Véhicule</h3><div style="display:grid;gap:10px;margin-top:12px">${vehicles.map((v,i)=>`<label style="border:1px solid var(--border);padding:12px;border-radius:10px;cursor:pointer"><input type="radio" name="heberg" value="${v.name}" ${state.heberg===v.name?'checked':''}> ${v.name}</label>`).join('')}</div><div id="conditionalPersons" class="conditional-field ${state.heberg?'visible':''}" style="margin-top:16px"><label class="field-label">Nombre de passagers (affiché car véhicule sélectionné)</label><input name="membres" type="number" min="1" value="${escapeHTML(state.membres)}" class="simple-tel" placeholder="Ex: 2"></div><div class="form-actions"><button id="back1" style="background:transparent;border:1px solid var(--border);padding:12px;border-radius:10px">Retour</button><button class="btn-gold" id="to3">Continuer</button></div><p id="cfgError" style="color:#9b1c1c"></p></div>`;
-body.querySelectorAll('input[name=heberg]').forEach(r=>r.addEventListener('change',e=>{state.heberg=e.target.value; const c=document.getElementById('conditionalPersons'); if(c){if(state.heberg)c.classList.add('visible');} collect();}));
-document.getElementById('back1').addEventListener('click',()=>render(1));
-document.getElementById('to3').addEventListener('click',()=>{collect(); if(!state.heberg){document.getElementById('cfgError').textContent='Choisissez un véhicule';return;} render(3);});
-}else if(s===3){
-body.innerHTML=`<div style="padding:24px"><h3>Personnaliser</h3><p style="font-size:13px;color:#665f57">Services additionnels (optionnel)</p><div style="display:grid;gap:8px;margin-top:10px"><label><input type="checkbox" value="Siège bébé" name="svcChk" ${state.services.includes('Siège bébé')?'checked':''}> Siège bébé</label><label><input type="checkbox" value="Eau & rafraîchissements" name="svcChk" ${state.services.includes('Eau & rafraîchissements')?'checked':''}> Eau & rafraîchissements</label><label><input type="checkbox" value="Autre besoin – Expliquez-nous" name="svcChk" ${state.services.includes('Autre besoin – Expliquez-nous')?'checked':''}> Autre besoin</label></div><label class="field-label">Infos complémentaires<textarea name="desc" class="form-field" style="min-height:80px">${escapeHTML(state.desc)}</textarea></label><div class="form-actions"><button id="back2" style="background:transparent;border:1px solid var(--border);padding:12px;border-radius:10px">Retour</button><button class="btn-gold" id="to4">Continuer</button></div></div>`;
-body.querySelectorAll('input[name=svcChk]').forEach(ch=>ch.addEventListener('change',()=>collect()));
-document.getElementById('back2').addEventListener('click',()=>render(2));
-document.getElementById('to4').addEventListener('click',()=>{collect(); render(4);});
-}else if(s===4){
-body.innerHTML=`<div style="padding:24px"><h3>Demande</h3><div style="display:flex;gap:12px;margin:12px 0;padding:10px;background:#f7f3ef;border-radius:10px"><label><input type="radio" name="conf" value="standard" ${state.conf==='standard'?'checked':''}> Standard</label><label><input type="radio" name="conf" value="confidentielle" ${state.conf==='confidentielle'?'checked':''}> Confidentielle</label></div><div style="display:grid;grid-template-columns:1fr 1fr;gap:12px"><label class="field-label">Nom<input name="nom" value="${escapeHTML(state.nom)}" class="simple-tel"></label><label class="field-label">Téléphone simple (sans sélecteur)<input name="tel" value="${escapeHTML(state.tel)}" class="simple-tel" placeholder="+241 6X XX XX XX ou 06X"></label></div><div class="conditional-field visible" style="margin-top:12px"><label class="field-label">Nombre de passagers (nécessaire car véhicule choisi)</label><input name="membres" type="number" min="1" value="${escapeHTML(state.membres)}" class="simple-tel"></div><div style="margin-top:12px"><label class="field-label">Budget<select name="budget" class="form-field"><option value="proposition" ${state.budget==='proposition'?'selected':''}>Sur mesure</option><option value="avec" ${state.budget==='avec'?'selected':''}>Avec budget</option></select></label>${state.budget==='avec'?`<input name="budgetVal" value="${escapeHTML(state.budgetVal)}" class="simple-tel" placeholder="Budget" style="margin-top:8px">`:''}</div><div class="form-actions"><button id="back3" style="background:transparent;border:1px solid var(--border);padding:12px;border-radius:10px">Retour</button><div style="display:flex;gap:8px"><button id="sendWA" class="btn-gold">WhatsApp</button><button id="sendMail" style="background:#fff;border:1px solid var(--border);padding:12px;border-radius:10px">Email</button></div></div><p id="cfgError" style="color:#9b1c1c;margin-top:12px"></p></div>`;
-body.querySelectorAll('input[name=conf]').forEach(r=>r.addEventListener('change',e=>{state.conf=e.target.value;}));
-document.getElementById('back3').addEventListener('click',()=>render(3));
-document.getElementById('sendWA').addEventListener('click',()=>submit('WhatsApp'));
-document.getElementById('sendMail').addEventListener('click',()=>submit('E-mail'));
+if(step===1){
+body.innerHTML=`<div style="padding:24px"><h3>Quel service ? – Bug texto detrás imagen arreglado</h3><div class="opt-grid" style="margin-top:14px">${services.map(s=>`<div class="opt-card ${state.service===s.key?'selected':''}" data-key="${s.key}"><img src="${s.img}" loading="lazy"><div class="opt-text"><strong>${s.label}</strong><small>${s.desc}${s.needNb?' – personnes requis':''}</small></div></div>`).join('')}</div><div style="text-align:right;margin-top:20px"><button class="btn-gold" id="to2">Continuer</button></div><p id="err" style="color:#9b1c1c"></p></div>`;
+body.querySelectorAll('.opt-card').forEach(c=>c.onclick=()=>{state.service=c.dataset.key;render(1);});
+document.getElementById('to2').onclick=()=>{if(!state.service){document.getElementById('err').textContent='Choisissez un service';return;}render(2);};
+}else if(step===2){
+const need=services.find(s=>s.key===state.service)?.needNb;
+body.innerHTML=`<div style="padding:24px"><h3>Personnes – Condicional</h3>
+<div class="${need?'conditional-field visible':'conditional-field'}" id="nbWrap"><label style="font-weight:600">Nombre de personnes (requis pour ${esc(state.service)} – Nounou, Chef, Fête)<input type="number" id="nb" value="${state.nb}" class="simple-tel" placeholder="Ex: 4"></label></div>
+<label style="display:block;margin-top:12px">Date<input type="date" id="date" value="${state.date}" class="form-field"></label>
+<div style="display:flex;justify-content:space-between;margin-top:20px"><button id="b1" style="background:transparent;border:1px solid var(--border);padding:12px;border-radius:10px">Retour</button><button class="btn-gold" id="to3">Continuer</button></div><p id="err" style="color:#9b1c1c"></p></div>`;
+document.getElementById('b1').onclick=()=>render(1);
+document.getElementById('to3').onclick=()=>{if(need && !document.getElementById('nb').value){document.getElementById('err').textContent='Indiquez nombre de personnes – condicional';return;}state.nb=document.getElementById('nb')?.value||'';state.date=document.getElementById('date').value;render(3);};
+}else{
+body.innerHTML=`<div style="padding:24px"><h3>Demande – Téléphone simple</h3>
+<div style="display:flex;gap:12px;margin:12px 0"><label><input type="radio" name="conf" value="standard" ${state.conf==='standard'?'checked':''}> Standard</label><label><input type="radio" name="conf" value="confidentielle" ${state.conf==='confidentielle'?'checked':''}> Confidentielle</label></div>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:12px"><label>Nom<input id="nom" value="${esc(state.nom)}" class="simple-tel"></label><label>Tél simple<input id="tel" value="${esc(state.tel)}" class="simple-tel" placeholder="+241..."></label></div>
+<label style="display:block;margin-top:12px">Détails<textarea id="desc" class="form-field" style="min-height:90px">${esc(state.desc)}</textarea></label>
+<div style="display:flex;justify-content:space-between;margin-top:20px"><button id="b2" style="background:transparent;border:1px solid var(--border);padding:12px;border-radius:10px">Retour</button><div style="display:flex;gap:8px"><button id="wa" class="btn-gold">WhatsApp</button><button id="mail" style="background:#fff;border:1px solid var(--border);padding:12px;border-radius:10px">Email</button></div></div><p id="err" style="color:#9b1c1c"></p></div>`;
+document.getElementById('b2').onclick=()=>render(2);
+document.getElementById('wa').onclick=()=>submit('WhatsApp');document.getElementById('mail').onclick=()=>submit('Email');
 }
-document.querySelectorAll('.config-tabs button').forEach((b,i)=>b.classList.toggle('active',i+1===s));
+document.querySelectorAll('.config-tabs button').forEach((b,i)=>b.classList.toggle('active',i+1===step));
 }
-function collect(){const b=document.getElementById('cfgBody'); b.querySelectorAll('input,select,textarea').forEach(el=>{if(el.name)state[el.name]=el.value;}); state.services=[]; b.querySelectorAll('input[name=svcChk]:checked').forEach(ch=>state.services.push(ch.value)); const c=b.querySelector('input[name=conf]:checked'); if(c)state.conf=c.value;}
 function submit(src){
-collect();
-const err=document.getElementById('cfgError');
-if(!state.tel.trim()){err.textContent='Téléphone requis';return;}
-if(state.tel.replace(/\D/g,'').length<8){err.textContent='Téléphone trop court';return;}
-if(!state.membres||Number(state.membres)<1){err.textContent='Nombre de passagers requis (véhicule sélectionné)';return;}
-const msg=`DEMANDE MOBILITE\nType: ${state.type}\nDépart: ${state.origine} -> ${state.destination}\nDate: ${state.date} ${state.heure}\nVéhicule: ${state.heberg}\nPassagers: ${state.membres}\nTel: ${state.tel}\nConf: ${state.conf}\nServices: ${state.services.join(', ')}`;
-if(src==='WhatsApp'){window.open('https://wa.me/24162516457?text='+encodeURIComponent((state.conf==='confidentielle'?'[CONFIDENTIEL] ':'')+msg),'_blank');}else{window.location.href='mailto:magangabridge@gmail.com?subject=Mobilité&body='+encodeURIComponent(msg);}
+const tel=document.getElementById('tel').value,nom=document.getElementById('nom').value;
+if(tel.replace(/\D/g,'').length<8){document.getElementById('err').textContent='Tel invalide';return;}
+const conf=document.querySelector('input[name=conf]:checked')?.value||state.conf;
+const msg=`CONCIERGERIE DEMANDE\\nService: ${state.service}\\nNb personnes: ${state.nb||'N/A'} (condicional)\\nDate: ${state.date}\\nTel: ${tel} Nom: ${nom}\\nConf: ${conf}\\nDesc: ${document.getElementById('desc').value}`;
+if(src==='WhatsApp')window.open('https://wa.me/'+WA+'?text='+encodeURIComponent((conf==='confidentielle'?'[CONFIDENTIEL] ':'')+msg),'_blank'); else window.location.href='mailto:magangabridge@gmail.com?subject=Conciergerie&body='+encodeURIComponent(msg);
+try{fetch(SHEET_URL,{method:'POST',mode:'no-cors',body:JSON.stringify({service:'CONCIERGERIE',...state,tel,nom,conf,source:src})});}catch{}
 }
-document.addEventListener('DOMContentLoaded',()=>{render(1); document.querySelectorAll('.config-tabs button').forEach(b=>b.addEventListener('click',()=>{const s=Number(b.dataset.s); if(s===1)render(1);}));});
+document.addEventListener('DOMContentLoaded',()=>{render(1);const b=document.getElementById('burgerBtn'),n=document.getElementById('mainNav');b.onclick=()=>{const o=n.classList.toggle('open');b.textContent=o?'✕':'☰';};});
 </script>
-</body></html>
+</body>
+</html>
