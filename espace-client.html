@@ -1,1 +1,68 @@
-<!DOCTYPE html><html lang="fr"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#0B1F3A"><meta name="description" content="Aperçu de démonstration de l’espace client L’Adresse"><title>Mon espace client | L’Adresse SARL</title><link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet"><link rel="stylesheet" href="style.css"></head><body><header class="top-header"><a class="brand" href="index.html"><div class="brand-icon">L</div><div class="brand-name">L’ADRESSE SARL</div></a><nav class="nav"><a href="index.html">Accueil</a><a href="qui-sommes-nous.html">Qui sommes-nous</a><a href="travel.html">Travel</a><a href="business.html">Business</a><a href="prestige.html">Prestige</a><a href="blog.html">Blog</a><a href="abonnements.html">Abonnements</a><a href="espace-client.html">Mon espace client</a></nav></header><main class=""><section class="client-page"><div class="client-shell"><div class="client-brand"><span class="client-user-icon" aria-hidden="true">♙</span><span>L’ADRESSE · ESPACE CLIENT</span></div><div class="client-greeting"><span class="client-user-icon" aria-hidden="true">♙</span><h1>Bonjour, Sophie</h1></div><p class="client-subtitle">Aperçu de l’espace client</p><article class="virtual-card"><div style="display:flex;justify-content:space-between;align-items:center"><strong style="letter-spacing:.18em">L’ADRESSE</strong><span style="color:#C9A86A;font-size:24px">✧</span></div><p class="gold-text" style="margin-top:22px">CARTE PRESTIGE · DÉMONSTRATION</p><h2>Sophie Martin</h2><p class="card-num">DEMO-0001</p><div class="card-meta"><div><p class="gold-text">DATE D’ACTIVATION</p><strong>01/10/2026</strong></div><div><p class="gold-text">DATE D’EXPIRATION</p><strong>31/10/2026</strong></div><div><p class="gold-text">STATUT</p><strong>Exemple fictif</strong></div></div></article><div class="client-dashboard"><a class="client-tile" href="abonnements.html"><span class="tile-icon">◇</span><strong>Mon abonnement</strong></a><a class="client-tile" href="#notifications"><span class="tile-icon">♧</span><strong>Mes notifications</strong></a><a class="client-tile" href="#profil"><span class="tile-icon">♙</span><strong>Mon profil</strong></a><a class="client-tile" href="#avis"><span class="tile-icon">✉</span><strong>Mes avis</strong></a></div><p class="demo-note">Espace de démonstration : Sophie Martin, la carte, les dates et le statut sont fictifs. Aucun compte n’est connecté et aucune donnée client n’est enregistrée.</p></div></section></main><footer class="footer" style="background:#0B1F3A;color:#fff;padding:35px 5%;margin-top:30px"><strong>L’ADRESSE SARL</strong><p style="margin:10px 0">Glass, Libreville · Gabon · WhatsApp : <a href="https://wa.me/24162516457">+241 62 51 64 57</a></p><p><a href="index.html">Accueil</a> · <a href="cgv.html">CGV</a> · <a href="politique-confidentialite.html">Confidentialité</a> · <a href="mentions-legales.html">Mentions légales</a></p><small>© 2026 L’Adresse SARL — Démonstration non contractuelle.</small></footer></body></html>
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="format-detection" content="telephone=no"><meta name="format-detection" content="email=no">
+<meta name="theme-color" content="#0B1F3A">
+<title>Mon espace client | L’Adresse SARL</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<style>
+*{-webkit-tap-highlight-color:transparent}
+.hero-pano{position:relative;min-height:62vh;display:flex;align-items:center;justify-content:center;text-align:center;color:#fff;overflow:hidden;padding:110px 20px 60px}
+.hero-pano-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0}
+.hero-pano-overlay{position:absolute;inset:0;background:linear-gradient(180deg,rgba(11,31,58,.6),rgba(11,31,58,.88));z-index:1}
+.hero-pano-content{position:relative;z-index:2;max-width:900px}
+.client-page{background:#F8F6F2;padding:60px 0 90px}
+.client-shell{max-width:1100px;margin:0 auto;padding:0 24px;display:grid;grid-template-columns:320px 1fr;gap:24px}
+.virtual-card{background:linear-gradient(135deg,#0B1F3A 0%,#1a3a6a 100%);border-radius:20px;padding:26px;color:#fff;position:relative;overflow:hidden}
+.virtual-card::after{content:'';position:absolute;top:-40px;right:-40px;width:120px;height:120px;background:rgba(201,168,106,.2);border-radius:50%}
+.client-panel{background:#fff;border:1px solid var(--border);border-radius:16px;padding:22px}
+.order-row{display:flex;justify-content:space-between;padding:12px 0;border-bottom:1px solid #f0ece6;font-size:14px}
+.order-row:last-child{border:none}
+@media(max-width:900px){.client-shell{grid-template-columns:1fr}}
+@media(max-width:768px){.hero-pano{min-height:54vh;padding:90px 18px 40px}.hero-pano h1{font-size:34px !important}}
+</style>
+</head>
+<body>
+<header class="top-header">
+<a class="brand" href="index.html"><div class="brand-icon">L</div><div class="brand-name">L’ADRESSE SARL</div></a>
+<nav class="nav" id="mainNav"><a href="index.html">Accueil</a><a href="qui-sommes-nous.html">Qui sommes-nous</a><a href="index.html#services-cards">Services</a><a href="blog.html">Blog</a><a href="espace-client.html">Mon espace client</a></nav>
+<button class="burger" id="burgerBtn">☰</button>
+</header>
+
+<section class="hero-pano">
+<img class="hero-pano-img" src="https://images.unsplash.com/photo-1553877522-43269d4ea984?w=1600&q=80" alt="Espace client">
+<div class="hero-pano-overlay"></div>
+<div class="hero-pano-content">
+<span class="eyebrow">L’ADRESSE · ESPACE CLIENT – IMPORTANT</span>
+<h1>Bonjour, Sophie</h1>
+<p>Aperçu démo – Carte Prestige DEMO-0001 – Sans données réelles – 100% responsive</p>
+</div>
+</section>
+
+<section class="client-page"><div class="client-shell">
+<div>
+<div class="virtual-card">
+<div style="font-size:11px;letter-spacing:.28em;text-transform:uppercase;color:#E9D9B8">Carte Prestige</div>
+<h2 style="margin:12px 0 6px">Sophie Martin</h2>
+<p style="font-family:'Instrument Sans';font-size:13px;opacity:.8">DEMO-0001 · Valide 12 mois</p>
+<div style="margin-top:20px;font-family:'Cormorant Garamond';font-size:22px">•••• •••• •••• 0001</div>
+</div>
+<div style="margin-top:18px" class="client-panel"><h4 style="margin-bottom:10px">Actions rapides</h4><a class="q-btn" href="https://wa.me/24162516457?text=Bonjour%20L’Adresse%20-%20Mon%20espace%20client" style="display:block;text-align:center;text-decoration:none;margin-bottom:10px">Contacter concierge</a><a class="q-btn" href="index.html#services-cards" style="display:block;text-align:center;text-decoration:none;background:#fff;color:var(--navy);border:1px solid var(--border)">Nouvelle demande</a></div>
+</div>
+<div>
+<div class="client-panel"><h3 style="font-family:'Cormorant Garamond';font-size:22px;margin-bottom:4px">Mes demandes récentes</h3><p style="font-size:13px;color:var(--muted);margin-bottom:16px">Exemple fictif – en attente d'intégration Google Sheets</p>
+<div class="order-row"><span><strong>Travel – Appartement Premium Glass</strong><br><small style="color:var(--muted)">Dans Libreville – 2 voyageurs (condicional)</small></span><span style="color:#9a7940;font-weight:600">Confirmé</span></div>
+<div class="order-row"><span><strong>Mobilité – SUV Premium</strong><br><small style="color:var(--muted)">SUV 35 000 – image affichée selon nom</small></span><span style="color:#2e7d32;font-weight:600">En cours</span></div>
+<div class="order-row"><span><strong>Conciergerie – Chef privé</strong><br><small style="color:var(--muted)">4 personnes – bug image arreglado</small></span><span style="color:var(--muted)">Livré</span></div>
+</div>
+<div class="client-panel" style="margin-top:18px"><h4>Facturation</h4><p style="font-size:13px;color:var(--muted);margin-top:6px">Carte Prestige – 1 050 000 FCFA / mois – Délai 15 min – Facture démo disponible</p><button class="btn-gold" style="margin-top:12px">Télécharger facture démo</button></div>
+</div>
+</div></section>
+
+<footer class="footer-universal"><div class="footer-grid"><div><p>L’ADRESSE SARL – Glass, Libreville</p><p><a href="https://wa.me/24162516457" style="color:#E9D9B8">WhatsApp</a></p></div><div><h4>Services</h4><a href="index.html#services-cards">Tous</a></div><div><h4>Liens</h4><a href="index.html">Accueil</a></div><div><h4>Légal</h4><a href="cgv.html">CGV</a></div></div><div class="footer-bottom"><span>© 2026 L’Adresse</span></div></footer>
+
+<script>const b=document.getElementById('burgerBtn'),n=document.getElementById('mainNav');b.onclick=()=>{const o=n.classList.toggle('open');b.textContent=o?'✕':'☰';};</script>
+</body>
+</html>
