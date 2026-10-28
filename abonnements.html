@@ -1,48 +1,130 @@
-<!DOCTYPE html><html lang="fr"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#0B1F3A"><meta name="description" content="Découvrez les abonnements L’Adresse"><title>Abonnements | L’Adresse SARL</title><link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet"><link rel="stylesheet" href="style.css"></head><body><header class="top-header">
-  <a class="brand" href="index.html" aria-label="L’Adresse SARL">
-    <div class="brand-icon">L</div>
-    <div class="brand-name">L’ADRESSE SARL</div>
-  </a>
-  <nav class="nav" id="mainNav">
-    <a href="index.html">Accueil</a>
-    <a href="qui-sommes-nous.html">Qui sommes-nous</a>
-    <a href="service-sejours.html">Séjours</a>
-    <a href="service-mobilite.html">Mobilité</a>
-    <a href="service-conciergerie.html">Conciergerie</a>
-    <a href="travel.html">Travel</a>
-    <a href="business.html">Business</a>
-    <a href="prestige.html">Prestige</a>
-    <a href="blog.html">Blog</a>
-    <a href="abonnements.html">Abonnements</a>
-    <a href="espace-client.html">Mon espace client</a>
-  </nav>
-  <div style="display:flex;gap:10px;align-items:center">
-    <a class="btn-contact hide-mobile" href="abonnements.html">Abonnements</a>
-    <button class="burger" id="burgerBtn" type="button">☰</button>
-  </div>
-</header><main class=""><section class="hero-pano" style="background-image:url('https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=1600&q=80'); min-height:72vh;">
-  <div class="hero-pano-content"><span class="eyebrow">L’Adresse · Abonnements</span><h1>Nos abonnements</h1><h2>Un accompagnement adapté à vos besoins</h2><p>Premium, Luxe et Prestige. Délais garantis et interlocuteur dédié. Demandes standard ou confidentielles.</p><div class="hero-btns"><a class="btn-gold" href="#abos">Voir les formules</a><a class="btn-outline" href="espace-client.html">Espace client</a></div></div>
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#0B1F3A">
+<meta name="format-detection" content="telephone=no">
+<meta name="format-detection" content="email=no">
+<meta name="format-detection" content="address=no">
+<meta name="description" content="Découvrez les abonnements L’Adresse">
+<title>Abonnements | L’Adresse SARL</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<style>
+*{ -webkit-tap-highlight-color:transparent }
+a[href^="tel"],a[href^="mailto"],a[href*="wa.me"]{color:inherit !important;text-decoration:none !important}
+.hero-pano{position:relative;min-height:72vh;display:flex;align-items:center;justify-content:center;text-align:center;color:#fff;overflow:hidden;padding:110px 24px 80px}
+.hero-pano-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0}
+.hero-pano-overlay{position:absolute;inset:0;background:linear-gradient(180deg,rgba(11,31,58,.60),rgba(11,31,58,.85));z-index:1}
+.hero-pano-content{position:relative;z-index:2;max-width:820px}
+.abos-section{background:#F8F3ED;padding:80px 0}
+.demo-grid{max-width:1150px;margin:0 auto;padding:0 32px;display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.demo-card{background:#fff;border-radius:16px;overflow:hidden;border:1px solid #efe8db;box-shadow:0 8px 30px rgba(11,31,58,.05);display:flex;flex-direction:column;transition:.3s}
+.demo-card:hover{transform:translateY(-4px);box-shadow:0 18px 40px rgba(11,31,58,.10)}
+.demo-card-top{height:4px;background:linear-gradient(90deg,#C9A86A,#e8d5a8)}
+.demo-card-body{padding:28px 24px 24px;flex:1;display:flex;flex-direction:column}
+.demo-eyebrow{font-size:10px;letter-spacing:.28em;text-transform:uppercase;color:#C9A86A;font-weight:700;margin-bottom:10px}
+.demo-card h2{font-family:'Cormorant Garamond';font-size:28px;color:#0B1F3A;line-height:1}
+.demo-card h3{font-family:'Instrument Sans';font-size:15px;font-weight:700;color:#0B1F3A;margin:12px 0 10px}
+.demo-card p.desc{font-size:13px;color:#6b7a8d;line-height:1.6;margin-bottom:20px;flex:1}
+.demo-btns{display:flex;flex-direction:column;gap:10px;margin-top:auto}
+.demo-btn{border:1px solid #e5ddd0;border-radius:100px;padding:13px 18px;text-align:center;font-size:13px;font-weight:600;color:#0B1F3A;background:#fff;transition:.2s;text-decoration:none;display:block}
+.demo-btn:hover{border-color:#0B1F3A}
+.demo-btn.gold{background:#0B1F3A;color:#fff;border-color:#0B1F3A;box-shadow:0 0 0 2px #C9A86A}
+.demo-btn.gold:hover{background:#122f5c}
+@media(max-width:900px){.demo-grid{grid-template-columns:1fr}.hero-pano{min-height:68vh}}
+</style>
+</head>
+<body>
+
+<header class="top-header">
+<a class="brand" href="index.html"><div class="brand-icon">L</div><div class="brand-name">L’ADRESSE SARL</div></a>
+<nav class="nav" id="mainNav">
+<a href="index.html">Accueil</a>
+<a href="qui-sommes-nous.html">Qui sommes-nous</a>
+<a href="index.html#services-cards">Services</a>
+<a href="blog.html">Blog</a>
+<a href="espace-client.html">Mon espace client</a>
+</nav>
+<button class="burger" id="burgerBtn" type="button">☰</button>
+</header>
+
+<section class="hero-pano">
+<img class="hero-pano-img" src="https://images.unsplash.com/photo-1571896349842-33c89424de2d?auto=format&fit=crop&w=1600&q=80" alt="Abonnements">
+<div class="hero-pano-overlay"></div>
+<div class="hero-pano-content">
+<span class="eyebrow">L’Adresse · Abonnements</span>
+<h1>Nos abonnements</h1>
+<h2>Un accompagnement adapté à vos besoins</h2>
+<p>Premium, Luxe et Prestige. Délais garantis et interlocuteur dédié. Demandes standard ou confidentielles.</p>
+<div class="hero-btns">
+<a class="btn-gold" href="#abos">Voir les formules</a>
+<a class="btn-outline" href="espace-client.html">Espace client</a>
+</div>
+</div>
 </section>
-<section class="demo-container" id="abos"><div class="demo-grid">
-<article class="demo-card"><div class="demo-card-body"><p class="demo-eyebrow">L’Adresse SARL</p><h2>Carte Premium</h2><h3 style="font-size:30px">150 000 FCFA/mois</h3><p>Délai de réponse indiqué : 2 heures maximum.</p><a class="demo-btn" href="abonnement-premium.html">Savoir plus</a><a class="demo-btn gold" style="margin-top:12px;display:block;text-align:center" href="https://wa.me/24162516457?text=Bonjour%2C%20je%20suis%20intéressé%20par%20Carte%20Premium">Solliciter cet abonnement</a></div></article>
-<article class="demo-card"><div class="demo-card-body"><p class="demo-eyebrow">L’Adresse SARL</p><h2>Carte Luxe</h2><h3 style="font-size:30px">350 000 FCFA/mois</h3><p>Délai de réponse indiqué : 1 heure maximum.</p><a class="demo-btn" href="abonnement-luxe.html">Savoir plus</a><a class="demo-btn gold" style="margin-top:12px;display:block;text-align:center" href="https://wa.me/24162516457?text=Bonjour%2C%20je%20suis%20intéressé%20par%20Carte%20Luxe">Solliciter cet abonnement</a></div></article>
-<article class="demo-card"><div class="demo-card-body"><p class="demo-eyebrow">L’Adresse SARL</p><h2>Carte Prestige</h2><h3 style="font-size:30px">1 050 000 FCFA/mois</h3><p>Délai Ultra VIP 15 minutes maximum.</p><a class="demo-btn" href="abonnement-prestige.html">Savoir plus</a><a class="demo-btn gold" style="margin-top:12px;display:block;text-align:center" href="https://wa.me/24162516457?text=Bonjour%2C%20je%20suis%20intéressé%20par%20Carte%20Prestige">Solliciter cet abonnement</a></div></article>
-</div></section>
-</main><footer class="footer-universal">
-  <div class="footer-grid">
-    <div class="footer-brand">
-      <div style="display:flex;align-items:center;gap:12px;margin-bottom:14px"><div class="brand-icon" style="border-color:#C9A86A;color:#C9A86A">L</div><div class="brand-name">L’ADRESSE SARL</div></div>
-      <p>Conciergerie de luxe à Libreville. Séjours, mobilité privée, réservations et assistance personnalisée. Glass, Libreville – Extension Port-Gentil.</p>
-      <p style="margin-top:12px">WhatsApp: <a href="https://wa.me/24162516457" style="display:inline;color:#E9D9B8">+241 62 51 64 57</a></p>
-    </div>
-    <div><h4>Services</h4><a href="service-sejours.html">Séjours Premium</a><a href="service-mobilite.html">Mobilité & Chauffeur</a><a href="service-conciergerie.html">Conciergerie</a><a href="travel.html">Travel</a><a href="business.html">Business</a><a href="prestige.html">Prestige</a></div>
-    <div><h4>Entreprise</h4><a href="qui-sommes-nous.html">Qui sommes-nous</a><a href="blog.html">Blog</a><a href="abonnements.html">Abonnements</a><a href="espace-client.html">Espace client</a><a href="demande.html">Demande personnalisée</a></div>
-    <div><h4>Contact & Légal</h4><p>Glass, Libreville · Gabon</p><a href="politique-confidentialite.html">Confidentialité</a><a href="cgv.html">CGV</a><a href="mentions-legales.html">Mentions légales</a><p style="margin-top:10px;font-size:11px">Traitement standard ou confidentiel disponible.</p></div>
-  </div>
-  <div class="footer-bottom"><span>© 2026 L’Adresse SARL — Démonstration non contractuelle.</span><span>Glass, Libreville · Confidentialité renforcée · 2 Sheets séparés</span></div>
+
+<section class="abos-section" id="abos">
+<div class="demo-grid">
+
+<article class="demo-card">
+<div class="demo-card-top"></div>
+<div class="demo-card-body">
+<p class="demo-eyebrow">L’Adresse SARL</p>
+<h2>Carte Premium</h2>
+<h3>150 000 FCFA / mois</h3>
+<p class="desc">Délai de réponse indiqué : 2 heures maximum. Idéal pour un accompagnement quotidien discret.</p>
+<div class="demo-btns">
+<a class="demo-btn" href="abonnement-premium.html">Savoir plus →</a>
+<a class="demo-btn gold" href="https://wa.me/24162516457?text=Bonjour%2C%20je%20suis%20intéressé%20par%20Carte%20Premium">Solliciter cet abonnement</a>
+</div>
+</div>
+</article>
+
+<article class="demo-card">
+<div class="demo-card-top" style="background:linear-gradient(90deg,#0B1F3A,#2a4a7a)"></div>
+<div class="demo-card-body">
+<p class="demo-eyebrow">L’Adresse SARL · Populaire</p>
+<h2>Carte Luxe</h2>
+<h3>350 000 FCFA / mois</h3>
+<p class="desc">Délai de réponse indiqué : 1 heure maximum. SUV Premium inclus 5j/mois.</p>
+<div class="demo-btns">
+<a class="demo-btn" href="abonnement-luxe.html">Savoir plus →</a>
+<a class="demo-btn gold" href="https://wa.me/24162516457?text=Bonjour%2C%20je%20suis%20intéressé%20par%20Carte%20Luxe">Solliciter cet abonnement</a>
+</div>
+</div>
+</article>
+
+<article class="demo-card">
+<div class="demo-card-top" style="background:linear-gradient(90deg,#C9A86A,#0B1F3A)"></div>
+<div class="demo-card-body">
+<p class="demo-eyebrow">L’Adresse SARL · Ultra VIP</p>
+<h2>Carte Prestige</h2>
+<h3>1 050 000 FCFA / mois</h3>
+<p class="desc">Délai Ultra VIP 15 minutes maximum. Assistant dédié 24/7, demandes illimitées.</p>
+<div class="demo-btns">
+<a class="demo-btn" href="abonnement-prestige.html">Savoir plus →</a>
+<a class="demo-btn gold" href="https://wa.me/24162516457?text=Bonjour%2C%20je%20suis%20intéressé%20par%20Carte%20Prestige">Solliciter cet abonnement</a>
+</div>
+</div>
+</article>
+
+</div>
+</section>
+
+<footer class="footer-universal">
+<div class="footer-grid">
+<div><div style="display:flex;align-items:center;gap:10px;margin-bottom:12px"><div class="brand-icon" style="border-color:#C9A86A;color:#C9A86A">L</div><div class="brand-name" style="color:#fff">L’ADRESSE SARL</div></div><p>Glass, Libreville</p><p>WhatsApp: <a href="https://wa.me/24162516457" style="color:#E9D9B8">+241 62 51 64 57</a></p></div>
+<div><h4>NAVIGATION</h4><a href="index.html">Accueil</a><a href="index.html#services-cards">Nos services</a><a href="qui-sommes-nous.html">Qui sommes-nous</a><a href="blog.html">Blog</a></div>
+<div><h4>INFORMATIONS LÉGALES</h4><a href="politique-confidentialite.html">Confidentialité</a><a href="mentions-legales.html">Mentions légales</a><a href="cgv.html">CGV</a></div>
+</div>
+<div class="footer-bottom"><span>© 2026 L’Adresse SARL</span><span>Glass, Libreville · Confidentialité renforcée</span></div>
 </footer>
+
 <script>
-const burger=document.getElementById('burgerBtn');const nav=document.getElementById('mainNav');
-if(burger&&nav){burger.addEventListener('click',()=>{const o=nav.classList.toggle('open');burger.textContent=o?'✕':'☰';});nav.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{nav.classList.remove('open');burger.textContent='☰';}));}
+const burger=document.getElementById('burgerBtn'),nav=document.getElementById('mainNav');
+burger.addEventListener('click',()=>{const o=nav.classList.toggle('open');burger.textContent=o?'✕':'☰';});
 </script>
-</body></html>
+</body>
+</html>
