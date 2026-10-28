@@ -2,7 +2,7 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="format-detection" content="telephone=no"><meta name="format-detection" content="email=no">
+<meta name="format-detection" content="telephone=no"><meta name="format-detection" content="email=no"><meta name="format-detection" content="address=no">
 <meta name="theme-color" content="#0B1F3A">
 <title>Business | L’Adresse SARL – Accompagnement entreprises</title>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
@@ -14,12 +14,34 @@
 .hero-pano-overlay{position:absolute;inset:0;background:linear-gradient(180deg,rgba(11,31,58,.55),rgba(11,31,58,.88));z-index:1}
 .hero-pano-content{position:relative;z-index:2;max-width:920px}
 .form-field,.simple-tel{width:100%;padding:12px 14px;border:1px solid #d6dbe4;border-radius:10px;font:inherit;background:#fff}
+.field-label{font-size:13px;font-weight:600;color:var(--navy);margin-bottom:6px;display:block}
 .conditional-field{display:none}.conditional-field.visible{display:block;animation:fadeIn .3s}@keyframes fadeIn{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:translateY(0)}}
-.opt-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
-.opt-card{border:1.5px solid var(--border);border-radius:14px;padding:14px;background:#fff;cursor:pointer;transition:.2s;display:flex;gap:12px;align-items:center}
-.opt-card.selected{border-color:#0B1F3A;box-shadow:0 0 0 2px #C9A86A}
-.opt-card img{width:56px;height:56px;border-radius:10px;object-fit:cover}
-@media(max-width:768px){.hero-pano{min-height:78vh;padding:90px 18px 50px}.hero-pano h1{font-size:38px !important}}
+.opt-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:14px}
+.opt-card{border:1.5px solid var(--border);border-radius:16px;padding:0;overflow:hidden;background:#fff;cursor:pointer;transition:.25s;display:flex;align-items:stretch;min-height:96px}
+.opt-card.selected{border-color:#0B1F3A;box-shadow:0 0 0 2.5px #C9A86A;background:#FFFEF8}
+.opt-card img{width:96px;min-width:96px;height:96px;object-fit:cover;flex-shrink:0}
+.opt-card .opt-text{padding:12px 14px;flex:1;display:flex;flex-direction:column;justify-content:center}
+.opt-card .opt-text strong{font-size:13.5px;line-height:1.3;color:#0B1F3A}
+.opt-card .opt-text small{font-size:11.5px;color:#6b6560;margin-top:4px;line-height:1.3}
+.opt-card.selected .opt-text strong{color:#0B1F3A}
+.type-ent-wrap{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:10px;margin-top:12px}
+.type-ent-chip{border:1.5px solid var(--border);border-radius:100px;padding:12px 14px;background:#fff;cursor:pointer;text-align:center;font-weight:600;font-size:13px;transition:.2s}
+.type-ent-chip.selected{background:#0B1F3A;color:#fff;border-color:#0B1F3A;box-shadow:0 0 0 2px #C9A86A}
+.extra-box{border:1px solid var(--border);background:#fff;border-radius:14px;padding:16px;margin-top:14px}
+.voiture-opt{display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:10px;margin-top:10px}
+.voiture-opt label{border:1.5px solid var(--border);border-radius:12px;overflow:hidden;cursor:pointer;background:#fff;text-align:center;transition:.2s}
+.voiture-opt label.selected{border-color:#0B1F3A;box-shadow:0 0 0 2px #C9A86A}
+.voiture-opt img{width:100%;height:68px;object-fit:cover;display:block}
+.voiture-opt span{display:block;padding:6px;font-size:11.5px;font-weight:600}
+.recap{background:#0B1F3A;color:#fff;border-radius:14px;padding:16px 18px;margin-bottom:18px;font-size:12.8px;line-height:1.8}
+.recap span{color:#C9A86A;font-weight:600}
+.recap .med-badge{display:inline-block;background:#C9A86A;color:#0B1F3A;font-weight:700;padding:2px 8px;border-radius:100px;font-size:10px;margin-left:6px}
+.budget-box{display:flex;gap:10px;margin-top:10px}
+.budget-box label{flex:1;border:1px solid var(--border);border-radius:10px;padding:10px;text-align:center;cursor:pointer;background:#fff;font-size:13px;transition:.2s}
+.budget-box label.selected{background:#0B1F3A;color:#fff;border-color:#0B1F3A;box-shadow:0 0 0 2px #C9A86A}
+.counter{display:flex;align-items:center;justify-content:space-between;border:1px solid var(--border);border-radius:10px;padding:10px 14px;background:#fff}
+.counter button{width:32px;height:32px;border-radius:50%;border:1px solid var(--border);background:#fff;cursor:pointer;font-weight:700}
+@media(max-width:768px){.hero-pano{min-height:78vh;padding:90px 18px 50px}.opt-grid{grid-template-columns:1fr}.type-ent-wrap{grid-template-columns:1fr 1fr}}
 </style>
 </head>
 <body>
@@ -30,74 +52,230 @@
 </header>
 
 <section class="hero-pano">
-<img class="hero-pano-img" src="https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=1600&q=80" alt="Business Libreville">
+<img class="hero-pano-img" src="https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=1600&q=80" alt="Business">
 <div class="hero-pano-overlay"></div>
 <div class="hero-pano-content">
 <span class="eyebrow">L’Adresse Business</span>
 <h1>Business – Entreprises & Investisseurs</h1>
-<h2>Voyages d'affaires, réunions, installations</h2>
-<p>Un interlocuteur unique, standard ou confidentiel, coordination complète.</p>
-<div class="hero-btns"><a class="btn-gold" href="#cfg">Organiser</a><a class="btn-outline" href="index.html#services-cards">Services</a></div>
+<h2>Sélectionnez un ou plusieurs services – Voiture et Chauffeur sont indépendants</h2>
+<div class="hero-btns"><a class="btn-gold" href="#cfg">Organiser</a></div>
 </div>
 </section>
 
 <section style="padding:80px 0;background:var(--cream)" id="cfg"><div class="container">
 <div class="config-wrap">
-<div class="config-tabs"><button class="active" data-s="1">1. Besoin</button><button data-s="2">2. Participants</button><button data-s="3">3. Demande</button></div>
-<div class="config-body" id="cfgBody"></div>
+<div class="config-tabs"><button class="active" data-s="1">1. BESOIN</button><button data-s="2">2. DÉTAILS</button><button data-s="3">3. DEMANDE</button></div>
+<div class="config-body" id="cfgBody"><p>Chargement…</p></div>
 </div>
 </div></section>
 
-<footer class="footer-universal"><div class="footer-grid"><div><p>L’ADRESSE SARL – Glass, Libreville</p><p><a href="https://wa.me/24162516457" style="color:#E9D9B8">WhatsApp +241 62 51 64 57</a></p></div><div><h4>Services</h4><a href="index.html#services-cards">Tous</a></div><div><h4>Liens</h4><a href="index.html">Accueil</a></div><div><h4>Légal</h4><a href="cgv.html">CGV</a></div></div><div class="footer-bottom"><span>© 2026 L’Adresse</span></div></footer>
+<footer class="footer-universal"><div class="footer-grid"><div><p>L’ADRESSE SARL – Glass, Libreville</p><p>WhatsApp: <a href="https://wa.me/24162516457" style="color:#E9D9B8">+241 62 51 64 57</a></p></div><div><h4>Services</h4><a href="index.html#services-cards">Tous nos services</a></div><div><h4>Liens</h4><a href="index.html">Accueil</a></div><div><h4>Légal</h4><a href="cgv.html">CGV</a></div></div><div class="footer-bottom"><span>© 2026 L’Adresse SARL</span></div></footer>
 
 <script>
-const SHEET_URL="https://script.google.com/macros/s/AKfycbww-7Nn7ro4OZ-R1oVuoLSdY6P7OWOHJzLl0I4KNazjOXjGYWlmxFzpq-ti7sHGA2zP/exec";const WA="24162516457";
-const state={besoin:"",participants:"",typeEnt:"PME",date:"",conf:"standard",nom:"",tel:"",desc:""};
-const besoins=[
-{key:"Reunion",label:"Réunion / Séminaire",img:"https://images.unsplash.com/photo-1515187029135-18ee286d815b?w=200&q=80",needParticipants:true},
-{key:"Deplacement",label:"Déplacement d'affaires",img:"https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?w=200&q=80",needParticipants:true},
-{key:"Installation",label:"Installation expatrié",img:"https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=200&q=80",needParticipants:true},
-{key:"Investisseur",label:"Accueil investisseur",img:"https://images.unsplash.com/photo-1507679799987-c73779587ccf?w=200&q=80",needParticipants:false}
-];
-function esc(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
-function render(step){
-const body=document.getElementById('cfgBody');
-if(step===1){
-body.innerHTML=`<div style="padding:24px"><h3>Type de besoin Business</h3><div class="opt-grid" style="margin-top:14px">${besoins.map(b=>`<div class="opt-card ${state.besoin===b.key?'selected':''}" data-key="${b.key}"><img src="${b.img}" loading="lazy"><div><strong style="font-size:14px">${b.label}</strong><br><small style="color:var(--muted)">${b.needParticipants?'Participants requis':'Confidentiel possible'}</small></div></div>`).join('')}</div>
-<label style="display:block;margin-top:16px">Type d'entreprise<select id="typeEnt" class="form-field"><option ${state.typeEnt==='PME'?'selected':''}>PME</option><option ${state.typeEnt==='Grande entreprise'?'selected':''}>Grande entreprise</option><option ${state.typeEnt==='Investisseur'?'selected':''}>Investisseur</option><option ${state.typeEnt==='Ambassade'?'selected':''}>Ambassade / Institution</option></select></label>
-<div style="text-align:right;margin-top:20px"><button class="btn-gold" id="to2">Continuer</button></div><p id="err" style="color:#9b1c1c"></p></div>`;
-body.querySelectorAll('.opt-card').forEach(c=>c.onclick=()=>{state.besoin=c.dataset.key;render(1);});
-document.getElementById('to2').onclick=()=>{if(!state.besoin){document.getElementById('err').textContent='Choisissez un besoin';return;}state.typeEnt=document.getElementById('typeEnt').value;render(2);};
-}else if(step===2){
-const needP=besoins.find(b=>b.key===state.besoin)?.needParticipants;
-body.innerHTML=`<div style="padding:24px"><h3>Participants & Dates – Condicional</h3><p style="font-size:13px;color:#665f57">Este campo solo aparece cuando el servicio lo requiere (ej: Nounou, Chef privé, Fête, Business)</p>
-<div class="${needP?'conditional-field visible':'conditional-field'}" id="partWrap"><label style="font-weight:600">Nombre de participants (requis pour ${esc(state.besoin)})<input type="number" id="part" value="${state.participants}" class="simple-tel" placeholder="Ex: 5"></label></div>
-<label style="display:block;margin-top:12px">Date souhaitée<input type="date" id="date" value="${state.date}" class="form-field"></label>
-<div style="display:flex;justify-content:space-between;margin-top:20px"><button id="b1" style="background:transparent;border:1px solid var(--border);padding:12px;border-radius:10px">Retour</button><button class="btn-gold" id="to3">Continuer</button></div><p id="err" style="color:#9b1c1c"></p></div>`;
-document.getElementById('b1').onclick=()=>render(1);
-document.getElementById('to3').onclick=()=>{
-if(needP && !document.getElementById('part').value){document.getElementById('err').textContent='Indiquez nombre de participants – condicional, requerido para Business';return;}
-state.participants=document.getElementById('part')?.value||''; state.date=document.getElementById('date').value; render(3);
+const SHEET_URL="https://script.google.com/macros/s/AKfycbww-7Nn7ro4OZ-R1oVuoLSdY6P7OWOHJzLl0I4KNazjOXjGYWlmxFzpq-ti7sHGA2zP/exec";
+const WA="24162516457";
+const state={
+  besoins:[], // multi-select
+  typeEnt:"PME",
+  participants:1,
+  voyageurs:1,
+  date:"",
+  voitureType:"",
+  voitureDuree:"Tout le séjour",
+  voitureDetail:"",
+  chauffeurDuree:"Journée entière",
+  chauffeurDetail:"",
+  securiteNb:"1 agent",
+  reunionMateriel:false,
+  reunionTraiteur:false,
+  accueilDetails:"",
+  installationDetails:"",
+  conf:"Standard",
+  nom:"",
+  tel:"",
+  desc:"",
+  budget:"ouvert",
+  budgetMontant:""
 };
-}else{
-body.innerHTML=`<div style="padding:24px"><h3>Demande Business – Téléphone simple</h3>
-<div style="display:flex;gap:12px;margin:12px 0"><label><input type="radio" name="conf" value="standard" ${state.conf==='standard'?'checked':''}> Standard</label><label><input type="radio" name="conf" value="confidentielle" ${state.conf==='confidentielle'?'checked':''}> Confidentielle</label></div>
-<div style="display:grid;grid-template-columns:1fr 1fr;gap:12px"><label>Nom<input id="nom" value="${esc(state.nom)}" class="simple-tel"></label><label>Tél simple<input id="tel" value="${esc(state.tel)}" class="simple-tel" placeholder="+241..."></label></div>
-<label style="display:block;margin-top:12px">Détails<textarea id="desc" class="form-field" style="min-height:90px">${esc(state.desc)}</textarea></label>
-<div style="display:flex;justify-content:space-between;margin-top:20px"><button id="b2" style="background:transparent;border:1px solid var(--border);padding:12px;border-radius:10px">Retour</button><div style="display:flex;gap:8px"><button id="wa" class="btn-gold">WhatsApp</button><button id="mail" style="background:#fff;border:1px solid var(--border);padding:12px;border-radius:10px">Email</button></div></div><p id="err" style="color:#9b1c1c"></p></div>`;
-document.getElementById('b2').onclick=()=>render(2);
-document.getElementById('wa').onclick=()=>submit('WhatsApp');document.getElementById('mail').onclick=()=>submit('Email');
+
+const SERVICES=[
+{key:"Assistant",label:"Assistant administratif / Bilingue",sub:"Secrétariat, traduction, RDV",img:"https://images.unsplash.com/photo-1521791136064-7986c2920216?w=300&q=80"},
+{key:"Securite",label:"Sécurité – Agent privé",sub:"Limite 5 + Escort policier",img:"https://images.unsplash.com/photo-1593113598332-cd288d649433?w=300&q=80"},
+{key:"Reunion",label:"Organisation Réunion / Séminaire",sub:"Salle, traiteur, matériel – Nombre de participants",img:"https://images.unsplash.com/photo-1515187029135-18ee286d815b?w=300&q=80",needParticipants:true},
+{key:"Deplacement",label:"Déplacement d'affaires",sub:"Transferts",img:"https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?w=300&q=80"},
+{key:"Voiture",label:"Location voiture",sub:"Service indépendant – Type + Durée",img:"https://images.unsplash.com/photo-1552519507-da3b142c6e3d?w=300&q=80"},
+{key:"Chauffeur",label:"Chauffeur d'affaires",sub:"Service indépendant – Durée",img:"https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?w=300&q=80"},
+{key:"AccueilVIP",label:"Accueil VIP Aéroport",sub:"Fast-track – Nombre de voyageurs",img:"https://images.unsplash.com/photo-1436491865332-7a61a109cc05?w=300&q=80",needParticipants:false},
+{key:"Installation",label:"Installation expatrié / Bureau",sub:"Logement, école",img:"https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=300&q=80"}
+];
+
+const VOITURES=[
+ {id:"Berline",label:"Berline",img:"https://images.unsplash.com/photo-1552519507-da3b142c6e3d?w=300&q=80"},
+ {id:"SUV",label:"SUV",img:"https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=300&q=80"},
+ {id:"4x4",label:"4x4",img:"https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?w=300&q=80"},
+ {id:"Minivan",label:"Minivan",img:"https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?w=300&q=80"},
+ {id:"Prestige",label:"Prestige",img:"https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=300&q=80"}
+];
+
+const TYPE_ENTS=["PME","Grande entreprise","Investisseur","Ambassade / Institution","Startup","Autre"];
+
+function esc(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
+
+function buildRecap(){
+  let l='';
+  l+=`<div><span>Services sélectionnés:</span> ${state.besoins.length?esc(state.besoins.join(', ')):'Aucun – choisissez en étape 1'}</div>`;
+  l+=`<div><span>Type d'entreprise:</span> ${esc(state.typeEnt)}</div>`;
+  if(state.besoins.includes('Reunion')) l+=`<div><span>Réunion:</span> ${state.participants} participant(s) ${state.reunionTraiteur?' + Traiteur':''} ${state.reunionMateriel?' + Matériel':''}</div>`;
+  if(state.besoins.includes('AccueilVIP')) l+=`<div><span>Accueil VIP:</span> ${state.voyageurs} voyageur(s) ${esc(state.accueilDetails)}</div>`;
+  if(state.besoins.includes('Voiture') && state.voitureType) l+=`<div><span>Voiture:</span> ${esc(state.voitureType)} – ${esc(state.voitureDuree)} ${esc(state.voitureDetail)}</div>`;
+  if(state.besoins.includes('Chauffeur')) l+=`<div><span>Chauffeur d'affaires:</span> ${esc(state.chauffeurDuree)} ${esc(state.chauffeurDetail)}</div>`;
+  if(state.besoins.includes('Securite')) l+=`<div><span>Sécurité:</span> ${esc(state.securiteNb)}</div>`;
+  if(state.besoins.includes('Installation')) l+=`<div><span>Installation:</span> ${esc(state.installationDetails)||'À préciser'}</div>`;
+  if(state.besoins.includes('Deplacement')) l+=`<div><span>Déplacement:</span> Transferts prévus</div>`;
+  if(state.besoins.includes('Assistant')) l+=`<div><span>Assistant:</span> Administratif / Bilingue</div>`;
+  l+=`<div><span>Date souhaitée:</span> ${esc(state.date)||'À définir'}</div>`;
+  return `<div class="recap">${l}</div>`;
 }
-document.querySelectorAll('.config-tabs button').forEach((b,i)=>b.classList.toggle('active',i+1===step));
+
+function render(step){
+ const body=document.getElementById('cfgBody');
+ if(step===1){
+  body.innerHTML=`<div style="padding:24px">
+  <div style="background:#F8F3ED;border:1px solid #EDE6DA;border-radius:10px;padding:12px 14px;margin-bottom:16px;font-size:13px"><strong>Business – Sélectionnez un ou plusieurs services</strong><br><small style="color:#6b6560">Voiture et Chauffeur sont indépendants – vous pouvez choisir les deux ou un seul.</small></div>
+  <div class="opt-grid">${SERVICES.map(s=>{const sel=state.besoins.includes(s.key);return `<div class="opt-card ${sel?'selected':''}" data-k="${s.key}"><img src="${s.img}" alt="${esc(s.label)}"><div class="opt-text"><strong>${esc(s.label)}</strong><small>${esc(s.sub)}</small></div></div>`}).join('')}</div>
+  
+  <div style="margin-top:22px"><span class="field-label" style="font-size:14px">Type d'entreprise</span>
+  <div class="type-ent-wrap">${TYPE_ENTS.map(t=>`<div class="type-ent-chip ${state.typeEnt===t?'selected':''}" data-t="${esc(t)}">${esc(t)}</div>`).join('')}</div>
+  </div>
+
+  <div style="text-align:right;margin-top:22px"><button class="btn-gold" id="to2">CONTINUER →</button></div><p id="err" style="color:#9b1c1c;font-size:12px;margin-top:8px"></p>
+  </div>`;
+  body.querySelectorAll('.opt-card').forEach(c=>{c.onclick=()=>{const k=c.dataset.k; if(state.besoins.includes(k)) state.besoins=state.besoins.filter(x=>x!==k); else state.besoins.push(k); render(1);};});
+  body.querySelectorAll('.type-ent-chip').forEach(ch=>{ch.onclick=()=>{state.typeEnt=ch.dataset.t; render(1);};});
+  document.getElementById('to2').onclick=()=>{ if(state.besoins.length===0){document.getElementById('err').textContent='Sélectionnez au moins un service';return;} render(2); };
+
+ }else if(step===2){
+  const hasReunion=state.besoins.includes('Reunion');
+  const hasVoiture=state.besoins.includes('Voiture');
+  const hasChauffeur=state.besoins.includes('Chauffeur');
+  const hasSecu=state.besoins.includes('Securite');
+  const hasAccueil=state.besoins.includes('AccueilVIP');
+  const hasInstall=state.besoins.includes('Installation');
+  body.innerHTML=`<div style="padding:24px">
+  ${buildRecap()}
+  <h4 style="font-size:15px;margin-bottom:12px">2. DÉTAILS – Seulement ce que vous avez choisi</h4>
+
+  ${hasReunion?`<div class="extra-box" style="border-color:#0B1F3A"><span class="field-label">Organisation Réunion / Séminaire – Nombre de participants *</span>
+    <div class="counter" style="margin-top:10px"><span><strong>Participants</strong></span><div style="display:flex;align-items:center;gap:10px"><button id="decP">-</button><span id="valP">${state.participants}</span><button id="incP">+</button></div></div>
+    <div style="display:flex;gap:10px;margin-top:12px"><label style="flex:1;border:1px solid var(--border);border-radius:10px;padding:10px;font-size:12px"><input type="checkbox" id="chkTraiteur" ${state.reunionTraiteur?'checked':''}> Traiteur</label><label style="flex:1;border:1px solid var(--border);border-radius:10px;padding:10px;font-size:12px"><input type="checkbox" id="chkMateriel" ${state.reunionMateriel?'checked':''}> Matériel / Salle</label></div>
+  </div>`:''}
+
+  ${hasAccueil?`<div class="extra-box"><span class="field-label">Accueil VIP Aéroport – Nombre de voyageurs</span>
+    <div class="counter" style="margin-top:10px"><span><strong>Voyageurs</strong></span><div style="display:flex;align-items:center;gap:10px"><button id="decV">-</button><span id="valV">${state.voyageurs}</span><button id="incV">+</button></div></div>
+    <input id="accDetail" class="form-field" style="margin-top:10px" placeholder="Vol, fast-track, etc." value="${esc(state.accueilDetails)}">
+  </div>`:''}
+
+  ${hasVoiture?`<div class="extra-box" style="border-color:#C9A86A"><span class="field-label">Location voiture – Type + Durée (service indépendant)</span>
+    <div class="voiture-opt">${VOITURES.map(v=>`<label class="${state.voitureType===v.id?'selected':''}" data-v="${v.id}"><img src="${v.img}"><span>${v.label}</span></label>`).join('')}</div>
+    <div style="margin-top:12px"><span class="field-label">Durée</span><div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px">${["Tout le séjour","Demi-journée","Journée entière","Personnalisé"].map(d=>`<label style="border:1.5px solid ${state.voitureDuree===d?'#0B1F3A':'var(--border)'};padding:10px;border-radius:10px;cursor:pointer;background:${state.voitureDuree===d?'#FFFEF8':'#fff'};font-size:12.5px"><input type="radio" name="voitureDuree" value="${d}" ${state.voitureDuree===d?'checked':''} style="display:none"> ${d}</label>`).join('')}</div>
+    <div class="${state.voitureDuree==='Personnalisé'?'conditional-field visible':'conditional-field'}" style="margin-top:8px"><input id="voitureDetail" class="form-field" placeholder="Horaires, lieu de prise en charge..." value="${esc(state.voitureDetail)}"></div></div>
+  </div>`:''}
+
+  ${hasChauffeur?`<div class="extra-box" style="border-color:#0B1F3A"><span class="field-label">Chauffeur d'affaires – Durée (service indépendant)</span>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px">${["Demi-journée","Journée entière","Tout le séjour","Personnalisé"].map(d=>`<label style="border:1.5px solid ${state.chauffeurDuree===d?'#0B1F3A':'var(--border)'};padding:10px;border-radius:10px;cursor:pointer;background:${state.chauffeurDuree===d?'#FFFEF8':'#fff'};font-size:12.5px"><input type="radio" name="chauffDuree" value="${d}" ${state.chauffeurDuree===d?'checked':''} style="display:none"> ${d}</label>`).join('')}</div>
+    <div class="${state.chauffeurDuree==='Personnalisé'?'conditional-field visible':'conditional-field'}" style="margin-top:8px"><input id="chauffDetail" class="form-field" placeholder="Ex: 3 jours, 08h-18h, itinéraire..." value="${esc(state.chauffeurDetail)}"></div>
+  </div>`:''}
+
+  ${hasSecu?`<div class="extra-box"><span class="field-label">Sécurité – Agent privé – Combien ?</span>
+    <select id="secNb" class="form-field"><option ${state.securiteNb==='1 agent'?'selected':''}>1 agent</option><option ${state.securiteNb==='2 agents'?'selected':''}>2 agents</option><option ${state.securiteNb==='3 agents'?'selected':''}>3 agents</option><option ${state.securiteNb==='4 agents'?'selected':''}>4 agents</option><option ${state.securiteNb==='5 agents'?'selected':''}>5 agents</option><option ${state.securiteNb==='Escorte policière'?'selected':''}>Escorte policière</option></select>
+  </div>`:''}
+
+  ${hasInstall?`<div class="extra-box"><span class="field-label">Installation expatrié / Bureau – Précisions</span>
+    <textarea id="installDetail" class="form-field" style="min-height:70px" placeholder="Logement, école, bureau, nombre de personnes...">${esc(state.installationDetails)}</textarea>
+  </div>`:''}
+
+  <div style="margin-top:18px"><label class="field-label">Date souhaitée</label><input type="date" id="date" class="form-field" value="${state.date}"></div>
+
+  <div style="display:flex;justify-content:space-between;margin-top:22px"><button id="b1" style="background:transparent;border:1px solid var(--border);padding:12px 18px;border-radius:100px;font-weight:600">← Retour</button><button class="btn-gold" id="to3">CONTINUER →</button></div>
+  </div>`;
+
+  // events
+  document.getElementById('incP')?.addEventListener('click',()=>{state.participants++;document.getElementById('valP').textContent=state.participants;});
+  document.getElementById('decP')?.addEventListener('click',()=>{if(state.participants>1)state.participants--;document.getElementById('valP').textContent=state.participants;});
+  document.getElementById('incV')?.addEventListener('click',()=>{state.voyageurs++;document.getElementById('valV').textContent=state.voyageurs;});
+  document.getElementById('decV')?.addEventListener('click',()=>{if(state.voyageurs>1)state.voyageurs--;document.getElementById('valV').textContent=state.voyageurs;});
+  body.querySelectorAll('.voiture-opt label').forEach(l=>{l.onclick=()=>{state.voitureType=l.dataset.v;render(2);};});
+  body.querySelectorAll('input[name=voitureDuree]').forEach(r=>r.onchange=e=>{state.voitureDuree=e.target.value;render(2);});
+  body.querySelectorAll('input[name=chauffDuree]').forEach(r=>r.onchange=e=>{state.chauffeurDuree=e.target.value;render(2);});
+  document.getElementById('chkTraiteur')?.addEventListener('change',e=>state.reunionTraiteur=e.target.checked);
+  document.getElementById('chkMateriel')?.addEventListener('change',e=>state.reunionMateriel=e.target.checked);
+  ['accDetail','voitureDetail','chauffDetail','installDetail','date','secNb'].forEach(id=>{
+    const el=document.getElementById(id);
+    if(!el) return;
+    el.oninput=e=>{
+      if(id==='accDetail') state.accueilDetails=e.target.value;
+      if(id==='voitureDetail') state.voitureDetail=e.target.value;
+      if(id==='chauffDetail') state.chauffeurDetail=e.target.value;
+      if(id==='installDetail') state.installationDetails=e.target.value;
+      if(id==='date') state.date=e.target.value;
+      if(id==='secNb') state.securiteNb=e.target.value;
+    };
+    el.onchange=el.oninput;
+  });
+  document.getElementById('b1').onclick=()=>render(1);
+  document.getElementById('to3').onclick=()=>render(3);
+
+ }else{
+  const isConf=state.conf==='Confidentielle';
+  body.innerHTML=`<div style="padding:24px">
+  ${buildRecap()}
+  <div style="display:flex;gap:10px;margin:12px 0"><label style="flex:1;border:1.5px solid ${!isConf?'#0B1F3A':'var(--border)'};border-radius:100px;padding:12px;text-align:center;cursor:pointer;background:${!isConf?'#0B1F3A;color:#fff':'#fff'};font-weight:600"><input type="radio" name="conf" value="Standard" ${!isConf?'checked':''} style="display:none"> Standard</label><label style="flex:1;border:1.5px solid ${isConf?'#0B1F3A':'var(--border)'};border-radius:100px;padding:12px;text-align:center;cursor:pointer;background:${isConf?'#0B1F3A;color:#fff':'#fff'};font-weight:600"><input type="radio" name="conf" value="Confidentielle" ${isConf?'checked':''} style="display:none"> Confidentielle</label></div>
+
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:8px">
+    <div class="${isConf?'conditional-field':'conditional-field visible'}"><label class="field-label">Nom complet / Société</label><input id="nom" class="simple-tel" value="${esc(state.nom)}" placeholder="Société ou nom"></div>
+    <div><label class="field-label">Téléphone *</label><input id="tel" class="simple-tel" placeholder="+241..." value="${esc(state.tel)}"></div>
+  </div>
+
+  <label style="display:block;margin-top:12px"><span class="field-label">Précisions de la demande</span><textarea id="desc" class="form-field" style="min-height:90px" placeholder="Objectifs, lieu, contraintes...">${esc(state.desc)}</textarea></label>
+
+  <div style="margin-top:14px"><span class="field-label">Budget</span><div class="budget-box"><label class="${state.budget==='ouvert'?'selected':''}"><input type="radio" name="budget" value="ouvert" ${state.budget==='ouvert'?'checked':''} style="display:none"> Budget ouvert</label><label class="${state.budget==='defini'?'selected':''}"><input type="radio" name="budget" value="defini" ${state.budget==='defini'?'checked':''} style="display:none"> J'ai un budget</label></div><div class="${state.budget==='defini'?'conditional-field visible':'conditional-field'}" style="margin-top:8px"><input id="bmont" class="form-field" placeholder="Montant FCFA" value="${esc(state.budgetMontant)}"></div></div>
+
+  <div style="display:flex;justify-content:space-between;margin-top:22px"><button id="b2" style="background:transparent;border:1px solid var(--border);padding:12px 18px;border-radius:100px;font-weight:600">← Retour</button><div style="display:flex;gap:8px"><button id="wa" class="btn-gold">WhatsApp</button><button id="mail" style="background:#0B1F3A;color:#fff;border:none;padding:12px 18px;border-radius:100px;font-weight:600">Email</button></div></div><p id="err" style="color:#9b1c1c;font-size:12px;margin-top:10px"></p>
+  </div>`;
+  body.querySelectorAll('input[name=conf]').forEach(r=>r.onchange=e=>{state.conf=e.target.value;render(3);});
+  body.querySelectorAll('input[name=budget]').forEach(r=>r.onchange=e=>{state.budget=e.target.value;render(3);});
+  ['nom','tel','desc','bmont'].forEach(id=>{const el=document.getElementById(id); if(el) el.oninput=e=>{if(id==='nom') state.nom=e.target.value; if(id==='tel') state.tel=e.target.value; if(id==='desc') state.desc=e.target.value; if(id==='bmont') state.budgetMontant=e.target.value;};});
+  document.getElementById('b2').onclick=()=>render(2);
+  document.getElementById('wa').onclick=()=>submit('WhatsApp');document.getElementById('mail').onclick=()=>submit('Email');
+ }
+ document.querySelectorAll('.config-tabs button').forEach((b,i)=>b.classList.toggle('active',i+1===step));
 }
+
 function submit(src){
-const tel=document.getElementById('tel').value,nom=document.getElementById('nom').value;
-if(tel.replace(/\D/g,'').length<8){document.getElementById('err').textContent='Tel invalide (+241)';return;}
-const conf=document.querySelector('input[name=conf]:checked')?.value||state.conf;
-const msg=`BUSINESS DEMANDE\\nBesoin: ${state.besoin} (${state.typeEnt})\\nParticipants: ${state.participants||'N/A'} (condicional)\\nDate: ${state.date}\\nTel: ${tel} Nom: ${nom}\\nConf: ${conf}\\nDesc: ${document.getElementById('desc').value}`;
-if(src==='WhatsApp')window.open('https://wa.me/'+WA+'?text='+encodeURIComponent((conf==='confidentielle'?'[CONFIDENTIEL] ':'')+msg),'_blank'); else window.location.href='mailto:magangabridge@gmail.com?subject=Business&body='+encodeURIComponent(msg);
-try{fetch(SHEET_URL,{method:'POST',mode:'no-cors',body:JSON.stringify({service:'BUSINESS',...state,tel,nom,conf,source:src})});}catch{}
+ const tel=document.getElementById('tel')?.value||state.tel;
+ if(!tel||tel.replace(/\D/g,'').length<8){document.getElementById('err').textContent='Téléphone invalide (+241...)';return;}
+ const msg=`BUSINESS DEMANDE
+Services: ${state.besoins.join(', ')}
+Type entreprise: ${state.typeEnt}
+Participants: ${state.participants}
+Voyageurs VIP: ${state.voyageurs} ${state.accueilDetails}
+Voiture: ${state.voitureType||'N/A'} – ${state.voitureDuree} ${state.voitureDetail}
+Chauffeur: ${state.chauffeurDuree} ${state.chauffeurDetail}
+Sécurité: ${state.securiteNb}
+Réunion: Traiteur=${state.reunionTraiteur?'Oui':'Non'} Materiel=${state.reunionMateriel?'Oui':'Non'}
+Installation: ${state.installationDetails}
+Date: ${state.date}
+Confidentialité: ${state.conf}
+Nom: ${state.conf==='Confidentielle'?'[CONFIDENTIEL]':state.nom}
+Tel: ${tel}
+Budget: ${state.budget==='ouvert'?'ouvert':state.budgetMontant}
+Desc: ${state.desc}`;
+ const finalMsg=(state.conf==='Confidentielle'?'[CONFIDENTIEL] ':'')+msg;
+ if(src==='WhatsApp') window.open('https://wa.me/'+WA+'?text='+encodeURIComponent(finalMsg),'_blank');
+ else window.location.href='mailto:magangabridge@gmail.com?subject=Business '+encodeURIComponent(state.besoins.join('+'))+'&body='+encodeURIComponent(finalMsg);
+ try{fetch(SHEET_URL,{method:'POST',mode:'no-cors',headers:{'Content-Type':'text/plain'},body:JSON.stringify({service:'BUSINESS',...state,tel,source:src})});}catch{}
 }
+
 document.addEventListener('DOMContentLoaded',()=>{render(1);const b=document.getElementById('burgerBtn'),n=document.getElementById('mainNav');b.onclick=()=>{const o=n.classList.toggle('open');b.textContent=o?'✕':'☰';};});
 </script>
 </body>
