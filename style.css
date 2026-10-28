@@ -9,7 +9,7 @@ body{font-family:'Instrument Sans',sans-serif;background:#fff;color:var(--text);
 h1,h2,h3{font-family:'Cormorant Garamond',serif}
 a{text-decoration:none;color:inherit}
 img{width:100%;display:block;object-fit:cover}
-a[href^="tel"],a[href^="mailto"],a[href^="https://wa.me"]{color:inherit !important;text-decoration:none !important}
+a[href^="tel"],a[href^="mailto"],a[href*="wa.me"]{color:inherit !important;text-decoration:none !important;-webkit-tap-highlight-color:transparent}
 .container{max-width:1280px;margin:0 auto;padding:0 32px}
 
 /* HEADER SIMPLIFIÉ */
@@ -33,9 +33,9 @@ a[href^="tel"],a[href^="mailto"],a[href^="https://wa.me"]{color:inherit !importa
 .hero-pano h2{font-size:clamp(18px,3vw,26px);font-weight:400;color:#E9D9B8;margin-bottom:16px}
 .hero-pano p{font-size:clamp(14px,1.8vw,17px);line-height:1.7;color:rgba(255,255,255,.88);max-width:720px;margin:0 auto 30px}
 .hero-btns{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-top:10px}
-.btn-gold{background:var(--gold);color:var(--navy);padding:15px 30px;border-radius:100px;font-size:13px;letter-spacing:.08em;text-transform:uppercase;font-weight:600;border:none;cursor:pointer}
+.btn-gold{background:var(--gold);color:var(--navy) !important;padding:15px 30px;border-radius:100px;font-size:13px;letter-spacing:.08em;text-transform:uppercase;font-weight:600;border:none;cursor:pointer}
 .btn-gold:hover{background:var(--gold-hover)}
-.btn-outline{border:1px solid rgba(255,255,255,.35);color:#fff;padding:14px 28px;border-radius:100px;background:rgba(255,255,255,.06);backdrop-filter:blur(6px)}
+.btn-outline{border:1px solid rgba(255,255,255,.35);color:#fff !important;padding:14px 28px;border-radius:100px;background:rgba(255,255,255,.06);backdrop-filter:blur(6px)}
 .btn-outline:hover{background:rgba(255,255,255,.12)}
 
 /* SERVICES INTRO */
@@ -51,7 +51,7 @@ a[href^="tel"],a[href^="mailto"],a[href^="https://wa.me"]{color:inherit !importa
 .svc3 .icon img{width:28px;height:28px;object-fit:contain}
 
 /* CARDS */
-.section-cards{background:#fff;padding:80px 0}
+.section-cards{background:#F8F3ED;padding:80px 0}
 .section-header{max-width:1280px;margin:0 auto 32px;padding:0 32px;text-align:center}
 .section-header h2{font-size:42px;line-height:1.05;color:var(--navy);margin-bottom:12px}
 .section-header p{color:var(--muted);font-size:14px}
@@ -79,9 +79,25 @@ a[href^="tel"],a[href^="mailto"],a[href^="https://wa.me"]{color:inherit !importa
 .abonnement-card h3{font-family:'Cormorant Garamond';font-size:30px;margin:12px 0 4px;color:var(--navy)}
 .price-abonnement{font-family:'Cormorant Garamond';font-size:36px;font-weight:600}
 .price-abonnement small{font-family:'Instrument Sans';font-size:12px;color:var(--muted)}
-.btn-【entity-whatsapp¦canonical_name=WhatsApp】{width:100%;background:var(--text);color:#fff;border:none;padding:14px;border-radius:100px;font-size:13px;font-weight:600;cursor:pointer;margin-top:auto;display:block;text-align:center}
+.btn-whatsapp{width:100%;background:var(--text);color:#fff;border:none;padding:14px;border-radius:100px;font-size:13px;font-weight:600;cursor:pointer;margin-top:auto;display:block;text-align:center}
 
-/* FORMULAIRES UNIFIÉS - FIX TEXTO DETRÁS IMAGEN */
+/* ABONNEMENTS PAGE CARDS - FIX BOTON AZUL QUE TAPA TEXTO */
+.demo-grid{max-width:1150px;margin:0 auto;padding:0 32px;display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.demo-card{background:#fff;border-radius:16px;overflow:hidden;border:1px solid #efe8db;box-shadow:0 8px 30px rgba(11,31,58,.05);display:flex;flex-direction:column;transition:.3s}
+.demo-card:hover{transform:translateY(-4px);box-shadow:0 18px 40px rgba(11,31,58,.10)}
+.demo-card-top{height:4px;background:linear-gradient(90deg,#C9A86A,#e8d5a8)}
+.demo-card-body{padding:28px 24px 24px;flex:1;display:flex;flex-direction:column}
+.demo-eyebrow{font-size:10px;letter-spacing:.28em;text-transform:uppercase;color:#C9A86A;font-weight:700;margin-bottom:10px}
+.demo-card h2{font-family:'Cormorant Garamond';font-size:28px;color:#0B1F3A;line-height:1}
+.demo-card h3{font-family:'Instrument Sans';font-size:15px;font-weight:700;color:#0B1F3A;margin:12px 0 10px}
+.demo-card p.desc{font-size:13px;color:#6b7a8d;line-height:1.6;margin-bottom:20px;flex:1}
+.demo-btns{display:flex;flex-direction:column;gap:10px;margin-top:auto}
+.demo-btn{border:1px solid #e5ddd0;border-radius:100px;padding:13px 18px;text-align:center;font-size:13px;font-weight:600;color:#0B1F3A;background:#fff;transition:.2s;display:block}
+.demo-btn:hover{border-color:#0B1F3A}
+.demo-btn.gold{background:#0B1F3A !important;color:#FFFEF8 !important;border:1.5px solid #C9A86A !important;box-shadow:0 0 0 1px #C9A86A}
+.demo-btn.gold:hover{background:#122f5c !important}
+
+/* FORMULAIRES UNIFIÉS */
 .config-wrap{max-width:1000px;margin:60px auto;background:#fff;border-radius:20px;border:1px solid var(--border);overflow:hidden}
 .config-tabs{display:flex;border-bottom:1px solid var(--border)}
 .config-tabs button{flex:1;padding:18px;border:none;background:transparent;font-size:12px;letter-spacing:.08em;text-transform:uppercase;font-weight:600;color:var(--muted);cursor:pointer;border-right:1px solid var(--border)}
@@ -91,8 +107,6 @@ a[href^="tel"],a[href^="mailto"],a[href^="https://wa.me"]{color:inherit !importa
 .field-label{display:block;margin:12px 0 6px;font-size:13px;font-weight:600;color:var(--navy)}
 .conditional-field{display:none}.conditional-field.visible{display:block;animation:fadeIn .3s ease}
 @keyframes fadeIn{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:translateY(0)}}
-
-/* GRIDS VEHICULOS / HOTELES / SERVICIOS - FIX BUG */
 .vehicle-grid,.hotel-grid,.opt-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;margin-top:12px}
 .vehicle-card,.hotel-card,.opt-card{border:1.5px solid var(--border);border-radius:14px;overflow:hidden;background:#fff;cursor:pointer;transition:.25s;position:relative;isolation:isolate}
 .vehicle-card:hover,.hotel-card:hover,.opt-card:hover{transform:translateY(-3px);box-shadow:0 12px 24px rgba(11,31,58,.08)}
@@ -114,12 +128,12 @@ a[href^="tel"],a[href^="mailto"],a[href^="https://wa.me"]{color:inherit !importa
 .reviews-track::-webkit-scrollbar{display:none}
 .review-card{flex:0 0 320px;scroll-snap-align:start;background:#fff;border:1px solid var(--border);border-radius:20px;padding:22px}
 
-/* PARTENAIRES 4 */
+/* PARTENAIRES */
 .partners-ribbon{background:#0B1F3A;padding:32px 0;text-align:center;border-top:1px solid rgba(201,168,106,.2)}
 .partners-track{display:flex;gap:20px;justify-content:center;flex-wrap:wrap;padding:0 24px}
 .partner-logo{border:1px solid rgba(255,255,255,.18);color:rgba(255,255,255,.7);padding:10px 20px;border-radius:100px;font-family:'Cormorant Garamond';font-size:15px;letter-spacing:.1em}
 
-/* FOOTER UNIVERSAL */
+/* FOOTER */
 .footer-universal{background:#0B1F3A;color:#fff;padding:60px 5% 30px}
 .footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1.2fr;gap:40px;max-width:1280px;margin:0 auto}
 .footer-universal h4{font-size:13px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold-light);margin-bottom:18px}
@@ -131,11 +145,11 @@ a[href^="tel"],a[href^="mailto"],a[href^="https://wa.me"]{color:inherit !importa
 .client-page{background:#F8F6F2;padding:60px 0 90px}
 .virtual-card{background:linear-gradient(135deg,#0B1F3A 0%,#1a3a6a 100%);border-radius:20px;padding:26px;color:#fff}
 
-/* RESPONSIVE TABLET + MOBILE */
+/* RESPONSIVE */
 @media(max-width:1024px){
 .services-grid-3{grid-template-columns:1fr;border-top:none}
 .svc3{border-right:none;border-bottom:1px solid var(--border)}
-.abonnement-grid{grid-template-columns:1fr}
+.abonnement-grid,.demo-grid{grid-template-columns:1fr}
 .cards-wrapper{padding:0 16px}
 .cards-scroll{justify-content:flex-start !important;flex-wrap:nowrap !important}
 .q-card{flex:0 0 85vw}
