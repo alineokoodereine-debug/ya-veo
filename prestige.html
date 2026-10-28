@@ -38,9 +38,9 @@
 .fete-chip{border:1.5px solid var(--border);border-radius:100px;padding:10px 12px;background:#fff;text-align:center;cursor:pointer;font-size:12.5px;font-weight:600;transition:.2s}
 .fete-chip.selected{background:#0B1F3A;color:#fff;border-color:#0B1F3A;box-shadow:0 0 0 2px #C9A86A}
 .mariage-box{display:flex;gap:10px;margin-top:12px}
-.mariage-box label{flex:1;border:1px solid var(--border);border-radius:10px;padding:10px;text-align:center;cursor:pointer;background:#fff;font-size:12.5px}
+.mariage-box label{flex:1;border:1px solid var(--border);border-radius:10px;padding:10px;text-align:center;cursor:pointer;background:#fff;font-size:12.5px;transition:.2s}
 .mariage-box label.selected{background:#C9A86A;color:#0B1F3A;border-color:#0B1F3A;font-weight:700}
-@media(max-width:768px){.hero-pano{min-height:78vh;padding:90px 18px 50px}.opt-grid{grid-template-columns:1fr}.fete-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:768px){.hero-pano{min-height:78vh;padding:90px 18px 50px}.opt-grid{grid-template-columns:1fr}.fete-grid{grid-template-columns:1fr 1fr}.opt-card img{width:72px;min-width:72px;height:72px}}
 </style>
 </head>
 <body>
@@ -54,10 +54,10 @@
 <img class="hero-pano-img" src="https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=crop&w=1600&q=80" alt="Prestige">
 <div class="hero-pano-overlay"></div>
 <div class="hero-pano-content">
-<span class="eyebrow">L’Adresse Prestige</span>
+<span class="eyebrow">L’Adresse Prestige – Ultra VIP</span>
 <h1>Prestige – Événements d'Exception</h1>
-<h2>Organisation sur-mesure & discrétion totale</h2>
-<div class="hero-btns"><a class="btn-gold" href="#cfg">Organiser mon événement</a></div>
+<h2>15 min de délai, confidentialité absolue</h2>
+<div class="hero-btns"><a class="btn-gold" href="#cfg">Demander</a><a class="btn-outline" href="abonnement-prestige.html">Carte Prestige</a></div>
 </div>
 </section>
 
@@ -68,7 +68,7 @@
 </div>
 </div></section>
 
-<footer class="footer-universal"><div class="footer-grid"><div><p>L’ADRESSE SARL – Glass, Libreville</p><p><a href="https://wa.me/24162516457" style="color:#E9D9B8">WhatsApp +241 62 51 64 57</a></p></div><div><h4>Services</h4><a href="index.html#services-cards">Tous nos services</a></div><div><h4>Liens</h4><a href="index.html">Accueil</a></div><div><h4>Légal</h4><a href="cgv.html">CGV</a></div></div><div class="footer-bottom"><span>© 2026 L’Adresse</span></div></footer>
+<footer class="footer-universal"><div class="footer-grid"><div><p>L’ADRESSE SARL – Glass, Libreville</p><p><a href="https://wa.me/24162516457" style="color:#E9D9B8">WhatsApp +241 62 51 64 57</a></p></div><div><h4>Services</h4><a href="index.html#services-cards">Tous</a></div><div><h4>Liens</h4><a href="index.html">Accueil</a></div><div><h4>Légal</h4><a href="cgv.html">CGV</a></div></div><div class="footer-bottom"><span>© 2026 L’Adresse</span></div></footer>
 
 <script>
 const SHEET_URL="https://script.google.com/macros/s/AKfycbww-7Nn7ro4OZ-R1oVuoLSdY6P7OWOHJzLl0I4KNazjOXjGYWlmxFzpq-ti7sHGA2zP/exec";const WA="24162516457";
@@ -95,15 +95,15 @@ const VOITURES=[
 ];
 
 const EVENTS=[
-  {key:"Fete",label:"Fête privée",desc:"Anniversaire, mariage, célébration",img:"https://images.unsplash.com/photo-1511795409834-ef04bbd61622?w=200&q=80",needPerson:true,personLabel:"Nombre d'invités",ph:"Ex: 50 invités"},
-  {key:"Deco",label:"Décoration & Fleurs",desc:"Thème, table, arche florale",img:"https://images.unsplash.com/photo-1527529482837-4698179dc6ce?w=200&q=80",needPerson:false},
-  {key:"ChefFete",label:"Chef privé + Serveurs",desc:"Buffet, cocktail dînatoire",img:"https://images.unsplash.com/photo-1556910103-1c02745a30bf?w=200&q=80",needPerson:true,personLabel:"Nombre de convives",ph:"Ex: 30 convives"},
-  {key:"DJ",label:"DJ / Son & Lumière",desc:"Matériel et technicien inclus",img:"https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=200&q=80",needPerson:false},
+  {key:"Fete",label:"Fête – Anniversaire / Baby shower / Mariage",desc:"Organisation complète",img:"https://images.unsplash.com/photo-1511795409834-ef04bbd61622?w=200&q=80",needPerson:true,personLabel:"Nombre d'invités",ph:"Ex: 50 invités"},
+  {key:"Deco",label:"Décoration & Fleurs",desc:"Thème, table, arche",img:"https://images.unsplash.com/photo-1527529482837-4698179dc6ce?w=200&q=80",needPerson:false},
+  {key:"ChefFete",label:"Chef privé + Serveurs événement",desc:"Buffet, cocktail",img:"https://images.unsplash.com/photo-1556910103-1c02745a30bf?w=200&q=80",needPerson:true,personLabel:"Nombre de convives",ph:"Ex: 30 convives"},
+  {key:"DJ",label:"DJ / Son & Lumière",desc:"Matériel + technicien",img:"https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=200&q=80",needPerson:false},
   {key:"PhotoVideo",label:"Photographe / Vidéaste",desc:"Reportage discret",img:"https://images.unsplash.com/photo-1519741497674-611481863552?w=200&q=80",needPerson:false},
-  {key:"Chapiteau",label:"Chapiteau / Mobilier",desc:"Tentes, chaises, tables",img:"https://images.unsplash.com/photo-1519167758481-83f550bb49b3?w=200&q=80",needPerson:true,personLabel:"Nombre d'invités",ph:"Ex: 80 invités"},
-  {key:"Voiture",label:"Location voiture",desc:"Service indépendant",img:"https://images.unsplash.com/photo-1494976388531-d1058494cdd8?w=200&q=80",needPerson:false},
-  {key:"Chauffeur",label:"Chauffeur",desc:"Service indépendant",img:"https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?w=200&q=80",needPerson:false},
-  {key:"MC",label:"Maître de cérémonie",desc:"Animation et présentation",img:"https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&q=80",needPerson:false}
+  {key:"Chapiteau",label:"Location Chapiteau / Mobilier",desc:"Tentes, chaises",img:"https://images.unsplash.com/photo-1519167758481-83f550bb49b3?w=200&q=80",needPerson:true,personLabel:"Nombre d'invités",ph:"Ex: 80 invités"},
+  {key:"Voiture",label:"Location voiture événement",desc:"Type + Durée – Indépendant",img:"https://images.unsplash.com/photo-1494976388531-d1058494cdd8?w=200&q=80",needPerson:false},
+  {key:"Chauffeur",label:"Chauffeur événement",desc:"Durée – Indépendant",img:"https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?w=200&q=80",needPerson:false},
+  {key:"MC",label:"Maître de cérémonie / Animateur",desc:"Animation soirée",img:"https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&q=80",needPerson:false}
 ];
 
 const FETES=["Baby shower","Anniversaire","Mariage","Réunion familiale","Fête surprise","Fiançailles","Enterrement de vie de célibataire"];
@@ -111,11 +111,11 @@ const FETES=["Baby shower","Anniversaire","Mariage","Réunion familiale","Fête 
 function esc(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
 function getPersonInfo(){ const sel=EVENTS.filter(e=>state.services.includes(e.key)&&e.needPerson); return sel.length?sel[0]:null; }
 function buildRecap(){
-  let l=`<div><span>Services:</span> ${state.services.length?esc(state.services.join(', ')):'Aucun'}</div>`;
+  let l=`<div><span>Services Prestige:</span> ${state.services.length?esc(state.services.join(', ')):'Aucun'}</div>`;
   if(state.services.includes('Fete') && state.feteType){
     l+=`<div><span>Type de fête:</span> ${esc(state.feteType)}`;
     if(state.feteType==='Mariage'){
-      const m=[]; if(state.mariageCoutumier) m.push('Mariage coutumier'); if(state.mariageCivil) m.push('Mariage civil'); 
+      const m=[]; if(state.mariageCoutumier) m.push('Mariage coutumier'); if(state.mariageCivil) m.push('Mariage civil');
       if(m.length) l+=` – ${esc(m.join(' + '))}`;
     }
     l+=`</div>`;
@@ -125,6 +125,7 @@ function buildRecap(){
   if(state.services.includes('PhotoVideo')) l+=`<div><span>Photo / Vidéo:</span> Photo ${esc(state.photoDuree)||'À définir'} – Vidéo ${esc(state.videoDuree)||'À définir'}</div>`;
   if(state.services.includes('Voiture')) l+=`<div><span>Voiture:</span> ${esc(state.voitureType||'À choisir')} – ${esc(state.voitureDuree)}</div>`;
   if(state.services.includes('Chauffeur')) l+=`<div><span>Chauffeur:</span> ${esc(state.chauffeurDuree)}</div>`;
+  if(state.services.includes('ChefFete')) l+=`<div><span>Chef:</span> ${esc(state.prefCul)} ${esc(state.prefDetail)}</div>`;
   if(state.ville||state.lieu) l+=`<div><span>Lieu:</span> ${esc(state.ville)} ${esc(state.lieu)?'– '+esc(state.lieu):''}</div>`;
   l+=`<div><span>Date:</span> ${esc(state.date)||'À définir'}</div>`;
   return `<div class="recap">${l}</div>`;
@@ -136,7 +137,7 @@ function render(step){
   body.innerHTML=`<div style="padding:24px">
   <div class="opt-grid">${EVENTS.map(e=>{const sel=state.services.includes(e.key);return `<div class="opt-card ${sel?'selected':''}" data-k="${e.key}"><img src="${e.img}"><div class="opt-text"><strong>${e.label}</strong><small>${e.desc}</small></div></div>`}).join('')}</div>
   <div style="text-align:right;margin-top:20px"><button class="btn-gold" id="to2">Continuer →</button></div><p id="err" style="color:#9b1c1c;margin-top:8px"></p></div>`;
-  body.querySelectorAll('.opt-card').forEach(c=>c.onclick=()=>{const k=c.dataset.k;if(state.services.includes(k)) state.services=state.services.filter(x=>x!==k);else state.services.push(k); if(k!=='Fete'){render(1);} else {state.services.includes(k)?render(1):render(1);} render(1);});
+  body.querySelectorAll('.opt-card').forEach(c=>c.onclick=()=>{const k=c.dataset.k;if(state.services.includes(k)) state.services=state.services.filter(x=>x!==k);else state.services.push(k);render(1);});
   document.getElementById('to2').onclick=()=>{if(!state.services.length){document.getElementById('err').textContent='Choisissez au moins un service';return;}render(2);};
 
  }else if(step===2){
@@ -156,13 +157,13 @@ function render(step){
     <div class="${state.feteType==='Mariage'?'conditional-field visible':'conditional-field'}" style="margin-top:14px">
       <span class="field-label">Précisez le type de mariage</span>
       <div class="mariage-box">
-        <label class="${state.mariageCoutumier?'selected':''}" id="labCout"><input type="checkbox" id="mCout" ${state.mariageCoutumier?'checked':''} style="display:none"> Mariage coutumier</label>
-        <label class="${state.mariageCivil?'selected':''}" id="labCivil"><input type="checkbox" id="mCivil" ${state.mariageCivil?'checked':''} style="display:none"> Mariage civil</label>
+        <label class="${state.mariageCoutumier?'selected':''}" id="labCout"><input type="checkbox" style="display:none"> Mariage coutumier</label>
+        <label class="${state.mariageCivil?'selected':''}" id="labCivil"><input type="checkbox" style="display:none"> Mariage civil</label>
       </div>
     </div>
   </div>`:''}
 
-  ${pInfo?`<div class="extra-box"><span class="field-label">${esc(pInfo.personLabel)} *</span><input id="pers" class="simple-tel" placeholder="${esc(pInfo.ph)}" value="${esc(state.personnes)}"></div>`:''}
+  ${pInfo?`<div class="extra-box" style="border-color:#0B1F3A"><span class="field-label">${esc(pInfo.personLabel)} *</span><input id="pers" class="simple-tel" placeholder="${esc(pInfo.ph)}" value="${esc(state.personnes)}"></div>`:''}
 
   ${hasDJ?`<div class="extra-box"><span class="field-label">DJ / Son & Lumière – Durée</span><div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:8px"><input id="djDuree" class="form-field" placeholder="Ex: 4 heures, 19h-02h" value="${esc(state.djDuree)}"><select id="djStyle" class="form-field"><option ${state.djStyle==='Mix généraliste'?'selected':''}>Mix généraliste</option><option ${state.djStyle==='Afro / Coupé-décalé'?'selected':''}>Afro / Coupé-décalé</option><option ${state.djStyle==='Amapiano'?'selected':''}>Amapiano</option><option ${state.djStyle==='RnB / Slow'?'selected':''}>RnB / Slow</option><option ${state.djStyle==='Traditionnel gabonais'?'selected':''}>Traditionnel gabonais</option></select></div></div>`:''}
 
@@ -180,7 +181,6 @@ function render(step){
   <div style="margin-top:14px"><label class="field-label">Date souhaitée</label><input type="date" id="date" class="form-field" value="${esc(state.date)}"></div>
   <div style="display:flex;justify-content:space-between;margin-top:18px"><button id="b1" style="background:transparent;border:1px solid var(--border);padding:12px;border-radius:100px">← Retour</button><button class="btn-gold" id="to3">Continuer →</button></div><p id="err" style="color:#9b1c1c"></p></div>`;
 
-  // events
   body.querySelectorAll('.voiture-opt label').forEach(l=>l.onclick=()=>{state.voitureType=l.dataset.v;render(2);});
   body.querySelectorAll('.fete-chip').forEach(ch=>ch.onclick=()=>{state.feteType=ch.dataset.f; if(state.feteType!=='Mariage'){state.mariageCoutumier=false; state.mariageCivil=false;} render(2);});
   document.getElementById('labCout')?.addEventListener('click',()=>{state.mariageCoutumier=!state.mariageCoutumier; render(2);});
