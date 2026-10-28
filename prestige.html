@@ -35,11 +35,11 @@
 .budget-box label{flex:1;border:1px solid var(--border);border-radius:10px;padding:10px;text-align:center;cursor:pointer;background:#fff;font-size:13px}
 .budget-box label.selected{background:#0B1F3A;color:#fff;border-color:#0B1F3A;box-shadow:0 0 0 2px #C9A86A}
 .fete-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:8px;margin-top:10px}
-.fete-chip{border:1.5px solid var(--border);border-radius:100px;padding:10px 12px;background:#fff;text-align:center;cursor:pointer;font-size:12.5px;font-weight:600;transition:.2s}
+.fete-chip{border:1.5px solid var(--border);border-radius:100px;padding:10px 12px;background:#fff;text-align:center;cursor:pointer;font-size:12.5px;font-weight:600;transition:.2s;user-select:none}
 .fete-chip.selected{background:#0B1F3A;color:#fff;border-color:#0B1F3A;box-shadow:0 0 0 2px #C9A86A}
 .mariage-box{display:flex;gap:10px;margin-top:12px}
-.mariage-box label{flex:1;border:1px solid var(--border);border-radius:10px;padding:10px;text-align:center;cursor:pointer;background:#fff;font-size:12.5px;transition:.2s}
-.mariage-box label.selected{background:#C9A86A;color:#0B1F3A;border-color:#0B1F3A;font-weight:700}
+.mariage-chip{flex:1;border:1.5px solid var(--border);border-radius:10px;padding:12px;text-align:center;cursor:pointer;background:#fff;font-size:12.5px;transition:.2s;font-weight:600;user-select:none}
+.mariage-chip.selected{background:#C9A86A;color:#0B1F3A;border-color:#0B1F3A;box-shadow:0 0 0 2px #0B1F3A;font-weight:700}
 @media(max-width:768px){.hero-pano{min-height:78vh;padding:90px 18px 50px}.opt-grid{grid-template-columns:1fr}.fete-grid{grid-template-columns:1fr 1fr}.opt-card img{width:72px;min-width:72px;height:72px}}
 </style>
 </head>
@@ -162,10 +162,10 @@ function render(step){
   ${hasFete?`<div class="extra-box" style="border-color:#0B1F3A"><span class="field-label">Type de fête</span>
     <div class="fete-grid">${FETES.map(f=>`<div class="fete-chip ${state.feteType===f?'selected':''}" data-f="${esc(f)}">${esc(f)}</div>`).join('')}</div>
     <div class="${state.feteType==='Mariage'?'conditional-field visible':'conditional-field'}" style="margin-top:14px">
-      <span class="field-label">Précisez le type de mariage</span>
+      <span class="field-label">Précisez le type de mariage (vous pouvez choisir les deux)</span>
       <div class="mariage-box">
-        <label class="${state.mariageCoutumier?'selected':''}" data-m="cout"><input type="checkbox" style="display:none"> Mariage coutumier</label>
-        <label class="${state.mariageCivil?'selected':''}" data-m="civil"><input type="checkbox" style="display:none"> Mariage civil</label>
+        <div class="mariage-chip ${state.mariageCoutumier?'selected':''}" data-m="cout">Mariage coutumier</div>
+        <div class="mariage-chip ${state.mariageCivil?'selected':''}" data-m="civil">Mariage civil</div>
       </div>
     </div>
     <div class="${state.feteType==='Fête surprise'?'conditional-field visible':'conditional-field'}" style="margin-top:14px">
@@ -188,7 +188,24 @@ function render(step){
 
   body.querySelectorAll('.voiture-opt label').forEach(l=>l.onclick=()=>{state.voitureType=l.dataset.v;render(2);});
   body.querySelectorAll('.fete-chip').forEach(ch=>ch.onclick=()=>{state.feteType=ch.dataset.f; if(state.feteType!=='Mariage'){state.mariageCoutumier=false; state.mariageCivil=false;} if(state.feteType!=='Fête surprise'){state.feteSurpriseDetail="";} render(2);});
-  body.querySelectorAll('.mariage-box label').forEach(l=>{ l.onclick=()=>{ const t=l.getAttribute('data-m'); if(t==='cout') state.mariageCoutumier=!state.mariageCoutumier; if(t==='civil') state.mariageCivil=!state.mariageCivil; render(2); }; });
+  body.querySelectorAll('.mariage-chip').forEach(ch=>{
+    ch.onclick=(e)=>{
+      e.stopPropagation();
+      const t=ch.getAttribute('data-m');
+      if(t==='cout') state.mariageCoutumier=!state.mariageCoutumier;
+      if(t==='civil') state.mariageCivil=!state.mariageCivil;
+      ch.classList.toggle('selected');
+      // actualiza recap sin re-render completo para no perder foco
+      const recap = document.querySelector('.recap');
+      if(recap) recap.outerHTML = buildRecap();
+      // también actualiza la clase en el DOM para que quede
+      document.querySelectorAll('.mariage-chip').forEach(x=>{
+        const tm=x.getAttribute('data-m');
+        if(tm==='cout') x.classList.toggle('selected', state.mariageCoutumier);
+        if(tm==='civil') x.classList.toggle('selected', state.mariageCivil);
+      });
+    };
+  });
   body.querySelectorAll('input[name=voitD]').forEach(r=>r.onchange=e=>{state.voitureDuree=e.target.value;render(2);});
   body.querySelectorAll('input[name=chauffD]').forEach(r=>r.onchange=e=>{state.chauffeurDuree=e.target.value;render(2);});
   body.querySelectorAll('input[name=pref]').forEach(r=>r.onchange=e=>{state.prefCul=e.target.value;render(2);});
