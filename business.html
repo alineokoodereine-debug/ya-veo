@@ -23,7 +23,6 @@
 .opt-card .opt-text{padding:12px 14px;flex:1;display:flex;flex-direction:column;justify-content:center}
 .opt-card .opt-text strong{font-size:13.5px;line-height:1.3;color:#0B1F3A}
 .opt-card .opt-text small{font-size:11.5px;color:#6b6560;margin-top:4px;line-height:1.3}
-.opt-card.selected .opt-text strong{color:#0B1F3A}
 .type-ent-wrap{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:10px;margin-top:12px}
 .type-ent-chip{border:1.5px solid var(--border);border-radius:100px;padding:12px 14px;background:#fff;cursor:pointer;text-align:center;font-weight:600;font-size:13px;transition:.2s}
 .type-ent-chip.selected{background:#0B1F3A;color:#fff;border-color:#0B1F3A;box-shadow:0 0 0 2px #C9A86A}
@@ -35,7 +34,6 @@
 .voiture-opt span{display:block;padding:6px;font-size:11.5px;font-weight:600}
 .recap{background:#0B1F3A;color:#fff;border-radius:14px;padding:16px 18px;margin-bottom:18px;font-size:12.8px;line-height:1.8}
 .recap span{color:#C9A86A;font-weight:600}
-.recap .med-badge{display:inline-block;background:#C9A86A;color:#0B1F3A;font-weight:700;padding:2px 8px;border-radius:100px;font-size:10px;margin-left:6px}
 .budget-box{display:flex;gap:10px;margin-top:10px}
 .budget-box label{flex:1;border:1px solid var(--border);border-radius:10px;padding:10px;text-align:center;cursor:pointer;background:#fff;font-size:13px;transition:.2s}
 .budget-box label.selected{background:#0B1F3A;color:#fff;border-color:#0B1F3A;box-shadow:0 0 0 2px #C9A86A}
@@ -75,10 +73,12 @@
 const SHEET_URL="https://script.google.com/macros/s/AKfycbww-7Nn7ro4OZ-R1oVuoLSdY6P7OWOHJzLl0I4KNazjOXjGYWlmxFzpq-ti7sHGA2zP/exec";
 const WA="24162516457";
 const state={
-  besoins:[], // multi-select
+  besoins:[],
   typeEnt:"PME",
   participants:1,
-  voyageurs:1,
+  voyageurs:8,
+  aeroport:"Aéroport International Léon-Mba - Libreville (LBV)",
+  heureArrivee:"",
   date:"",
   voitureType:"",
   voitureDuree:"Tout le séjour",
@@ -101,12 +101,26 @@ const state={
 const SERVICES=[
 {key:"Assistant",label:"Assistant administratif / Bilingue",sub:"Secrétariat, traduction, RDV",img:"https://images.unsplash.com/photo-1521791136064-7986c2920216?w=300&q=80"},
 {key:"Securite",label:"Sécurité – Agent privé",sub:"Limite 5 + Escort policier",img:"https://images.unsplash.com/photo-1593113598332-cd288d649433?w=300&q=80"},
-{key:"Reunion",label:"Organisation Réunion / Séminaire",sub:"Salle, traiteur, matériel – Nombre de participants",img:"https://images.unsplash.com/photo-1515187029135-18ee286d815b?w=300&q=80",needParticipants:true},
+{key:"Reunion",label:"Organisation Réunion / Séminaire",sub:"Salle, traiteur, matériel – Nombre de participants",img:"https://images.unsplash.com/photo-1515187029135-18ee286d815b?w=300&q=80"},
 {key:"Deplacement",label:"Déplacement d'affaires",sub:"Transferts",img:"https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?w=300&q=80"},
 {key:"Voiture",label:"Location voiture",sub:"Service indépendant – Type + Durée",img:"https://images.unsplash.com/photo-1552519507-da3b142c6e3d?w=300&q=80"},
 {key:"Chauffeur",label:"Chauffeur d'affaires",sub:"Service indépendant – Durée",img:"https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?w=300&q=80"},
-{key:"AccueilVIP",label:"Accueil VIP Aéroport",sub:"Fast-track – Nombre de voyageurs",img:"https://images.unsplash.com/photo-1436491865332-7a61a109cc05?w=300&q=80",needParticipants:false},
+{key:"AccueilVIP",label:"Accueil VIP Aéroport",sub:"Fast-track – Nombre de voyageurs",img:"https://images.unsplash.com/photo-1436491865332-7a61a109cc05?w=300&q=80"},
 {key:"Installation",label:"Installation expatrié / Bureau",sub:"Logement, école",img:"https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=300&q=80"}
+];
+
+const AEROPORTS=[
+"Aéroport International Léon-Mba - Libreville (LBV)",
+"Aéroport de Port-Gentil - Port-Gentil (POG)",
+"Aéroport M'Vengué El Hadj Omar Bongo Ondimba - Franceville (MVB)",
+"Aéroport de Lambaréné - Lambaréné (LBQ)",
+"Aéroport de Mouila Ville - Mouila (MJL)",
+"Aéroport de Koulamoutou - Koulamoutou (KOU)",
+"Aéroport de Tchibanga - Tchibanga (TCH)",
+"Aéroport de Makokou - Makokou (MKU)",
+"Aéroport d'Oyem - Oyem (OYE)",
+"Aéroport de Bitam - Bitam (BMM)",
+"Autre / Vol privé – Préciser"
 ];
 
 const VOITURES=[
@@ -123,17 +137,15 @@ function esc(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;',
 
 function buildRecap(){
   let l='';
-  l+=`<div><span>Services sélectionnés:</span> ${state.besoins.length?esc(state.besoins.join(', ')):'Aucun – choisissez en étape 1'}</div>`;
-  l+=`<div><span>Type d'entreprise:</span> ${esc(state.typeEnt)}</div>`;
-  if(state.besoins.includes('Reunion')) l+=`<div><span>Réunion:</span> ${state.participants} participant(s) ${state.reunionTraiteur?' + Traiteur':''} ${state.reunionMateriel?' + Matériel':''}</div>`;
-  if(state.besoins.includes('AccueilVIP')) l+=`<div><span>Accueil VIP:</span> ${state.voyageurs} voyageur(s) ${esc(state.accueilDetails)}</div>`;
+  l+=`<div><span>Services:</span> ${state.besoins.length?esc(state.besoins.join(', ')):'Aucun'}</div>`;
+  l+=`<div><span>Entreprise:</span> ${esc(state.typeEnt)}</div>`;
+  if(state.besoins.includes('Reunion')) l+=`<div><span>Réunion:</span> ${state.participants} pers. ${state.reunionTraiteur?' + Traiteur':''} ${state.reunionMateriel?' + Matériel':''}</div>`;
+  if(state.besoins.includes('AccueilVIP')) l+=`<div><span>Accueil VIP:</span> ${state.voyageurs} voyageurs – ${esc(state.aeroport)} – ${esc(state.heureArrivee)||'Heure à confirmer'} – ${esc(state.accueilDetails)}</div>`;
   if(state.besoins.includes('Voiture') && state.voitureType) l+=`<div><span>Voiture:</span> ${esc(state.voitureType)} – ${esc(state.voitureDuree)} ${esc(state.voitureDetail)}</div>`;
-  if(state.besoins.includes('Chauffeur')) l+=`<div><span>Chauffeur d'affaires:</span> ${esc(state.chauffeurDuree)} ${esc(state.chauffeurDetail)}</div>`;
+  if(state.besoins.includes('Chauffeur')) l+=`<div><span>Chauffeur:</span> ${esc(state.chauffeurDuree)} ${esc(state.chauffeurDetail)}</div>`;
   if(state.besoins.includes('Securite')) l+=`<div><span>Sécurité:</span> ${esc(state.securiteNb)}</div>`;
   if(state.besoins.includes('Installation')) l+=`<div><span>Installation:</span> ${esc(state.installationDetails)||'À préciser'}</div>`;
-  if(state.besoins.includes('Deplacement')) l+=`<div><span>Déplacement:</span> Transferts prévus</div>`;
-  if(state.besoins.includes('Assistant')) l+=`<div><span>Assistant:</span> Administratif / Bilingue</div>`;
-  l+=`<div><span>Date souhaitée:</span> ${esc(state.date)||'À définir'}</div>`;
+  l+=`<div><span>Date:</span> ${esc(state.date)||'À définir'}</div>`;
   return `<div class="recap">${l}</div>`;
 }
 
@@ -141,18 +153,13 @@ function render(step){
  const body=document.getElementById('cfgBody');
  if(step===1){
   body.innerHTML=`<div style="padding:24px">
-  <div style="background:#F8F3ED;border:1px solid #EDE6DA;border-radius:10px;padding:12px 14px;margin-bottom:16px;font-size:13px"><strong>Business – Sélectionnez un ou plusieurs services</strong><br><small style="color:#6b6560">Voiture et Chauffeur sont indépendants – vous pouvez choisir les deux ou un seul.</small></div>
-  <div class="opt-grid">${SERVICES.map(s=>{const sel=state.besoins.includes(s.key);return `<div class="opt-card ${sel?'selected':''}" data-k="${s.key}"><img src="${s.img}" alt="${esc(s.label)}"><div class="opt-text"><strong>${esc(s.label)}</strong><small>${esc(s.sub)}</small></div></div>`}).join('')}</div>
-  
-  <div style="margin-top:22px"><span class="field-label" style="font-size:14px">Type d'entreprise</span>
-  <div class="type-ent-wrap">${TYPE_ENTS.map(t=>`<div class="type-ent-chip ${state.typeEnt===t?'selected':''}" data-t="${esc(t)}">${esc(t)}</div>`).join('')}</div>
-  </div>
-
-  <div style="text-align:right;margin-top:22px"><button class="btn-gold" id="to2">CONTINUER →</button></div><p id="err" style="color:#9b1c1c;font-size:12px;margin-top:8px"></p>
-  </div>`;
+  <div style="background:#F8F3ED;border:1px solid #EDE6DA;border-radius:10px;padding:12px 14px;margin-bottom:16px;font-size:13px"><strong>Business – Sélectionnez un ou plusieurs services</strong><br><small>Voiture et Chauffeur sont indépendants</small></div>
+  <div class="opt-grid">${SERVICES.map(s=>{const sel=state.besoins.includes(s.key);return `<div class="opt-card ${sel?'selected':''}" data-k="${s.key}"><img src="${s.img}"><div class="opt-text"><strong>${esc(s.label)}</strong><small>${esc(s.sub)}</small></div></div>`}).join('')}</div>
+  <div style="margin-top:22px"><span class="field-label">Type d'entreprise</span><div class="type-ent-wrap">${TYPE_ENTS.map(t=>`<div class="type-ent-chip ${state.typeEnt===t?'selected':''}" data-t="${esc(t)}">${esc(t)}</div>`).join('')}</div></div>
+  <div style="text-align:right;margin-top:22px"><button class="btn-gold" id="to2">CONTINUER →</button></div><p id="err" style="color:#9b1c1c;font-size:12px;margin-top:8px"></p></div>`;
   body.querySelectorAll('.opt-card').forEach(c=>{c.onclick=()=>{const k=c.dataset.k; if(state.besoins.includes(k)) state.besoins=state.besoins.filter(x=>x!==k); else state.besoins.push(k); render(1);};});
   body.querySelectorAll('.type-ent-chip').forEach(ch=>{ch.onclick=()=>{state.typeEnt=ch.dataset.t; render(1);};});
-  document.getElementById('to2').onclick=()=>{ if(state.besoins.length===0){document.getElementById('err').textContent='Sélectionnez au moins un service';return;} render(2); };
+  document.getElementById('to2').onclick=()=>{ if(!state.besoins.length){document.getElementById('err').textContent='Sélectionnez au moins un service';return;} render(2); };
 
  }else if(step===2){
   const hasReunion=state.besoins.includes('Reunion');
@@ -163,43 +170,42 @@ function render(step){
   const hasInstall=state.besoins.includes('Installation');
   body.innerHTML=`<div style="padding:24px">
   ${buildRecap()}
-  <h4 style="font-size:15px;margin-bottom:12px">2. DÉTAILS – Seulement ce que vous avez choisi</h4>
+  <h4 style="font-size:15px;margin-bottom:12px">2. DÉTAILS</h4>
 
-  ${hasReunion?`<div class="extra-box" style="border-color:#0B1F3A"><span class="field-label">Organisation Réunion / Séminaire – Nombre de participants *</span>
-    <div class="counter" style="margin-top:10px"><span><strong>Participants</strong></span><div style="display:flex;align-items:center;gap:10px"><button id="decP">-</button><span id="valP">${state.participants}</span><button id="incP">+</button></div></div>
-    <div style="display:flex;gap:10px;margin-top:12px"><label style="flex:1;border:1px solid var(--border);border-radius:10px;padding:10px;font-size:12px"><input type="checkbox" id="chkTraiteur" ${state.reunionTraiteur?'checked':''}> Traiteur</label><label style="flex:1;border:1px solid var(--border);border-radius:10px;padding:10px;font-size:12px"><input type="checkbox" id="chkMateriel" ${state.reunionMateriel?'checked':''}> Matériel / Salle</label></div>
-  </div>`:''}
-
-  ${hasAccueil?`<div class="extra-box"><span class="field-label">Accueil VIP Aéroport – Nombre de voyageurs</span>
+  ${hasAccueil?`<div class="extra-box" style="border-color:#0B1F3A"><span class="field-label">Accueil VIP Aéroport – Nombre de voyageurs</span>
     <div class="counter" style="margin-top:10px"><span><strong>Voyageurs</strong></span><div style="display:flex;align-items:center;gap:10px"><button id="decV">-</button><span id="valV">${state.voyageurs}</span><button id="incV">+</button></div></div>
-    <input id="accDetail" class="form-field" style="margin-top:10px" placeholder="Vol, fast-track, etc." value="${esc(state.accueilDetails)}">
+    
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:14px">
+      <div><label class="field-label">Aéroport d'arrivée</label>
+        <select id="aeroport" class="form-field">${AEROPORTS.map(a=>`<option ${state.aeroport===a?'selected':''}>${esc(a)}</option>`).join('')}</select>
+      </div>
+      <div><label class="field-label">Heure d'arrivée</label>
+        <input type="time" id="heureArr" class="form-field" value="${esc(state.heureArrivee)}">
+      </div>
+    </div>
+
+    <input id="accDetail" class="form-field" style="margin-top:12px" placeholder="Vol, fast-track, etc." value="${esc(state.accueilDetails)}">
   </div>`:''}
 
-  ${hasVoiture?`<div class="extra-box" style="border-color:#C9A86A"><span class="field-label">Location voiture – Type + Durée (service indépendant)</span>
+  ${hasReunion?`<div class="extra-box"><span class="field-label">Organisation Réunion / Séminaire – Nombre de participants</span>
+    <div class="counter" style="margin-top:10px"><span><strong>Participants</strong></span><div style="display:flex;align-items:center;gap:10px"><button id="decP">-</button><span id="valP">${state.participants}</span><button id="incP">+</button></div></div>
+    <div style="display:flex;gap:10px;margin-top:12px"><label style="flex:1;border:1px solid var(--border);border-radius:10px;padding:10px;font-size:12px"><input type="checkbox" id="chkTraiteur" ${state.reunionTraiteur?'checked':''}> Traiteur</label><label style="flex:1;border:1px solid var(--border);border-radius:10px;padding:10px;font-size:12px"><input type="checkbox" id="chkMateriel" ${state.reunionMateriel?'checked':''}> Matériel</label></div>
+  </div>`:''}
+
+  ${hasVoiture?`<div class="extra-box" style="border-color:#C9A86A"><span class="field-label">Location voiture – Type + Durée</span>
     <div class="voiture-opt">${VOITURES.map(v=>`<label class="${state.voitureType===v.id?'selected':''}" data-v="${v.id}"><img src="${v.img}"><span>${v.label}</span></label>`).join('')}</div>
-    <div style="margin-top:12px"><span class="field-label">Durée</span><div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px">${["Tout le séjour","Demi-journée","Journée entière","Personnalisé"].map(d=>`<label style="border:1.5px solid ${state.voitureDuree===d?'#0B1F3A':'var(--border)'};padding:10px;border-radius:10px;cursor:pointer;background:${state.voitureDuree===d?'#FFFEF8':'#fff'};font-size:12.5px"><input type="radio" name="voitureDuree" value="${d}" ${state.voitureDuree===d?'checked':''} style="display:none"> ${d}</label>`).join('')}</div>
-    <div class="${state.voitureDuree==='Personnalisé'?'conditional-field visible':'conditional-field'}" style="margin-top:8px"><input id="voitureDetail" class="form-field" placeholder="Horaires, lieu de prise en charge..." value="${esc(state.voitureDetail)}"></div></div>
+    <div style="margin-top:12px"><span class="field-label">Durée</span><div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px">${["Tout le séjour","Demi-journée","Journée entière","Personnalisé"].map(d=>`<label style="border:1.5px solid ${state.voitureDuree===d?'#0B1F3A':'var(--border)'};padding:10px;border-radius:10px;cursor:pointer;background:${state.voitureDuree===d?'#FFFEF8':'#fff'}"><input type="radio" name="voitureDuree" value="${d}" ${state.voitureDuree===d?'checked':''} style="display:none"> ${d}</label>`).join('')}</div><div class="${state.voitureDuree==='Personnalisé'?'conditional-field visible':'conditional-field'}" style="margin-top:8px"><input id="voitureDetail" class="form-field" placeholder="Horaires, lieu..." value="${esc(state.voitureDetail)}"></div></div>
   </div>`:''}
 
-  ${hasChauffeur?`<div class="extra-box" style="border-color:#0B1F3A"><span class="field-label">Chauffeur d'affaires – Durée (service indépendant)</span>
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px">${["Demi-journée","Journée entière","Tout le séjour","Personnalisé"].map(d=>`<label style="border:1.5px solid ${state.chauffeurDuree===d?'#0B1F3A':'var(--border)'};padding:10px;border-radius:10px;cursor:pointer;background:${state.chauffeurDuree===d?'#FFFEF8':'#fff'};font-size:12.5px"><input type="radio" name="chauffDuree" value="${d}" ${state.chauffeurDuree===d?'checked':''} style="display:none"> ${d}</label>`).join('')}</div>
-    <div class="${state.chauffeurDuree==='Personnalisé'?'conditional-field visible':'conditional-field'}" style="margin-top:8px"><input id="chauffDetail" class="form-field" placeholder="Ex: 3 jours, 08h-18h, itinéraire..." value="${esc(state.chauffeurDetail)}"></div>
+  ${hasChauffeur?`<div class="extra-box"><span class="field-label">Chauffeur d'affaires – Durée</span>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px">${["Demi-journée","Journée entière","Tout le séjour","Personnalisé"].map(d=>`<label style="border:1.5px solid ${state.chauffeurDuree===d?'#0B1F3A':'var(--border)'};padding:10px;border-radius:10px;cursor:pointer;background:${state.chauffeurDuree===d?'#FFFEF8':'#fff'}"><input type="radio" name="chauffDuree" value="${d}" ${state.chauffeurDuree===d?'checked':''} style="display:none"> ${d}</label>`).join('')}</div><div class="${state.chauffeurDuree==='Personnalisé'?'conditional-field visible':'conditional-field'}" style="margin-top:8px"><input id="chauffDetail" class="form-field" placeholder="Ex: 3 jours, 08h-18h..." value="${esc(state.chauffeurDetail)}"></div>
   </div>`:''}
 
-  ${hasSecu?`<div class="extra-box"><span class="field-label">Sécurité – Agent privé – Combien ?</span>
-    <select id="secNb" class="form-field"><option ${state.securiteNb==='1 agent'?'selected':''}>1 agent</option><option ${state.securiteNb==='2 agents'?'selected':''}>2 agents</option><option ${state.securiteNb==='3 agents'?'selected':''}>3 agents</option><option ${state.securiteNb==='4 agents'?'selected':''}>4 agents</option><option ${state.securiteNb==='5 agents'?'selected':''}>5 agents</option><option ${state.securiteNb==='Escorte policière'?'selected':''}>Escorte policière</option></select>
-  </div>`:''}
-
-  ${hasInstall?`<div class="extra-box"><span class="field-label">Installation expatrié / Bureau – Précisions</span>
-    <textarea id="installDetail" class="form-field" style="min-height:70px" placeholder="Logement, école, bureau, nombre de personnes...">${esc(state.installationDetails)}</textarea>
-  </div>`:''}
-
+  ${hasSecu?`<div class="extra-box"><span class="field-label">Sécurité – Agent privé</span><select id="secNb" class="form-field"><option ${state.securiteNb==='1 agent'?'selected':''}>1 agent</option><option ${state.securiteNb==='2 agents'?'selected':''}>2 agents</option><option ${state.securiteNb==='3 agents'?'selected':''}>3 agents</option><option ${state.securiteNb==='4 agents'?'selected':''}>4 agents</option><option ${state.securiteNb==='5 agents'?'selected':''}>5 agents</option><option ${state.securiteNb==='Escorte policière'?'selected':''}>Escorte policière</option></select></div>`:''}
+  ${hasInstall?`<div class="extra-box"><span class="field-label">Installation expatrié / Bureau</span><textarea id="installDetail" class="form-field" style="min-height:70px">${esc(state.installationDetails)}</textarea></div>`:''}
   <div style="margin-top:18px"><label class="field-label">Date souhaitée</label><input type="date" id="date" class="form-field" value="${state.date}"></div>
+  <div style="display:flex;justify-content:space-between;margin-top:22px"><button id="b1" style="background:transparent;border:1px solid var(--border);padding:12px 18px;border-radius:100px">← Retour</button><button class="btn-gold" id="to3">CONTINUER →</button></div></div>`;
 
-  <div style="display:flex;justify-content:space-between;margin-top:22px"><button id="b1" style="background:transparent;border:1px solid var(--border);padding:12px 18px;border-radius:100px;font-weight:600">← Retour</button><button class="btn-gold" id="to3">CONTINUER →</button></div>
-  </div>`;
-
-  // events
   document.getElementById('incP')?.addEventListener('click',()=>{state.participants++;document.getElementById('valP').textContent=state.participants;});
   document.getElementById('decP')?.addEventListener('click',()=>{if(state.participants>1)state.participants--;document.getElementById('valP').textContent=state.participants;});
   document.getElementById('incV')?.addEventListener('click',()=>{state.voyageurs++;document.getElementById('valV').textContent=state.voyageurs;});
@@ -209,18 +215,20 @@ function render(step){
   body.querySelectorAll('input[name=chauffDuree]').forEach(r=>r.onchange=e=>{state.chauffeurDuree=e.target.value;render(2);});
   document.getElementById('chkTraiteur')?.addEventListener('change',e=>state.reunionTraiteur=e.target.checked);
   document.getElementById('chkMateriel')?.addEventListener('change',e=>state.reunionMateriel=e.target.checked);
-  ['accDetail','voitureDetail','chauffDetail','installDetail','date','secNb'].forEach(id=>{
+  ['accDetail','aeroport','heureArr','voitureDetail','chauffDetail','installDetail','date','secNb'].forEach(id=>{
     const el=document.getElementById(id);
     if(!el) return;
-    el.oninput=e=>{
+    const handler=e=>{
       if(id==='accDetail') state.accueilDetails=e.target.value;
+      if(id==='aeroport') state.aeroport=e.target.value;
+      if(id==='heureArr') state.heureArrivee=e.target.value;
       if(id==='voitureDetail') state.voitureDetail=e.target.value;
       if(id==='chauffDetail') state.chauffeurDetail=e.target.value;
       if(id==='installDetail') state.installationDetails=e.target.value;
       if(id==='date') state.date=e.target.value;
       if(id==='secNb') state.securiteNb=e.target.value;
     };
-    el.onchange=el.oninput;
+    el.oninput=handler; el.onchange=handler;
   });
   document.getElementById('b1').onclick=()=>render(1);
   document.getElementById('to3').onclick=()=>render(3);
@@ -230,18 +238,10 @@ function render(step){
   body.innerHTML=`<div style="padding:24px">
   ${buildRecap()}
   <div style="display:flex;gap:10px;margin:12px 0"><label style="flex:1;border:1.5px solid ${!isConf?'#0B1F3A':'var(--border)'};border-radius:100px;padding:12px;text-align:center;cursor:pointer;background:${!isConf?'#0B1F3A;color:#fff':'#fff'};font-weight:600"><input type="radio" name="conf" value="Standard" ${!isConf?'checked':''} style="display:none"> Standard</label><label style="flex:1;border:1.5px solid ${isConf?'#0B1F3A':'var(--border)'};border-radius:100px;padding:12px;text-align:center;cursor:pointer;background:${isConf?'#0B1F3A;color:#fff':'#fff'};font-weight:600"><input type="radio" name="conf" value="Confidentielle" ${isConf?'checked':''} style="display:none"> Confidentielle</label></div>
-
-  <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:8px">
-    <div class="${isConf?'conditional-field':'conditional-field visible'}"><label class="field-label">Nom complet / Société</label><input id="nom" class="simple-tel" value="${esc(state.nom)}" placeholder="Société ou nom"></div>
-    <div><label class="field-label">Téléphone *</label><input id="tel" class="simple-tel" placeholder="+241..." value="${esc(state.tel)}"></div>
-  </div>
-
-  <label style="display:block;margin-top:12px"><span class="field-label">Précisions de la demande</span><textarea id="desc" class="form-field" style="min-height:90px" placeholder="Objectifs, lieu, contraintes...">${esc(state.desc)}</textarea></label>
-
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:8px"><div class="${isConf?'conditional-field':'conditional-field visible'}"><label class="field-label">Nom / Société</label><input id="nom" class="simple-tel" value="${esc(state.nom)}"></div><div><label class="field-label">Téléphone *</label><input id="tel" class="simple-tel" placeholder="+241..." value="${esc(state.tel)}"></div></div>
+  <label style="display:block;margin-top:12px"><span class="field-label">Précisions</span><textarea id="desc" class="form-field" style="min-height:90px">${esc(state.desc)}</textarea></label>
   <div style="margin-top:14px"><span class="field-label">Budget</span><div class="budget-box"><label class="${state.budget==='ouvert'?'selected':''}"><input type="radio" name="budget" value="ouvert" ${state.budget==='ouvert'?'checked':''} style="display:none"> Budget ouvert</label><label class="${state.budget==='defini'?'selected':''}"><input type="radio" name="budget" value="defini" ${state.budget==='defini'?'checked':''} style="display:none"> J'ai un budget</label></div><div class="${state.budget==='defini'?'conditional-field visible':'conditional-field'}" style="margin-top:8px"><input id="bmont" class="form-field" placeholder="Montant FCFA" value="${esc(state.budgetMontant)}"></div></div>
-
-  <div style="display:flex;justify-content:space-between;margin-top:22px"><button id="b2" style="background:transparent;border:1px solid var(--border);padding:12px 18px;border-radius:100px;font-weight:600">← Retour</button><div style="display:flex;gap:8px"><button id="wa" class="btn-gold">WhatsApp</button><button id="mail" style="background:#0B1F3A;color:#fff;border:none;padding:12px 18px;border-radius:100px;font-weight:600">Email</button></div></div><p id="err" style="color:#9b1c1c;font-size:12px;margin-top:10px"></p>
-  </div>`;
+  <div style="display:flex;justify-content:space-between;margin-top:22px"><button id="b2" style="background:transparent;border:1px solid var(--border);padding:12px 18px;border-radius:100px;font-weight:600">← Retour</button><div style="display:flex;gap:8px"><button id="wa" class="btn-gold">WhatsApp</button><button id="mail" style="background:#0B1F3A;color:#fff;border:none;padding:12px 18px;border-radius:100px;font-weight:600">Email</button></div></div><p id="err" style="color:#9b1c1c;font-size:12px;margin-top:10px"></p></div>`;
   body.querySelectorAll('input[name=conf]').forEach(r=>r.onchange=e=>{state.conf=e.target.value;render(3);});
   body.querySelectorAll('input[name=budget]').forEach(r=>r.onchange=e=>{state.budget=e.target.value;render(3);});
   ['nom','tel','desc','bmont'].forEach(id=>{const el=document.getElementById(id); if(el) el.oninput=e=>{if(id==='nom') state.nom=e.target.value; if(id==='tel') state.tel=e.target.value; if(id==='desc') state.desc=e.target.value; if(id==='bmont') state.budgetMontant=e.target.value;};});
@@ -253,12 +253,12 @@ function render(step){
 
 function submit(src){
  const tel=document.getElementById('tel')?.value||state.tel;
- if(!tel||tel.replace(/\D/g,'').length<8){document.getElementById('err').textContent='Téléphone invalide (+241...)';return;}
+ if(!tel||tel.replace(/\D/g,'').length<8){document.getElementById('err').textContent='Téléphone invalide';return;}
  const msg=`BUSINESS DEMANDE
 Services: ${state.besoins.join(', ')}
-Type entreprise: ${state.typeEnt}
+Entreprise: ${state.typeEnt}
 Participants: ${state.participants}
-Voyageurs VIP: ${state.voyageurs} ${state.accueilDetails}
+Accueil VIP: ${state.voyageurs} voyageurs – ${state.aeroport} – Heure: ${state.heureArrivee} – ${state.accueilDetails}
 Voiture: ${state.voitureType||'N/A'} – ${state.voitureDuree} ${state.voitureDetail}
 Chauffeur: ${state.chauffeurDuree} ${state.chauffeurDetail}
 Sécurité: ${state.securiteNb}
@@ -275,7 +275,6 @@ Desc: ${state.desc}`;
  else window.location.href='mailto:magangabridge@gmail.com?subject=Business '+encodeURIComponent(state.besoins.join('+'))+'&body='+encodeURIComponent(finalMsg);
  try{fetch(SHEET_URL,{method:'POST',mode:'no-cors',headers:{'Content-Type':'text/plain'},body:JSON.stringify({service:'BUSINESS',...state,tel,source:src})});}catch{}
 }
-
 document.addEventListener('DOMContentLoaded',()=>{render(1);const b=document.getElementById('burgerBtn'),n=document.getElementById('mainNav');b.onclick=()=>{const o=n.classList.toggle('open');b.textContent=o?'✕':'☰';};});
 </script>
 </body>
