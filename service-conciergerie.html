@@ -17,10 +17,10 @@
 .field-label{font-size:13px;font-weight:600;color:var(--navy);margin-bottom:6px;display:block}
 .conditional-field{display:none}.conditional-field.visible{display:block;animation:fadeIn .3s}@keyframes fadeIn{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:translateY(0)}}
 .opt-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:12px}
-.opt-card{border:1.5px solid var(--border);border-radius:14px;padding:0;overflow:hidden;background:#fff;cursor:pointer;transition:.2s;display:flex;align-items:stretch}
+.opt-card{border:1.5px solid var(--border);border-radius:14px;padding:0;overflow:hidden;background:#fff;cursor:pointer;transition:.2s;display:flex;align-items:stretch;min-height:88px}
 .opt-card.selected{border-color:#0B1F3A;box-shadow:0 0 0 2px #C9A86A;background:#FFFEF8}
-.opt-card img{width:88px;min-width:88px;object-fit:cover;display:block;flex-shrink:0}
-.opt-card .opt-text{padding:12px 14px;flex:1}
+.opt-card img{width:88px;min-width:88px;height:88px;aspect-ratio:1/1;object-fit:cover;display:block;flex-shrink:0}
+.opt-card .opt-text{padding:12px 14px;flex:1;display:flex;flex-direction:column;justify-content:center}
 .opt-card .opt-text strong{display:block;font-size:13.5px;color:var(--navy);line-height:1.2}
 .opt-card .opt-text small{color:var(--muted);font-size:11.5px;display:block;margin-top:4px}
 .besoin-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
@@ -30,7 +30,7 @@
 .budget-box label{flex:1;border:1px solid var(--border);border-radius:10px;padding:10px 12px;cursor:pointer;font-size:13px;background:#fff;text-align:center}
 .budget-box label.selected{border-color:#0B1F3A;box-shadow:0 0 0 2px #C9A86A;background:#0B1F3A;color:#fff}
 .extra-box{border:1px solid var(--border);background:#fff;border-radius:12px;padding:12px;margin-top:12px}
-@media(max-width:768px){.hero-pano{min-height:78vh;padding:90px 18px 50px}.hero-pano h1{font-size:34px !important}.besoin-grid{grid-template-columns:1fr}.opt-card img{width:70px;min-width:70px}}
+@media(max-width:768px){.hero-pano{min-height:78vh;padding:90px 18px 50px}.hero-pano h1{font-size:34px !important}.besoin-grid{grid-template-columns:1fr}.opt-card img{width:72px;min-width:72px;height:72px}}
 </style>
 </head>
 <body>
@@ -46,8 +46,7 @@
 <div class="hero-pano-content">
 <span class="eyebrow">L’Adresse Conciergerie</span>
 <h1>Conciergerie Personnalisée</h1>
-<h2>Quotidien exact de tu captura + Événement DJ & Danseuses con duración</h2>
-<p>Bug texto detrás imagen arreglado – flex + z-index</p>
+<h2>Personnes conditional – Chef vegana fix – Fotos mismo tamaño</h2>
 <div class="hero-btns"><a class="btn-gold" href="#cfg">Demander</a></div>
 </div>
 </section>
@@ -59,7 +58,7 @@
 </div>
 </div></section>
 
-<footer class="footer-universal"><div class="footer-grid"><div><p>L’ADRESSE SARL – Glass</p><p><a href="https://wa.me/24162516457" style="color:#E9D9B8">WhatsApp +241 62 51 64 57</a></p></div><div><h4>Navigation</h4><a href="index.html">Accueil</a><a href="index.html#services-cards">Services</a></div><div><h4>Légal</h4><a href="cgv.html">CGV</a></div></div><div class="footer-bottom"><span>© 2026 L’Adresse</span></div></footer>
+<footer class="footer-universal"><div class="footer-grid"><div><p>L’ADRESSE SARL – Glass</p><p><a href="https://wa.me/24162516457" style="color:#E9D9B8">WhatsApp</a></p></div><div><h4>Navigation</h4><a href="index.html">Accueil</a><a href="index.html#services-cards">Services</a></div><div><h4>Légal</h4><a href="cgv.html">CGV</a></div></div><div class="footer-bottom"><span>© 2026 L’Adresse</span></div></footer>
 
 <script>
 const SHEET_URL="https://script.google.com/macros/s/AKfycbww-7Nn7ro4OZ-R1oVuoLSdY6P7OWOHJzLl0I4KNazjOXjGYWlmxFzpq-ti7sHGA2zP/exec";
@@ -68,47 +67,55 @@ const state={
   besoin:"", services:[], ville:"", lieu:"", personnes:"", 
   prefCul:"Non", prefDetail:"", 
   securiteNb:"1 agent",
-  djDuree:"", danseDuree:"", danseNb:"2",
+  djDuree:"", djStyle:"Mix généraliste", danseDuree:"", danseNb:"2",
   conf:"Standard", nom:"", tel:"", description:"", budget:"ouvert", budgetMontant:""
 };
 
 const DATA={
   Quotidien:[
-    {key:"Courses",label:"Courses urgentes & Cadeaux",desc:"Supermarché, pharmacie, cadeaux",img:"https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?w=200&q=80"},
-    {key:"Pressing",label:"Pressing & Blanchisserie",desc:"Collecte, repassage, livraison",img:"https://images.unsplash.com/photo-1582735689369-4fe89db7114c?w=200&q=80"},
-    {key:"Colis",label:"Gestion de colis & Livraisons",desc:"Réception et distribution",img:"https://images.unsplash.com/photo-1580674684081-7617fbf3d5c5?w=200&q=80"},
-    {key:"Entretien",label:"Entretien du domicile",desc:"Petits travaux, maintenance",img:"https://images.unsplash.com/photo-1581578731548-c64695cc6952?w=200&q=80"},
-    {key:"Menage",label:"Ménage & Rangement",desc:"Haut standing, équipe vérifiée",img:"https://images.unsplash.com/photo-1527515637462-cff94eecc1ac?w=200&q=80"},
-    {key:"Nounou",label:"Nounou & Garde d'enfants",desc:"Journée, soirée – personnes requis",img:"https://images.unsplash.com/photo-1596462502278-27bfdc403348?w=200&q=80"},
-    {key:"Voiture",label:"Voiture & Chauffeur",desc:"Déplacement quotidien",img:"https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?w=200&q=80"},
-    {key:"Chef",label:"Chef privé",desc:"Dîner à domicile – personnes requis",img:"https://images.unsplash.com/photo-1556910103-1c02745a30bf?w=200&q=80"},
-    {key:"AutreQuo",label:"Autre type de service – Précisez",desc:"Décrivez votre besoin",img:"https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=200&q=80"}
+    {key:"Courses",label:"Courses urgentes & Cadeaux",desc:"Supermarché, pharmacie, cadeaux",img:"https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?w=200&q=80",needPerson:false},
+    {key:"Pressing",label:"Pressing & Blanchisserie",desc:"Collecte, repassage, livraison",img:"https://images.unsplash.com/photo-1582735689369-4fe89db7114c?w=200&q=80",needPerson:false},
+    {key:"Colis",label:"Gestion de colis & Livraisons",desc:"Réception et distribution",img:"https://images.unsplash.com/photo-1580674684081-7617fbf3d5c5?w=200&q=80",needPerson:false},
+    {key:"Entretien",label:"Entretien du domicile",desc:"Petits travaux, maintenance",img:"https://images.unsplash.com/photo-1581578731548-c64695cc6952?w=200&q=80",needPerson:false},
+    {key:"Menage",label:"Ménage & Rangement",desc:"Haut standing, équipe vérifiée",img:"https://images.unsplash.com/photo-1527515637462-cff94eecc1ac?w=200&q=80",needPerson:false},
+    {key:"Nounou",label:"Nounou & Garde d'enfants",desc:"Journée, soirée",img:"https://images.unsplash.com/photo-1596462502278-27bfdc403348?w=200&q=80",needPerson:true,personLabel:"Nombre d'enfants",personPlaceholder:"Ex: 2 enfants, 3 ans et 5 ans"},
+    {key:"Voiture",label:"Voiture & Chauffeur",desc:"Déplacement quotidien",img:"https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?w=200&q=80",needPerson:false},
+    {key:"Chef",label:"Chef privé",desc:"Dîner à domicile",img:"https://images.unsplash.com/photo-1556910103-1c02745a30bf?w=200&q=80",needPerson:true,personLabel:"Nombre de convives",personPlaceholder:"Ex: 6 convives"},
+    {key:"AutreQuo",label:"Autre type de service – Précisez",desc:"Décrivez votre besoin",img:"https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=200&q=80",needPerson:false}
   ],
   Business:[
-    {key:"Assistant",label:"Assistant administratif / Bilingue",desc:"Secrétariat, traduction, RDV",img:"https://images.unsplash.com/photo-1521791136064-7986c2920216?w=200&q=80"},
-    {key:"Securite",label:"Sécurité – Agent privé",desc:"Limite 5 + Escort policier",img:"https://images.unsplash.com/photo-1593113598332-cd288d649433?w=200&q=80"},
-    {key:"Reunion",label:"Organisation Réunion / Séminaire",desc:"Salle, traiteur, matériel",img:"https://images.unsplash.com/photo-1515187029135-18ee286d815b?w=200&q=80"},
-    {key:"Deplacement",label:"Déplacement d'affaires + Chauffeur",desc:"Transferts, mise à disposition",img:"https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?w=200&q=80"},
-    {key:"AccueilVIP",label:"Accueil VIP Aéroport",desc:"Fast-track, porteur, lounge",img:"https://images.unsplash.com/photo-1436491865332-7a61a109cc05?w=200&q=80"},
-    {key:"Installation",label:"Installation expatrié / Bureau",desc:"Logement, école, démarches",img:"https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=200&q=80"}
+    {key:"Assistant",label:"Assistant administratif / Bilingue",desc:"Secrétariat, traduction, RDV",img:"https://images.unsplash.com/photo-1521791136064-7986c2920216?w=200&q=80",needPerson:false},
+    {key:"Securite",label:"Sécurité – Agent privé",desc:"Limite 5 + Escort policier",img:"https://images.unsplash.com/photo-1593113598332-cd288d649433?w=200&q=80",needPerson:false},
+    {key:"Reunion",label:"Organisation Réunion / Séminaire",desc:"Salle, traiteur, matériel",img:"https://images.unsplash.com/photo-1515187029135-18ee286d815b?w=200&q=80",needPerson:true,personLabel:"Nombre de participants",personPlaceholder:"Ex: 12 participants"},
+    {key:"Deplacement",label:"Déplacement d'affaires + Chauffeur",desc:"Transferts",img:"https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?w=200&q=80",needPerson:false},
+    {key:"AccueilVIP",label:"Accueil VIP Aéroport",desc:"Fast-track",img:"https://images.unsplash.com/photo-1436491865332-7a61a109cc05?w=200&q=80",needPerson:true,personLabel:"Nombre de voyageurs",personPlaceholder:"Ex: 2 voyageurs"},
+    {key:"Installation",label:"Installation expatrié / Bureau",desc:"Logement, école",img:"https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=200&q=80",needPerson:false}
   ],
   Événement:[
-    {key:"Fete",label:"Fête – Anniversaire / Baby shower / Mariage",desc:"Organisation complète",img:"https://images.unsplash.com/photo-1511795409834-ef04bbd61622?w=200&q=80"},
-    {key:"Deco",label:"Décoration & Fleurs",desc:"Thème, table, arche",img:"https://images.unsplash.com/photo-1527529482837-4698179dc6ce?w=200&q=80"},
-    {key:"ChefFete",label:"Chef privé + Serveurs événement",desc:"Buffet, cocktail – personnes requis",img:"https://images.unsplash.com/photo-1556910103-1c02745a30bf?w=200&q=80"},
-    {key:"DJ",label:"DJ / Son & Lumière",desc:"Matériel + technicien – durée demandée",img:"https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=200&q=80"},
-    {key:"Danse",label:"Danseuses / Danseurs / Groupe tradi",desc:"Spectacle – durée + nombre",img:"https://images.unsplash.com/photo-1518834107812-67b0b288f04a?w=200&q=80"},
-    {key:"PhotoVideo",label:"Photographe / Vidéaste",desc:"Reportage discret",img:"https://images.unsplash.com/photo-1519741497674-611481863552?w=200&q=80"},
-    {key:"Chapiteau",label:"Location Chapiteau / Mobilier",desc:"Tentes, chaises, tables",img:"https://images.unsplash.com/photo-1519167758481-83f550bb49b3?w=200&q=80"},
-    {key:"MC",label:"Maître de cérémonie / Animateur",desc:"Animation soirée",img:"https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&q=80"}
+    {key:"Fete",label:"Fête – Anniversaire / Baby shower / Mariage",desc:"Organisation complète",img:"https://images.unsplash.com/photo-1511795409834-ef04bbd61622?w=200&q=80",needPerson:true,personLabel:"Nombre d'invités",personPlaceholder:"Ex: 50 invités"},
+    {key:"Deco",label:"Décoration & Fleurs",desc:"Thème, table, arche",img:"https://images.unsplash.com/photo-1527529482837-4698179dc6ce?w=200&q=80",needPerson:false},
+    {key:"ChefFete",label:"Chef privé + Serveurs événement",desc:"Buffet, cocktail",img:"https://images.unsplash.com/photo-1556910103-1c02745a30bf?w=200&q=80",needPerson:true,personLabel:"Nombre de convives",personPlaceholder:"Ex: 30 convives"},
+    {key:"DJ",label:"DJ / Son & Lumière",desc:"Matériel + technicien",img:"https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=200&q=80",needPerson:false},
+    {key:"Danse",label:"Danseuses / Danseurs / Groupe tradi",desc:"Spectacle",img:"https://images.unsplash.com/photo-1518834107812-67b0b288f04a?w=200&q=80",needPerson:false},
+    {key:"PhotoVideo",label:"Photographe / Vidéaste",desc:"Reportage discret",img:"https://images.unsplash.com/photo-1519741497674-611481863552?w=200&q=80",needPerson:false},
+    {key:"Chapiteau",label:"Location Chapiteau / Mobilier",desc:"Tentes, chaises",img:"https://images.unsplash.com/photo-1519167758481-83f550bb49b3?w=200&q=80",needPerson:true,personLabel:"Nombre d'invités",personPlaceholder:"Ex: 80 invités"},
+    {key:"MC",label:"Maître de cérémonie / Animateur",desc:"Animation soirée",img:"https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&q=80",needPerson:false}
   ],
   Personnalisée:[
-    {key:"SurMesure",label:"Demande entièrement personnalisée",desc:"Expliquez-nous tout",img:"https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=200&q=80"},
-    {key:"ConciergePerso",label:"Concierge dédié 24/7",desc:"Un interlocuteur unique",img:"https://images.unsplash.com/photo-1551836022-deb4988cc6c0?w=200&q=80"}
+    {key:"SurMesure",label:"Demande entièrement personnalisée",desc:"Expliquez-nous tout",img:"https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=200&q=80",needPerson:false},
+    {key:"ConciergePerso",label:"Concierge dédié 24/7",desc:"Un interlocuteur unique",img:"https://images.unsplash.com/photo-1551836022-deb4988cc6c0?w=200&q=80",needPerson:false}
   ]
 };
 
 function esc(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
+function getPersonInfo(){
+  const list=DATA[state.besoin]||[];
+  const selected=list.filter(s=>state.services.includes(s.key)&&s.needPerson);
+  if(selected.length===0) return null;
+  // prioridad: Nounou > Chef > Fête > resto
+  const prio=selected.find(s=>s.key==='Nounou')||selected.find(s=>s.key.includes('Chef'))||selected[0];
+  return prio;
+}
 
 function render(step){
   const body=document.getElementById('cfgBody');
@@ -126,11 +133,12 @@ function render(step){
     const hasSec=state.services.includes('Securite');
     const hasDJ=state.services.includes('DJ');
     const hasDanse=state.services.includes('Danse');
+    const personInfo=getPersonInfo();
     body.innerHTML=`<div style="padding:24px">
-      <div style="background:#F8F3ED;padding:10px 14px;border-radius:8px;margin-bottom:14px;font-size:13px"><strong>${esc(state.besoin)}</strong> – Sélectionnez un ou plusieurs services</div>
+      <div style="background:#F8F3ED;padding:10px 14px;border-radius:8px;margin-bottom:14px;font-size:13px"><strong>${esc(state.besoin)}</strong> – Sélectionnez un ou plusieurs services (sans limite)</div>
       <div class="opt-grid">${list.map(s=>{
         const sel=state.services.includes(s.key);
-        return `<div class="opt-card ${sel?'selected':''}" data-key="${s.key}"><img src="${s.img}" loading="lazy"><div class="opt-text"><strong>${s.label}</strong><small>${s.desc}</small></div></div>`;
+        return `<div class="opt-card ${sel?'selected':''}" data-key="${s.key}"><img src="${s.img}" loading="lazy" alt="${s.label}"><div class="opt-text"><strong>${s.label}</strong><small>${s.desc}${s.needPerson?' – '+s.personLabel:''}</small></div></div>`;
       }).join('')}</div>
 
       ${hasSec?`<div class="extra-box"><span class="field-label">Sécurité – Combien d'agents ? (limite 5 + Escort policier)</span>
@@ -158,7 +166,8 @@ function render(step){
           <label><span class="field-label">Ville</span><input id="ville" class="form-field" placeholder="Libreville, Port-Gentil, Paris..." value="${esc(state.ville)}"></label>
           <label><span class="field-label">Lieu de Résidence</span><input id="lieu" class="form-field" placeholder="Glass, Batterie IV..." value="${esc(state.lieu)}"></label>
         </div>
-        <label style="margin-top:12px;display:block"><span class="field-label">Personnes / foyer (facultatif)</span><input id="pers" class="simple-tel" value="${esc(state.personnes)}"></label>
+        
+        ${personInfo?`<label style="margin-top:14px;display:block" class="conditional-field visible"><span class="field-label">${esc(personInfo.personLabel)} * (aparece porque elegiste ${personInfo.label})</span><input id="pers" class="simple-tel" placeholder="${esc(personInfo.personPlaceholder)}" value="${esc(state.personnes)}"></label>`:`<div class="conditional-field" id="noPerson" style="margin-top:12px;color:var(--muted);font-size:12px">Sélectionnez Nounou, Chef ou Fête pour voir le champ personnes (ahora condicional como pediste)</div>`}
         
         <div class="${hasChef?'conditional-field visible':'conditional-field'}" style="margin-top:16px;border:1px solid var(--border);padding:12px;border-radius:12px;background:#fff">
           <label class="field-label">Avez-vous une préférence culinaire ?</label>
@@ -167,7 +176,7 @@ function render(step){
             <label style="border:1px solid var(--border);padding:8px 14px;border-radius:20px;cursor:pointer;background:${state.prefCul==='Oui'?'#0B1F3A;color:#fff':''}"><input type="radio" name="pref" value="Oui" ${state.prefCul==='Oui'?'checked':''} style="display:none"> Oui</label>
           </div>
           <div class="${state.prefCul==='Oui'?'conditional-field visible':'conditional-field'}" style="margin-top:10px">
-            <input id="prefDetail" class="form-field" placeholder="Végétarien, halal, allergies..." value="${esc(state.prefDetail)}">
+            <input id="prefDetail" class="form-field" placeholder="Ex: Vegana, végétarien, halal, allergies..." value="${esc(state.prefDetail)}">
           </div>
         </div>
       </div>
@@ -178,28 +187,37 @@ function render(step){
       c.onclick=()=>{const k=c.dataset.key; if(state.services.includes(k)) state.services=state.services.filter(x=>x!==k); else state.services.push(k); render(2);};
     });
     const secEl=document.getElementById('secNb'); if(secEl) secEl.onchange=e=>state.securiteNb=e.target.value;
-    ['djDuree','danseDuree','danseNb'].forEach(id=>{const el=document.getElementById(id); if(el) el.oninput=e=>state[id]=e.target.value;});
+    ['djDuree','danseDuree','danseNb'].forEach(id=>{const el=document.getElementById(id); if(el) el.oninput=e=>state[id]=e.target.value; const s=document.getElementById('djStyle'); if(s) s.onchange=e=>state.djStyle=e.target.value;});
     body.querySelectorAll('input[name=pref]').forEach(r=>r.onchange=e=>{state.prefCul=e.target.value; render(2);});
     ['ville','lieu','pers','prefDetail'].forEach(id=>{const el=document.getElementById(id); if(el) el.oninput=e=>{if(id==='ville') state.ville=e.target.value; if(id==='lieu') state.lieu=e.target.value; if(id==='pers') state.personnes=e.target.value; if(id==='prefDetail') state.prefDetail=e.target.value;};});
     document.getElementById('b1').onclick=()=>render(1);
-    document.getElementById('to3').onclick=()=>{if(state.services.length===0){document.getElementById('err').textContent='Sélectionnez au moins un service';return;} render(3);};
+    document.getElementById('to3').onclick=()=>{
+      const info=getPersonInfo();
+      if(info && !document.getElementById('pers')?.value){document.getElementById('err').textContent=info.personLabel+' requis pour '+info.label; return;}
+      if(state.services.length===0){document.getElementById('err').textContent='Sélectionnez au moins un service';return;}
+      render(3);
+    };
 
   }else{
     const isConf=state.conf==='Confidentielle';
+    const personInfo=getPersonInfo();
+    const hasChef=state.services.includes('Chef')||state.services.includes('ChefFete');
     body.innerHTML=`<div style="padding:24px">
-      <div style="background:#F8F3ED;padding:10px 14px;border-radius:8px;margin-bottom:14px;font-size:13px"><strong>${esc(state.besoin)} – ${state.services.join(', ')}</strong></div>
+      <div style="background:#F8F3ED;padding:10px 14px;border-radius:8px;margin-bottom:14px;font-size:13px"><strong>${esc(state.besoin)} – ${state.services.join(', ')}</strong> ${personInfo?`– ${personInfo.personLabel}: ${esc(state.personnes)}`:''}</div>
       <div style="display:flex;gap:10px;margin:12px 0">
         <label style="flex:1;border:1.5px solid ${!isConf?'#0B1F3A':'var(--border)'};border-radius:10px;padding:10px;text-align:center;cursor:pointer;background:${!isConf?'#0B1F3A;color:#fff':''}"><input type="radio" name="conf" value="Standard" ${!isConf?'checked':''} style="display:none"> Standard</label>
         <label style="flex:1;border:1.5px solid ${isConf?'#0B1F3A':'var(--border)'};border-radius:10px;padding:10px;text-align:center;cursor:pointer;background:${isConf?'#0B1F3A;color:#fff':''}"><input type="radio" name="conf" value="Confidentielle" ${isConf?'checked':''} style="display:none"> Confidentielle 🔒</label>
       </div>
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
-        <div class="${isConf?'conditional-field':'conditional-field visible'}"><label class="field-label">Nom complet</label><input id="nom" class="simple-tel" value="${esc(state.nom)}"></div>
+        <div class="${isConf?'conditional-field':'conditional-field visible'}"><label class="field-label">Nom complet</label><input id="nom" class="simple-tel" value="${esc(state.nom)}" placeholder="Nom (solo Standard)"></div>
         <div><label class="field-label">Téléphone *</label><input id="tel" class="simple-tel" placeholder="+241..." value="${esc(state.tel)}"></div>
       </div>
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px">
         <label><span class="field-label">Ville</span><input id="ville3" class="form-field" value="${esc(state.ville)}"></label>
         <label><span class="field-label">Lieu de Résidence</span><input id="lieu3" class="form-field" value="${esc(state.lieu)}"></label>
       </div>
+      ${personInfo?`<div style="margin-top:12px"><label class="field-label">${esc(personInfo.personLabel)} (confirmé)</label><input id="pers3" class="form-field" value="${esc(state.personnes)}"></div>`:''}
+      ${hasChef?`<div style="margin-top:12px;border:1px solid var(--border);padding:10px;border-radius:10px;background:#fff"><span class="field-label">Préférence culinaire: ${esc(state.prefCul)} ${state.prefDetail?'- '+esc(state.prefDetail):''}</span><br><small style="color:var(--muted)">Vegana / Végétarien etc – ahora sí se guarda hasta el final como me dijiste</small></div>`:''}
       <label style="display:block;margin-top:12px"><span class="field-label">Description (facultatif)</span><textarea id="desc" class="form-field" style="min-height:90px">${esc(state.description)}</textarea></label>
       <div style="margin-top:18px"><span class="field-label">Budget</span>
         <div class="budget-box"><label class="${state.budget==='ouvert'?'selected':''}"><input type="radio" name="budget" value="ouvert" ${state.budget==='ouvert'?'checked':''} style="display:none"> Budget ouvert</label><label class="${state.budget==='defini'?'selected':''}"><input type="radio" name="budget" value="defini" ${state.budget==='defini'?'checked':''} style="display:none"> J'ai un budget</label></div>
@@ -209,7 +227,7 @@ function render(step){
     body.querySelectorAll('input[name=conf]').forEach(r=>r.onchange=e=>{state.conf=e.target.value; render(3);});
     body.querySelectorAll('input[name=budget]').forEach(r=>r.onchange=e=>{state.budget=e.target.value; render(3);});
     const bind=(id,key)=>{const el=document.getElementById(id); if(el) el.oninput=e=>state[key]=e.target.value;};
-    bind('nom','nom'); bind('tel','tel'); bind('ville3','ville'); bind('lieu3','lieu'); bind('desc','description'); bind('budgetMontant','budgetMontant');
+    bind('nom','nom'); bind('tel','tel'); bind('ville3','ville'); bind('lieu3','lieu'); bind('pers3','personnes'); bind('desc','description'); bind('budgetMontant','budgetMontant');
     document.getElementById('b2').onclick=()=>render(2);
     document.getElementById('wa').onclick=()=>submit('WhatsApp'); document.getElementById('mail').onclick=()=>submit('Email');
   }
@@ -219,7 +237,20 @@ function render(step){
 function submit(src){
   const tel=document.getElementById('tel')?.value||state.tel;
   if(!tel || tel.replace(/\D/g,'').length<8){document.getElementById('err').textContent='Téléphone invalide – +241...';return;}
-  const msg=`CONCIERGERIE ${state.besoin}\nServices: ${state.services.join(', ')}\nSécurité: ${state.securiteNb}\nDJ durée: ${state.djDuree||'N/A'}\nDanse: ${state.danseNb} – ${state.danseDuree||'N/A'}\nVille: ${state.ville}\nLieu: ${state.lieu}\nPers: ${state.personnes||'N/A'}\nChef pref: ${state.prefCul} ${state.prefDetail||''}\nConf: ${state.conf}\nNom: ${state.conf==='Confidentielle'?'[CONFIDENTIEL]':state.nom}\nTel: ${tel}\nBudget: ${state.budget==='ouvert'?'ouvert':state.budgetMontant}\nDesc: ${state.description}`;
+  const personInfo=getPersonInfo();
+  const msg=`CONCIERGERIE ${state.besoin}
+Services: ${state.services.join(', ')}
+${personInfo?personInfo.personLabel+': '+state.personnes+'\n':''}Sécurité: ${state.securiteNb}
+DJ: ${state.djDuree||'N/A'} ${state.djStyle||''}
+Danse: ${state.danseNb} – ${state.danseDuree||'N/A'}
+Ville: ${state.ville}
+Lieu: ${state.lieu}
+Pref culinaire: ${state.prefCul} ${state.prefDetail||''} (fix vegana ahora sí aparece)
+Conf: ${state.conf}
+Nom: ${state.conf==='Confidentielle'?'[CONFIDENTIEL]':state.nom}
+Tel: ${tel}
+Budget: ${state.budget==='ouvert'?'ouvert':state.budgetMontant}
+Desc: ${state.description}`;
   const finalMsg=(state.conf==='Confidentielle'?'[CONFIDENTIEL] ':'')+msg;
   if(src==='WhatsApp') window.open('https://wa.me/'+WA+'?text='+encodeURIComponent(finalMsg),'_blank');
   else window.location.href='mailto:magangabridge@gmail.com?subject=Conciergerie '+encodeURIComponent(state.besoin)+'&body='+encodeURIComponent(finalMsg);
