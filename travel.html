@@ -81,7 +81,7 @@
 <script>
 const SHEET_URL="https://script.google.com/macros/s/AKfycbww-7Nn7ro4OZ-R1oVuoLSdY6P7OWOHJzLl0I4KNazjOXjGYWlmxFzpq-ti7sHGA2zP/exec";
 const WA="24162516457";
-const state={type:"",zone:"",zoneDetail:"",heberg:"",dateArr:"",dateDep:"",adultes:2,enfants:0,enfantsAges:"",besoins:[],securiteNb:"1 agent",chefPref:"Non",chefDetail:"",voitureType:"",chauffeurDuree:"Tout le séjour",chauffeurDetail:"",assistMed:"Non",conf:"Standard",nom:"",tel:"",desc:"",budget:"ouvert",budgetMontant:""};
+const state={type:"",zone:"",zoneDetail:"",heberg:"",dateArr:"",dateDep:"",adultes:2,enfants:0,enfantsAges:"",besoins:[],securiteNb:"1 agent",chefPref:"Non",chefDetail:"",voitureType:"",voitureDuree:"Tout le séjour",voitureDetail:"",chauffeurDuree:"Tout le séjour",chauffeurDetail:"",assistMed:"Non",conf:"Standard",nom:"",tel:"",desc:"",budget:"ouvert",budgetMontant:""};
 
 const TYPES=["Court séjour","Long séjour","Affaires","Familles"];
 const ZONES={
@@ -151,8 +151,7 @@ function buildRecap(){
   lignes+=`<div><span>Zone:</span> ${esc(state.zone)} – ${esc(state.zoneDetail)||'À préciser'}</div>`;
   lignes+=`<div><span>Hébergement:</span> ${esc(state.heberg)||'Non sélectionné'}</div>`;
   lignes+=`<div><span>Besoin:</span> ${state.besoins.length?esc(state.besoins.join(', ')):'Aucun (optionnel)'}</div>`;
-  // Seulement si sélectionné
-  if(state.besoins.includes('Voiture') && state.voitureType) lignes+=`<div><span>Voiture:</span> ${esc(state.voitureType)}</div>`;
+  if(state.besoins.includes('Voiture') && state.voitureType) lignes+=`<div><span>Voiture:</span> ${esc(state.voitureType)} – ${esc(state.voitureDuree)} ${esc(state.voitureDetail)}</div>`;
   if((state.besoins.includes('Chauffeur')||state.besoins.includes('ChauffeurB')) && state.chauffeurDuree) lignes+=`<div><span>Chauffeur:</span> ${esc(state.chauffeurDuree)} ${esc(state.chauffeurDetail)}</div>`;
   if(state.besoins.includes('Securite')) lignes+=`<div><span>Sécurité:</span> ${esc(state.securiteNb)}</div>`;
   if(state.besoins.includes('Chef')) lignes+=`<div><span>Chef:</span> ${esc(state.chefPref)} ${esc(state.chefDetail)}</div>`;
@@ -193,7 +192,7 @@ function render(step){
   ${hasSec?`<div class="extra-box"><span class="field-label">Sécurité – Combien ?</span><select id="secNb" class="form-field"><option ${state.securiteNb==='1 agent'?'selected':''}>1 agent</option><option ${state.securiteNb==='2 agents'?'selected':''}>2 agents</option><option ${state.securiteNb==='3 agents'?'selected':''}>3 agents</option><option ${state.securiteNb==='4 agents'?'selected':''}>4 agents</option><option ${state.securiteNb==='5 agents'?'selected':''}>5 agents</option><option ${state.securiteNb==='Escorte policière'?'selected':''}>Escorte policière</option></select></div>`:''}
   ${hasChef?`<div class="extra-box"><span class="field-label">Chef privé – Préférence culinaire ?</span><div style="display:flex;gap:8px;margin-top:8px"><label style="border:1px solid var(--border);padding:8px 12px;border-radius:20px"><input type="radio" name="chefPref" value="Non" ${state.chefPref==='Non'?'checked':''}> Non</label><label style="border:1px solid var(--border);padding:8px 12px;border-radius:20px"><input type="radio" name="chefPref" value="Oui" ${state.chefPref==='Oui'?'checked':''}> Oui</label></div><div class="${state.chefPref==='Oui'?'conditional-field visible':'conditional-field'}" style="margin-top:8px"><input id="chefDetail" class="form-field" placeholder="Végétalien, halal..." value="${esc(state.chefDetail)}"></div></div>`:''}
   ${hasNounou?`<div class="extra-box" style="border-color:#0B1F3A"><span class="field-label">Nounou – Nombre d'enfants et âges</span><input id="enfAges" class="form-field" placeholder="Ex: 2 enfants – 3 ans et 6 ans" value="${esc(state.enfantsAges)}"></div>`:''}
-  ${hasVoiture?`<div class="extra-box" style="border-color:#C9A86A"><span class="field-label">Location voiture – Type de véhicule</span><div class="voiture-opt">${VOITURES.map(v=>`<label class="${state.voitureType===v.id?'selected':''}" data-v="${v.id}"><img src="${v.img}"><span>${v.label}</span></label>`).join('')}</div></div>`:''}
+  ${hasVoiture?`<div class="extra-box" style="border-color:#C9A86A"><span class="field-label">Location voiture – Type de véhicule</span><div class="voiture-opt">${VOITURES.map(v=>`<label class="${state.voitureType===v.id?'selected':''}" data-v="${v.id}"><img src="${v.img}"><span>${v.label}</span></label>`).join('')}</div><div style="margin-top:12px"><span class="field-label">Durée</span><div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px">${["Tout le séjour","Demi-journée","Journée entière","Personnalisé"].map(d=>`<label style="border:1.5px solid ${state.voitureDuree===d?'#0B1F3A':'var(--border)'};padding:10px;border-radius:10px;cursor:pointer;background:${state.voitureDuree===d?'#FFFEF8':'#fff'}"><input type="radio" name="voitureDuree" value="${d}" ${state.voitureDuree===d?'checked':''} style="display:none"> ${d}</label>`).join('')}</div><div class="${state.voitureDuree==='Personnalisé'?'conditional-field visible':'conditional-field'}" style="margin-top:8px"><input id="voitureDetail" class="form-field" placeholder="Ex: horaires, livraison..." value="${esc(state.voitureDetail)}"></div></div></div>`:''}
   ${hasChauffeur?`<div class="extra-box" style="border-color:#0B1F3A"><span class="field-label">Chauffeur – Durée</span><div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px">${["Tout le séjour","Demi-journée","Journée entière","Personnalisé"].map(d=>`<label style="border:1.5px solid ${state.chauffeurDuree===d?'#0B1F3A':'var(--border)'};padding:10px;border-radius:10px;cursor:pointer;background:${state.chauffeurDuree===d?'#FFFEF8':'#fff'}"><input type="radio" name="chauffDuree" value="${d}" ${state.chauffeurDuree===d?'checked':''} style="display:none"> ${d}</label>`).join('')}</div><div class="${state.chauffeurDuree==='Personnalisé'?'conditional-field visible':'conditional-field'}" style="margin-top:8px"><input id="chauffDetail" class="form-field" placeholder="Ex: 3 jours, horaires 08h-18h..." value="${esc(state.chauffeurDetail)}"></div></div>`:''}
   <div class="extra-box" style="border-color:#C9A86A;background:#FFFEF8"><span class="field-label">Assistance médicale – Incluse dans tous nos séjours</span><div style="display:flex;gap:8px;margin-top:10px"><label style="flex:1;border:1.5px solid ${state.assistMed==='Non'?'#0B1F3A':'var(--border)'};padding:10px;border-radius:10px;cursor:pointer;background:${state.assistMed==='Non'?'#0B1F3A;color:#fff':'#fff'}"><input type="radio" name="assistMed" value="Non" ${state.assistMed==='Non'?'checked':''} style="display:none"> Non, merci</label><label style="flex:1;border:1.5px solid ${state.assistMed==='Oui'?'#0B1F3A':'var(--border)'};padding:10px;border-radius:10px;cursor:pointer;background:${state.assistMed==='Oui'?'#0B1F3A;color:#fff':'#fff'}"><input type="radio" name="assistMed" value="Oui" ${state.assistMed==='Oui'?'checked':''} style="display:none"> Oui, besoin spécifique</label></div>${state.assistMed==='Oui'?`<div class="note-med">✓ Notre équipe en tiendra compte et vous contactera en toute discrétion pour les détails nécessaires. L'assistance médicale de base reste incluse.</div>`:''}</div>
   <div style="margin-top:18px;border-top:1px solid var(--border);padding-top:14px">
@@ -209,12 +208,13 @@ function render(step){
   body.querySelectorAll('.opt-card').forEach(c=>{c.onclick=()=>{const k=c.dataset.k; if(state.besoins.includes(k)) state.besoins=state.besoins.filter(x=>x!==k); else state.besoins.push(k); render(4);};});
   body.querySelectorAll('.voiture-opt label').forEach(l=>{l.onclick=()=>{state.voitureType=l.dataset.v; render(4);};});
   body.querySelectorAll('input[name=chauffDuree]').forEach(r=>r.onchange=e=>{state.chauffeurDuree=e.target.value; render(4);});
+  body.querySelectorAll('input[name=voitureDuree]').forEach(r=>r.onchange=e=>{state.voitureDuree=e.target.value; render(4);});
   body.querySelectorAll('input[name=assistMed]').forEach(r=>r.onchange=e=>{state.assistMed=e.target.value; render(4);});
   const sec=document.getElementById('secNb'); if(sec) sec.onchange=e=>state.securiteNb=e.target.value;
   body.querySelectorAll('input[name=chefPref]').forEach(r=>r.onchange=e=>{state.chefPref=e.target.value;render(4);});
   document.getElementById('incA')?.addEventListener('click',()=>{state.adultes++;render(4);}); document.getElementById('decA')?.addEventListener('click',()=>{if(state.adultes>1)state.adultes--;render(4);});
   document.getElementById('incE')?.addEventListener('click',()=>{state.enfants++;render(4);}); document.getElementById('decE')?.addEventListener('click',()=>{if(state.enfants>0)state.enfants--;render(4);});
-  ['arr','dep','enfAges','enfAges2','chefDetail','chauffDetail'].forEach(id=>{const el=document.getElementById(id); if(el) el.oninput=e=>{if(id==='arr') state.dateArr=e.target.value; if(id==='dep') state.dateDep=e.target.value; if(id.includes('enfAges')) state.enfantsAges=e.target.value; if(id==='chefDetail') state.chefDetail=e.target.value; if(id==='chauffDetail') state.chauffeurDetail=e.target.value;};});
+  ['arr','dep','enfAges','enfAges2','chefDetail','voitureDetail','chauffDetail'].forEach(id=>{const el=document.getElementById(id); if(el) el.oninput=e=>{if(id==='arr') state.dateArr=e.target.value; if(id==='dep') state.dateDep=e.target.value; if(id.includes('enfAges')) state.enfantsAges=e.target.value; if(id==='chefDetail') state.chefDetail=e.target.value; if(id==='voitureDetail') state.voitureDetail=e.target.value; if(id==='chauffDetail') state.chauffeurDetail=e.target.value;};});
   document.getElementById('b3').onclick=()=>render(3);
   document.getElementById('to5').onclick=()=>render(5);
  }else{
@@ -236,7 +236,7 @@ Type: ${state.type}
 Zone: ${state.zone} – ${state.zoneDetail}
 Hébergement: ${state.heberg}
 Besoins: ${state.besoins.join(', ')||'Aucun'}
-Voiture: ${state.voitureType||'N/A'}
+Voiture: ${state.voitureType||'N/A'} – ${state.voitureDuree} ${state.voitureDetail}
 Chauffeur: ${state.chauffeurDuree} ${state.chauffeurDetail}
 ${state.besoins.includes('Securite')?`Sécurité: ${state.securiteNb}\n`:''}${state.besoins.includes('Chef')?`Chef: ${state.chefPref} ${state.chefDetail}\n`:''}
 Voyageurs: ${state.adultes} adultes, ${state.enfants} enfants (${state.enfantsAges||'N/A'})
