@@ -39,7 +39,7 @@
 .fete-chip.selected{background:#0B1F3A;color:#fff;border-color:#0B1F3A;box-shadow:0 0 0 2px #C9A86A}
 .mariage-box{display:flex;gap:10px;margin-top:12px}
 .mariage-chip{flex:1;border:1.5px solid var(--border);border-radius:10px;padding:12px;text-align:center;cursor:pointer;background:#fff;font-size:12.5px;transition:.2s;font-weight:600;user-select:none}
-.mariage-chip.selected{background:#C9A86A;color:#0B1F3A;border-color:#0B1F3A;box-shadow:0 0 0 2px #0B1F3A;font-weight:700}
+.mariage-chip.selected{background:#fff;color:#0B1F3A;border-color:#C9A86A;box-shadow:0 0 0 2px #C9A86A;font-weight:700}
 @media(max-width:768px){.hero-pano{min-height:78vh;padding:90px 18px 50px}.opt-grid{grid-template-columns:1fr}.fete-grid{grid-template-columns:1fr 1fr}.opt-card img{width:72px;min-width:72px;height:72px}}
 </style>
 </head>
@@ -195,10 +195,8 @@ function render(step){
       if(t==='cout') state.mariageCoutumier=!state.mariageCoutumier;
       if(t==='civil') state.mariageCivil=!state.mariageCivil;
       ch.classList.toggle('selected');
-      // actualiza recap sin re-render completo para no perder foco
       const recap = document.querySelector('.recap');
       if(recap) recap.outerHTML = buildRecap();
-      // también actualiza la clase en el DOM para que quede
       document.querySelectorAll('.mariage-chip').forEach(x=>{
         const tm=x.getAttribute('data-m');
         if(tm==='cout') x.classList.toggle('selected', state.mariageCoutumier);
