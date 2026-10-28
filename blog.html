@@ -1,1 +1,105 @@
-<!DOCTYPE html><html lang="fr"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#0B1F3A"><meta name="description" content="Inspirations de voyage, destinations et découvertes du Gabon"><title>Blog | L’Adresse SARL</title><link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet"><link rel="stylesheet" href="style.css"></head><body><header class="top-header"><a class="brand" href="index.html"><div class="brand-icon">L</div><div class="brand-name">L’ADRESSE SARL</div></a><nav class="nav"><a href="index.html">Accueil</a><a href="qui-sommes-nous.html">Qui sommes-nous</a><a href="travel.html">Travel</a><a href="business.html">Business</a><a href="prestige.html">Prestige</a><a href="blog.html">Blog</a><a href="abonnements.html">Abonnements</a><a href="espace-client.html">Mon espace client</a></nav></header><main class=""><section class="demo-hero"><div><span class="demo-eyebrow">Carnet d’inspiration</span><h1>Le Blog</h1><p>Découvertes, idées de séjour et inspirations autour du Gabon.</p></div></section><section class="demo-container"><div class="demo-grid"><article class="demo-card"><img src="https://images.unsplash.com/photo-1516026672322-bc52d61a55d5?auto=format&fit=crop&w=900&q=80" alt="Découvrir le Gabon : entre nature et hospitalité" loading="lazy"><div class="demo-card-body"><h2>Découvrir le Gabon : entre nature et hospitalité</h2><p>Une introduction aux paysages, aux parcs et aux expériences qui peuvent composer un séjour au Gabon.</p><a class="demo-btn" href="decouvrir-gabon.html">Lire l’article</a></div></article><article class="demo-card"><img src="https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&w=900&q=80" alt="Escapades autour de Libreville" loading="lazy"><div class="demo-card-body"><h2>Escapades autour de Libreville</h2><p>Des idées de sorties et d’escapades à envisager selon la saison, les accès et les conditions locales.</p><a class="demo-btn" href="escapades-autour-libreville.html">Lire l’article</a></div></article><article class="demo-card"><img src="https://images.unsplash.com/photo-1488646953014-85cb44e25828?auto=format&fit=crop&w=900&q=80" alt="Préparer son séjour au Gabon" loading="lazy"><div class="demo-card-body"><h2>Préparer son séjour au Gabon</h2><p>Quelques repères pratiques pour organiser son hébergement, ses déplacements et son programme.</p><a class="demo-btn" href="organiser-sejour-gabon.html">Lire l’article</a></div></article></div><p class="demo-note">Articles de démonstration à relire et valider avant publication.</p></section></main><footer class="footer" style="background:#0B1F3A;color:#fff;padding:35px 5%;margin-top:30px"><strong>L’ADRESSE SARL</strong><p style="margin:10px 0">Glass, Libreville · Gabon · WhatsApp : <a href="https://wa.me/24162516457">+241 62 51 64 57</a></p><p><a href="index.html">Accueil</a> · <a href="cgv.html">CGV</a> · <a href="politique-confidentialite.html">Confidentialité</a> · <a href="mentions-legales.html">Mentions légales</a></p><small>© 2026 L’Adresse SARL — Démonstration non contractuelle.</small></footer></body></html>
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#0B1F3A">
+<meta name="format-detection" content="telephone=no">
+<meta name="format-detection" content="email=no">
+<meta name="format-detection" content="address=no">
+<meta name="description" content="Inspirations de voyage, destinations et découvertes du Gabon">
+<title>Blog | L’Adresse SARL</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<style>
+*{ -webkit-tap-highlight-color:transparent }
+a[href^="tel"],a[href^="mailto"],a[href*="wa.me"]{color:inherit !important;text-decoration:none !important}
+.hero-pano{position:relative;min-height:58vh;display:flex;align-items:center;justify-content:center;text-align:center;color:#fff;overflow:hidden;padding:110px 24px 60px}
+.hero-pano-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0}
+.hero-pano-overlay{position:absolute;inset:0;background:linear-gradient(180deg,rgba(11,31,58,.60),rgba(11,31,58,.82));z-index:1}
+.hero-pano-content{position:relative;z-index:2;max-width:800px}
+.blog-section{background:#F8F3ED;padding:80px 0 60px}
+.blog-grid{max-width:1150px;margin:0 auto;padding:0 32px;display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.blog-card{background:#fff;border-radius:16px;overflow:hidden;border:1px solid #efe8db;box-shadow:0 8px 30px rgba(11,31,58,.05);display:flex;flex-direction:column;transition:.3s}
+.blog-card:hover{transform:translateY(-4px);box-shadow:0 18px 40px rgba(11,31,58,.10)}
+.blog-card img{height:220px;object-fit:cover}
+.blog-card-body{padding:22px 20px 18px;flex:1;display:flex;flex-direction:column}
+.blog-card h2{font-family:'Cormorant Garamond';font-size:20px;line-height:1.15;color:#0B1F3A;margin-bottom:8px}
+.blog-card p{font-size:13px;color:#6b7a8d;line-height:1.6;margin-bottom:16px;flex:1}
+.blog-btn{border:1px solid #e5ddd0;border-radius:100px;padding:11px 18px;text-align:center;font-size:12.5px;font-weight:600;color:#0B1F3A;background:#fff;display:block;margin-top:auto;transition:.2s}
+.blog-btn:hover{border-color:#0B1F3A;background:#0B1F3A;color:#fff}
+.demo-note{max-width:1150px;margin:28px auto 0;padding:0 32px;font-size:11.5px;color:#8a95a5}
+@media(max-width:900px){.blog-grid{grid-template-columns:1fr}.hero-pano{min-height:56vh}}
+</style>
+</head>
+<body>
+
+<header class="top-header">
+<a class="brand" href="index.html"><div class="brand-icon">L</div><div class="brand-name">L’ADRESSE SARL</div></a>
+<nav class="nav" id="mainNav">
+<a href="index.html">Accueil</a>
+<a href="qui-sommes-nous.html">Qui sommes-nous</a>
+<a href="index.html#services-cards">Services</a>
+<a href="blog.html">Blog</a>
+<a href="espace-client.html">Mon espace client</a>
+</nav>
+<button class="burger" id="burgerBtn" type="button">☰</button>
+</header>
+
+<section class="hero-pano">
+<img class="hero-pano-img" src="https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&w=1600&q=80" alt="Blog">
+<div class="hero-pano-overlay"></div>
+<div class="hero-pano-content">
+<span class="eyebrow">Carnet d’inspiration</span>
+<h1>Le Blog</h1>
+<h2>Découvertes, idées de séjour et inspirations autour du Gabon</h2>
+</div>
+</section>
+
+<section class="blog-section">
+<div class="blog-grid">
+<article class="blog-card">
+<img src="https://images.unsplash.com/photo-1516026672322-bc52d61a55d5?auto=format&fit=crop&w=900&q=80" alt="Découvrir le Gabon" loading="lazy">
+<div class="blog-card-body">
+<h2>Découvrir le Gabon : entre nature et hospitalité</h2>
+<p>Une introduction aux paysages, aux parcs et aux expériences qui peuvent composer un séjour au Gabon.</p>
+<a class="blog-btn" href="decouvrir-gabon.html">Lire l'article →</a>
+</div>
+</article>
+
+<article class="blog-card">
+<img src="https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&w=900&q=80" alt="Escapades" loading="lazy">
+<div class="blog-card-body">
+<h2>Escapades autour de Libreville</h2>
+<p>Des idées de sorties et d’escapades à envisager selon la saison, les accès et les conditions locales.</p>
+<a class="blog-btn" href="escapades-autour-libreville.html">Lire l'article →</a>
+</div>
+</article>
+
+<article class="blog-card">
+<img src="https://images.unsplash.com/photo-1488646953014-85cb44e25828?auto=format&fit=crop&w=900&q=80" alt="Préparer séjour" loading="lazy">
+<div class="blog-card-body">
+<h2>Préparer son séjour au Gabon</h2>
+<p>Quelques repères pratiques pour organiser son hébergement, ses déplacements et son programme.</p>
+<a class="blog-btn" href="organiser-sejour-gabon.html">Lire l'article →</a>
+</div>
+</article>
+</div>
+<p class="demo-note">Articles de démonstration à relire et valider avant publication.</p>
+</section>
+
+<footer class="footer-universal">
+<div class="footer-grid">
+<div><div style="display:flex;align-items:center;gap:10px;margin-bottom:12px"><div class="brand-icon" style="border-color:#C9A86A;color:#C9A86A">L</div><div class="brand-name" style="color:#fff">L’ADRESSE SARL</div></div><p>Glass, Libreville</p><p>WhatsApp: <a href="https://wa.me/24162516457" style="color:#E9D9B8">+241 62 51 64 57</a></p></div>
+<div><h4>NAVIGATION</h4><a href="index.html">Accueil</a><a href="index.html#services-cards">Nos services</a><a href="qui-sommes-nous.html">Qui sommes-nous</a><a href="blog.html">Blog</a></div>
+<div><h4>INFORMATIONS LÉGALES</h4><a href="politique-confidentialite.html">Confidentialité</a><a href="mentions-legales.html">Mentions légales</a><a href="cgv.html">CGV</a></div>
+</div>
+<div class="footer-bottom"><span>© 2026 L’Adresse SARL</span><span>Glass, Libreville · Confidentialité renforcée</span></div>
+</footer>
+
+<script>
+const burger=document.getElementById('burgerBtn'),nav=document.getElementById('mainNav');
+burger.addEventListener('click',()=>{const o=nav.classList.toggle('open');burger.textContent=o?'✕':'☰';});
+</script>
+</body>
+</html>
