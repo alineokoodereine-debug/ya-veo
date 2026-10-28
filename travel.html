@@ -17,19 +17,28 @@
 .hero-pano-content{position:relative;z-index:2;max-width:920px}
 .form-field{width:100%;padding:12px;border-radius:10px;border:1px solid var(--border);background:#fff;font:inherit}
 .simple-tel{width:100%;padding:12px 14px;border:1px solid #d6dbe4;border-radius:10px;font:inherit}
+.field-label{font-size:13px;font-weight:600;color:var(--navy);margin-bottom:6px;display:block}
 .conditional-field{display:none}.conditional-field.visible{display:block;animation:fadeIn .3s}@keyframes fadeIn{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:translateY(0)}}
 .hotel-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;margin-top:12px}
 .hotel-card{border:1.5px solid var(--border);border-radius:14px;overflow:hidden;background:#fff;cursor:pointer;transition:.25s}
-.hotel-card:hover{transform:translateY(-3px);box-shadow:0 12px 24px rgba(11,31,58,.08)}
 .hotel-card.selected{border-color:#0B1F3A;box-shadow:0 0 0 2px #C9A86A}
 .hotel-imgs{display:grid;grid-template-columns:2fr 1fr;grid-template-rows:1fr 1fr;gap:2px;height:180px}
 .hotel-imgs img{width:100%;height:100%;object-fit:cover;display:block}
 .hotel-imgs img:first-child{grid-row:span 2}
 .hotel-info{padding:12px 14px}
-.tabs{display:flex;gap:8px;margin:16px 0;flex-wrap:wrap}
-.tabs button{padding:10px 16px;border-radius:100px;border:1px solid var(--border);background:#fff;cursor:pointer;font-size:13px}
-.tabs button.active{background:#0B1F3A;color:#fff;border-color:#0B1F3A}
-@media(max-width:768px){.hero-pano{min-height:78vh;padding:90px 18px 50px}.hero-pano h1{font-size:38px !important}.hotel-grid{grid-template-columns:1fr}.hotel-imgs{height:200px}}
+.opt-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:12px}
+.opt-card{border:1.5px solid var(--border);border-radius:14px;padding:0;overflow:hidden;background:#fff;cursor:pointer;transition:.2s;display:flex;align-items:stretch;min-height:88px}
+.opt-card.selected{border-color:#0B1F3A;box-shadow:0 0 0 2px #C9A86A;background:#FFFEF8}
+.opt-card img{width:88px;min-width:88px;height:88px;object-fit:cover;flex-shrink:0}
+.opt-card .opt-text{padding:10px 12px;flex:1;display:flex;flex-direction:column;justify-content:center}
+.besoin-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.besoin-card{border:1.5px solid var(--border);border-radius:12px;padding:14px;background:#fff;cursor:pointer;text-align:center;font-weight:600;font-size:13px}
+.besoin-card.selected{background:#0B1F3A;color:#fff;border-color:#0B1F3A;box-shadow:0 0 0 2px #C9A86A}
+.budget-box{display:flex;gap:10px;margin-top:10px}
+.budget-box label{flex:1;border:1px solid var(--border);border-radius:10px;padding:10px;text-align:center;cursor:pointer;background:#fff;font-size:13px}
+.budget-box label.selected{background:#0B1F3A;color:#fff;border-color:#0B1F3A;box-shadow:0 0 0 2px #C9A86A}
+.extra-box{border:1px solid var(--border);background:#fff;border-radius:12px;padding:12px;margin-top:12px}
+@media(max-width:768px){.hero-pano{min-height:78vh;padding:90px 18px 50px}.hero-pano h1{font-size:32px !important}.hotel-grid{grid-template-columns:1fr}.besoin-grid{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -52,15 +61,15 @@
 <div class="hero-pano-content">
 <span class="eyebrow">L’Adresse Travel · Ex-Séjours</span>
 <h1>Travel – Séjours Premium</h1>
-<h2>5 Appartements + 5 Hôtels – 3 photos chacun</h2>
-<p>Questionnaire zone ajouté + téléphone simple sans sélecteur + voyageurs condicional</p>
-<div class="hero-btns"><a class="btn-gold" href="#cfgBody">Organiser mon séjour</a><a class="btn-outline" href="index.html#services-cards">Voir services</a></div>
+<h2>Type Court/Long/Affaires/Familles → Zone → Hébergement → Besoin</h2>
+<p>5 Appartements + 5 Hôtels – 3 photos chacun – Besoin dynamique como conciergerie</p>
+<div class="hero-btns"><a class="btn-gold" href="#cfgBody">Organiser mon séjour</a></div>
 </div>
 </section>
 
 <section style="padding:80px 0;background:var(--cream)"><div class="container">
 <div class="config-wrap">
-<div class="config-tabs"><button class="active" data-s="1">1. Zone</button><button data-s="2">2. Hébergement</button><button data-s="3">3. Dates</button><button data-s="4">4. Demande</button></div>
+<div class="config-tabs"><button data-s="1" class="active">1. Type</button><button data-s="2">2. Zone</button><button data-s="3">3. Hébergement</button><button data-s="4">4. Besoin</button><button data-s="5">5. Demande</button></div>
 <div class="config-body" id="cfgBody"><p>Chargement…</p></div>
 </div>
 </div></section>
@@ -76,100 +85,132 @@
 </footer>
 
 <script>
-const burger=document.getElementById('burgerBtn'),nav=document.getElementById('mainNav');
-burger.addEventListener('click',()=>{const o=nav.classList.toggle('open');burger.textContent=o?'✕':'☰';});
-
 const SHEET_URL="https://script.google.com/macros/s/AKfycbww-7Nn7ro4OZ-R1oVuoLSdY6P7OWOHJzLl0I4KNazjOXjGYWlmxFzpq-ti7sHGA2zP/exec";
 const WA="24162516457";
-const state={type:"Court séjour",zone:"",heberg:"",dateArr:"",dateDep:"",voy:"",conf:"standard",nom:"",tel:"",desc:"",budget:"proposition"};
+const state={type:"",zone:"",zoneDetail:"",heberg:"",dateArr:"",dateDep:"",voy:"",besoins:[],securiteNb:"1 agent",chefPref:"Non",chefDetail:"",conf:"Standard",nom:"",tel:"",desc:"",budget:"ouvert",budgetMontant:""};
 
+const TYPES=["Court séjour","Long séjour","Affaires","Familles"];
+const ZONES={
+ "Dans Libreville":{ph:"Quartier – Ex: Glass, Batterie IV, Sablière, Louis"},
+ "Autour de Libreville":{ph:"Zone – Ex: Cap Estérias, Pongara, Akanda, Pointe Denis"},
+ "Dans le pays":{ph:"Destination – Ex: Port-Gentil, Lambaréné, Lopé, Franceville"}
+};
 const appartements=[
-{name:"Appartement Premium Glass",desc:"2 chambres, vue lagune, Glass – Exemple",imgs:["https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?w=600&q=80","https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=300&q=80","https://images.unsplash.com/photo-1560184611-6a68d2a4e84b?w=300&q=80"]},
-{name:"Appartement Standing Batterie IV",desc:"3 chambres, terrasse, Batterie IV",imgs:["https://images.unsplash.com/photo-1502672023488-70e25813eb80?w=600&q=80","https://images.unsplash.com/photo-1493809842364-78817add58d1?w=300&q=80","https://images.unsplash.com/photo-1484154218962-a197022b5858?w=300&q=80"]},
-{name:"Villa avec Piscine – Sablière",desc:"Villa 4 chambres, piscine privée, Sablière",imgs:["https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=600&q=80","https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=300&q=80","https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=300&q=80"]},
-{name:"Studio Haut Standing – Centre Ville",desc:"Studio équipé, idéal affaires",imgs:["https://images.unsplash.com/photo-1554995207-c18c203602cb?w=600&q=80","https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af?w=300&q=80","https://images.unsplash.com/photo-1598928506311-c55ded91a20c?w=300&q=80"]},
-{name:"Villa d’Exception – Pointe-Denis",desc:"Accès plage, 5 chambres, Pointe-Denis",imgs:["https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=600&q=80","https://images.unsplash.com/photo-1600585154526-990dced4db0d?w=300&q=80","https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?w=300&q=80"]}
+{name:"Appartement Premium Glass",desc:"2 chambres, vue lagune",imgs:["https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?w=600&q=80","https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=300&q=80","https://images.unsplash.com/photo-1560184611-6a68d2a4e84b?w=300&q=80"]},
+{name:"Appartement Standing Batterie IV",desc:"3 chambres, terrasse",imgs:["https://images.unsplash.com/photo-1502672023488-70e25813eb80?w=600&q=80","https://images.unsplash.com/photo-1493809842364-78817add58d1?w=300&q=80","https://images.unsplash.com/photo-1484154218962-a197022b5858?w=300&q=80"]},
+{name:"Villa avec Piscine – Sablière",desc:"Villa 4 chambres, piscine",imgs:["https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=600&q=80","https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=300&q=80","https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=300&q=80"]},
+{name:"Studio Haut Standing – Centre Ville",desc:"Idéal affaires",imgs:["https://images.unsplash.com/photo-1554995207-c18c203602cb?w=600&q=80","https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af?w=300&q=80","https://images.unsplash.com/photo-1598928506311-c55ded91a20c?w=300&q=80"]},
+{name:"Villa d’Exception – Pointe-Denis",desc:"Accès plage, 5 chambres",imgs:["https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=600&q=80","https://images.unsplash.com/photo-1600585154526-990dced4db0d?w=300&q=80","https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?w=300&q=80"]}
 ];
 const hotels=[
-{name:"【entity-Radisson Blu¦canonical_name=Radisson Blu】 Okoumé Palace",desc:"Hôtel 5*, piscine, bord de mer – LBV",imgs:["https://images.unsplash.com/photo-1566073771259-6a8506099945?w=600&q=80","https://images.unsplash.com/photo-1551882547-b79c1d5a7a2d?w=300&q=80","https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=300&q=80"]},
-{name:"Onomo Hotel Libreville",desc:"Centre ville, business, exemple",imgs:["https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?w=600&q=80","https://images.unsplash.com/photo-1578683010236-d716f9a3f461?w=300&q=80","https://images.unsplash.com/photo-1611892440504-42a792e24d32?w=300&q=80"]},
-{name:"Hôtel Boulevard",desc:"Vue ville, restaurant, exemple",imgs:["https://images.unsplash.com/photo-1551882547-b79c1d5a7a2d?w=600&q=80","https://images.unsplash.com/photo-1564501049412-61c2a3083791?w=300&q=80","https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?w=300&q=80"]},
-{name:"Villa Hôtel – Port-Gentil",desc:"Extension Port-Gentil, à confirmer",imgs:["https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?w=600&q=80","https://images.unsplash.com/photo-1566073771259-6a8506099945?w=300&q=80","https://images.unsplash.com/photo-1551882547-b79c1d5a7a2d?w=300&q=80"]},
-{name:"Lodge Écotourisme – Lambaréné",desc:"Dans le pays, nature, exemple démo",imgs:["https://images.unsplash.com/photo-1449157291145-7efd050a4d0e?w=600&q=80","https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?w=300&q=80","https://images.unsplash.com/photo-1564501049412-61c2a3083791?w=300&q=80"]}
+{name:"Radisson Blu Okoumé Palace",desc:"5*, piscine, bord de mer",imgs:["https://images.unsplash.com/photo-1566073771259-6a8506099945?w=600&q=80","https://images.unsplash.com/photo-1551882547-b79c1d5a7a2d?w=300&q=80","https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=300&q=80"]},
+{name:"Onomo Hotel Libreville",desc:"Centre ville, business",imgs:["https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?w=600&q=80","https://images.unsplash.com/photo-1578683010236-d716f9a3f461?w=300&q=80","https://images.unsplash.com/photo-1611892440504-42a792e24d32?w=300&q=80"]},
+{name:"Hôtel Boulevard",desc:"Vue ville, restaurant",imgs:["https://images.unsplash.com/photo-1551882547-b79c1d5a7a2d?w=600&q=80","https://images.unsplash.com/photo-1564501049412-61c2a3083791?w=300&q=80","https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?w=300&q=80"]},
+{name:"Villa Hôtel – Port-Gentil",desc:"Extension POG",imgs:["https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?w=600&q=80","https://images.unsplash.com/photo-1566073771259-6a8506099945?w=300&q=80","https://images.unsplash.com/photo-1551882547-b79c1d5a7a2d?w=300&q=80"]},
+{name:"Lodge Écotourisme – Lambaréné",desc:"Dans le pays, nature",imgs:["https://images.unsplash.com/photo-1449157291145-7efd050a4d0e?w=600&q=80","https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?w=300&q=80","https://images.unsplash.com/photo-1564501049412-61c2a3083791?w=300&q=80"]}
 ];
+const BESOINS={
+ Familles:[
+  {key:"PlageFam",label:"Plage en famille – Pointe Denis",img:"https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=200&q=80"},
+  {key:"AkandaFam",label:"Parc Akanda – Safari mangrove",img:"https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?w=200&q=80"},
+  {key:"MarcheFam",label:"Marché artisanal + Glaces",img:"https://images.unsplash.com/photo-1555529771-7888783a18d3?w=200&q=80"},
+  {key:"MuseeFam",label:"Musée national – éducatif",img:"https://images.unsplash.com/photo-1518998053901-5348d3961a04?w=200&q=80"},
+  {key:"Enfant1",label:"Enfants – Atelier pêche / pirogue",img:"https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?w=200&q=80"},
+  {key:"Enfant2",label:"Enfants – Parc jeux + Goûter",img:"https://images.unsplash.com/photo-1596462502278-27bfdc403348?w=200&q=80"},
+  {key:"Duo1",label:"Duo/Solo – Paddle / Kayak",img:"https://images.unsplash.com/photo-1502680390547-bdbec3b5cc50?w=200&q=80"},
+  {key:"Duo2",label:"Duo/Groupe – Randonnée forêt",img:"https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=200&q=80"},
+  {key:"Duo3",label:"Groupe – Bateau coucher soleil",img:"https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=200&q=80"},
+  {key:"Romantique",label:"Pack Cita Romántica – Dîner + Pétales + Spa",img:"https://images.unsplash.com/photo-1519741497674-611481863552?w=200&q=80"},
+  {key:"Nounou",label:"Nounou / Garde d'enfants",img:"https://images.unsplash.com/photo-1596462502278-27bfdc403348?w=200&q=80"},
+  {key:"Chauffeur",label:"Chauffeur privé",img:"https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?w=200&q=80"},
+  {key:"Voiture",label:"Location voiture",img:"https://images.unsplash.com/photo-1494976388531-d1058494cdd8?w=200&q=80"},
+  {key:"Spa",label:"Spa à domicile",img:"https://images.unsplash.com/photo-1544161515-4ab6ce6db874?w=200&q=80"},
+  {key:"Sport",label:"Salle sport / Coach",img:"https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=200&q=80"},
+  {key:"Chef",label:"Chef privé",img:"https://images.unsplash.com/photo-1556910103-1c02745a30bf?w=200&q=80"},
+  {key:"Guide",label:"Guide touristique",img:"https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?w=200&q=80"},
+  {key:"Aeroport",label:"Recogida en el aeropuerto ✈️",img:"https://images.unsplash.com/photo-1436491865332-7a61a109cc05?w=200&q=80"}
+ ],
+ Business:[
+  {key:"Aeroport",label:"Recogida aeropuerto + Fast-track",img:"https://images.unsplash.com/photo-1436491865332-7a61a109cc05?w=200&q=80"},
+  {key:"Salle",label:"Salle réunion / Séminaire",img:"https://images.unsplash.com/photo-1515187029135-18ee286d815b?w=200&q=80"},
+  {key:"Assistant",label:"Assistant bilingue",img:"https://images.unsplash.com/photo-1521791136064-7986c2920216?w=200&q=80"},
+  {key:"Securite",label:"Sécurité 1-5 + Escort policier",img:"https://images.unsplash.com/photo-1593113598332-cd288d649433?w=200&q=80"},
+  {key:"ChauffeurB",label:"Chauffeur d'affaires",img:"https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?w=200&q=80"},
+  {key:"Dej",label:"Déjeuner d'affaires VIP",img:"https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=200&q=80"}
+ ]
+};
 let activeTab='appart';
-
 function esc(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
+function besoinList(){return (state.type==="Affaires"||state.type==="Business")?BESOINS.Business:BESOINS.Familles;}
 
 function render(step){
-const body=document.getElementById('cfgBody');
-if(step===1){
-body.innerHTML=`<div style="padding:24px"><h3>Où souhaitez-vous séjourner ? (Mini questionnaire nouveau)</h3><p style="font-size:13px;color:#665f57;margin:8px 0 14px">Choisissez la zone – cela nous aide à filtrer l'hébergement.</p>
-<label style="display:block;margin:12px 0 6px;font-weight:600">Type<select id="type" class="form-field"><option ${state.type==='Court séjour'?'selected':''}>Court séjour</option><option ${state.type==='Long séjour'?'selected':''}>Long séjour</option><option ${state.type==='Affaires'?'selected':''}>Affaires</option><option ${state.type==='Familial'?'selected':''}>Familial</option></select></label>
-<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px;margin-top:16px">
-<label style="border:1px solid var(--border);padding:14px;border-radius:12px;cursor:pointer"><input type="radio" name="zone" value="Dans Libreville" ${state.zone==='Dans Libreville'?'checked':''}> <strong>Dans Libreville</strong><br><small style="color:var(--muted)">Glass, Batterie IV, Sablière</small></label>
-<label style="border:1px solid var(--border);padding:14px;border-radius:12px;cursor:pointer"><input type="radio" name="zone" value="Autour de Libreville" ${state.zone==='Autour de Libreville'?'checked':''}> <strong>Autour de Libreville</strong><br><small style="color:var(--muted)">Cap Esterias, Pointe-Denis</small></label>
-<label style="border:1px solid var(--border);padding:14px;border-radius:12px;cursor:pointer"><input type="radio" name="zone" value="Dans le pays" ${state.zone==='Dans le pays'?'checked':''}> <strong>Dans le pays</strong><br><small style="color:var(--muted)">Port-Gentil, Lambaréné</small></label>
-</div>
-<div style="text-align:right;margin-top:20px"><button class="btn-gold" id="to2">Continuer</button></div><p id="err" style="color:#9b1c1c"></p></div>`;
-document.getElementById('to2').onclick=()=>{
-const z=document.querySelector('input[name=zone]:checked');
-if(!z){document.getElementById('err').textContent='Choisissez la zone (Libreville / Autour / Pays)';return;}
-state.zone=z.value; state.type=document.getElementById('type').value; render(2);
-};
-}else if(step===2){
-body.innerHTML=`<div style="padding:24px"><h3>Hébergement – Zone: ${esc(state.zone)}</h3>
-<div class="tabs"><button class="${activeTab==='appart'?'active':''}" id="tabA">Appartements (5)</button><button class="${activeTab==='hotel'?'active':''}" id="tabH">Hôtels (5)</button></div>
-<div id="grid" class="hotel-grid"></div>
-<div style="display:flex;justify-content:space-between;margin-top:20px"><button id="b1" style="background:transparent;border:1px solid var(--border);padding:12px;border-radius:10px">Retour</button><button class="btn-gold" id="to3">Continuer</button></div><p id="err" style="color:#9b1c1c"></p></div>`;
-function draw(){
-const grid=document.getElementById('grid'); const list=activeTab==='appart'?appartements:hotels;
-grid.innerHTML=list.map(it=>`
-<div class="hotel-card ${state.heberg===it.name?'selected':''}" data-name="${esc(it.name)}">
-<div class="hotel-imgs"><img src="${it.imgs[0]}" alt="" loading="lazy"><img src="${it.imgs[1]}" alt="" loading="lazy"><img src="${it.imgs[2]}" alt="" loading="lazy"></div>
-<div class="hotel-info"><h4 style="font-size:14px;color:var(--navy)">${esc(it.name)}</h4><p style="font-size:12px;color:var(--muted)">${esc(it.desc)}</p></div>
-</div>`).join('');
-grid.querySelectorAll('.hotel-card').forEach(c=>c.onclick=()=>{state.heberg=c.dataset.name;draw();});
-}
-draw();
-document.getElementById('tabA').onclick=()=>{activeTab='appart';render(2);};
-document.getElementById('tabH').onclick=()=>{activeTab='hotel';render(2);};
-document.getElementById('b1').onclick=()=>render(1);
-document.getElementById('to3').onclick=()=>{if(!state.heberg){document.getElementById('err').textContent='Choisissez un hébergement parmi les 10 exemples (3 photos chacun)';return;}render(3);};
-}else if(step===3){
-body.innerHTML=`<div style="padding:24px"><h3>Dates & Voyageurs – Condicional</h3><p style="font-size:13px;color:#665f57">Nombre de voyageurs aparece porque elegiste <strong>${esc(state.heberg)}</strong></p>
-<div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px"><label>Arrivée<input type="date" id="arr" value="${state.dateArr}" class="form-field"></label><label>Départ<input type="date" id="dep" value="${state.dateDep}" class="form-field"></label></div>
-<div class="conditional-field visible" style="margin-top:16px"><label style="font-weight:600">Nombre de voyageurs (requis car hébergement choisi)<input type="number" id="voy" min="1" value="${state.voy}" class="simple-tel" placeholder="Ex: 2"></label></div>
-<div style="display:flex;justify-content:space-between;margin-top:20px"><button id="b2" style="background:transparent;border:1px solid var(--border);padding:12px;border-radius:10px">Retour</button><button class="btn-gold" id="to4">Continuer</button></div><p id="err" style="color:#9b1c1c"></p></div>`;
-document.getElementById('b2').onclick=()=>render(2);
-document.getElementById('to4').onclick=()=>{
-const arr=document.getElementById('arr').value, dep=document.getElementById('dep').value, voy=document.getElementById('voy').value;
-if(!arr||!dep||!voy){document.getElementById('err').textContent='Remplissez dates y voyageurs (condicional)';return;}
-state.dateArr=arr; state.dateDep=dep; state.voy=voy; render(4);
-};
-}else{
-body.innerHTML=`<div style="padding:24px"><h3>Demande finale – Téléphone simple</h3>
-<div style="display:flex;gap:12px;margin:12px 0;padding:10px;background:#f7f3ef;border-radius:10px"><label><input type="radio" name="conf" value="standard" ${state.conf==='standard'?'checked':''}> Standard</label><label><input type="radio" name="conf" value="confidentielle" ${state.conf==='confidentielle'?'checked':''}> Confidentielle</label></div>
-<div style="display:grid;grid-template-columns:1fr 1fr;gap:12px"><label>Nom<input id="nom" value="${esc(state.nom)}" class="simple-tel" placeholder="Votre nom"></label><label>Téléphone simple (sans sélecteur)<input id="tel" value="${esc(state.tel)}" class="simple-tel" placeholder="+241 62 XX XX XX ou 06X"></label></div>
-<label style="display:block;margin-top:12px">Description<textarea id="desc" class="form-field" style="min-height:90px">${esc(state.desc)}</textarea></label>
-<div style="display:flex;justify-content:space-between;margin-top:20px"><button id="b3" style="background:transparent;border:1px solid var(--border);padding:12px;border-radius:10px">Retour</button><div style="display:flex;gap:8px"><button id="wa" class="btn-gold">WhatsApp</button><button id="mail" style="background:#fff;border:1px solid var(--border);padding:12px;border-radius:10px">Email</button></div></div><p id="err" style="color:#9b1c1c"></p></div>`;
-document.getElementById('b3').onclick=()=>render(3);
-document.getElementById('wa').onclick=()=>submit('WhatsApp');
-document.getElementById('mail').onclick=()=>submit('Email');
-}
-document.querySelectorAll('.config-tabs button').forEach((b,i)=>b.classList.toggle('active',i+1===step));
+ const body=document.getElementById('cfgBody');
+ if(step===1){
+  body.innerHTML=`<div style="padding:24px"><p style="font-size:13px;color:#665f57;margin-bottom:14px">Choisissez le type de demande qui correspond le mieux à votre besoin.</p><div class="besoin-grid">${TYPES.map(k=>`<div class="besoin-card ${state.type===k?'selected':''}" data-k="${k}">${k}</div>`).join('')}</div><div style="text-align:right;margin-top:20px"><button class="btn-gold" id="to2">Continuer →</button></div><p id="err" style="color:#9b1c1c"></p></div>`;
+  body.querySelectorAll('.besoin-card').forEach(c=>c.onclick=()=>{state.type=c.dataset.k;render(1);});
+  document.getElementById('to2').onclick=()=>{if(!state.type){document.getElementById('err').textContent='Choisissez Court séjour / Long séjour / Affaires / Familles';return;}render(2);};
+ }else if(step===2){
+  body.innerHTML=`<div style="padding:24px"><div style="background:#F8F3ED;padding:10px 14px;border-radius:8px;margin-bottom:14px;font-size:13px"><strong>${esc(state.type)}</strong> – Choisissez votre zone</div><div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px">${Object.keys(ZONES).map(k=>`<label style="border:1.5px solid ${state.zone===k?'#0B1F3A':'var(--border)'};padding:14px;border-radius:12px;cursor:pointer;background:${state.zone===k?'#FFFEF8':'#fff'}"><input type="radio" name="zone" value="${k}" ${state.zone===k?'checked':''} style="display:none"> <strong>${k}</strong><br><small style="color:var(--muted)">${ZONES[k].ph}</small></label>`).join('')}</div><div class="${state.zone?'conditional-field visible':'conditional-field'}" style="margin-top:18px"><label class="field-label">Précisez la zone / quartier (info qui apparaîtra dans le formulaire final como pediste)</label><input id="zoneDetail" class="form-field" placeholder="${state.zone?ZONES[state.zone].ph:'Sélectionnez zone'}" value="${esc(state.zoneDetail)}"></div><div style="display:flex;justify-content:space-between;margin-top:22px"><button id="b1" style="background:transparent;border:1px solid var(--border);padding:12px;border-radius:10px">← Retour</button><button class="btn-gold" id="to3">Continuer →</button></div><p id="err" style="color:#9b1c1c"></p></div>`;
+  body.querySelectorAll('input[name=zone]').forEach(r=>r.onchange=()=>{state.zone=r.value;render(2);});
+  const zd=document.getElementById('zoneDetail'); if(zd) zd.oninput=e=>state.zoneDetail=e.target.value;
+  document.getElementById('b1').onclick=()=>render(1);
+  document.getElementById('to3').onclick=()=>{if(!state.zone){document.getElementById('err').textContent='Choisissez Dans Libreville / Autour / Dans le pays';return;}render(3);};
+ }else if(step===3){
+  const list=activeTab==='appart'?appartements:hotels;
+  body.innerHTML=`<div style="padding:24px"><h3>Hébergement – ${esc(state.zone)} ${state.zoneDetail?'- '+esc(state.zoneDetail):''}</h3><div style="display:flex;gap:8px;margin:16px 0"><button id="tabA" style="padding:10px 16px;border-radius:100px;border:1px solid ${activeTab==='appart'?'#0B1F3A':'var(--border)'};background:${activeTab==='appart'?'#0B1F3A;color:#fff':'#fff'}">Appartements (5)</button><button id="tabH" style="padding:10px 16px;border-radius:100px;border:1px solid ${activeTab==='hotel'?'#0B1F3A':'var(--border)'};background:${activeTab==='hotel'?'#0B1F3A;color:#fff':'#fff'}">Hôtels (5)</button></div><div class="hotel-grid" id="grid"></div><div style="display:flex;justify-content:space-between;margin-top:20px"><button id="b2" style="background:transparent;border:1px solid var(--border);padding:12px;border-radius:10px">← Retour</button><button class="btn-gold" id="to4">Continuer →</button></div><p id="err" style="color:#9b1c1c"></p></div>`;
+  const grid=document.getElementById('grid');
+  grid.innerHTML=list.map(it=>`<div class="hotel-card ${state.heberg===it.name?'selected':''}" data-name="${esc(it.name)}"><div class="hotel-imgs"><img src="${it.imgs[0]}" loading="lazy"><img src="${it.imgs[1]}" loading="lazy"><img src="${it.imgs[2]}" loading="lazy"></div><div class="hotel-info"><h4 style="font-size:14px">${esc(it.name)}</h4><p style="font-size:12px;color:var(--muted)">${esc(it.desc)} – 3 photos</p></div></div>`).join('');
+  grid.querySelectorAll('.hotel-card').forEach(c=>c.onclick=()=>{state.heberg=c.dataset.name;render(3);});
+  document.getElementById('tabA').onclick=()=>{activeTab='appart';render(3);}; document.getElementById('tabH').onclick=()=>{activeTab='hotel';render(3);};
+  document.getElementById('b2').onclick=()=>render(2);
+  document.getElementById('to4').onclick=()=>{if(!state.heberg){document.getElementById('err').textContent='Choisissez un hébergement';return;}render(4);};
+ }else if(step===4){
+  const list=besoinList();
+  const hasSec=state.besoins.includes('Securite');
+  const hasChef=state.besoins.includes('Chef');
+  body.innerHTML=`<div style="padding:24px"><div style="background:#F8F3ED;padding:10px 14px;border-radius:8px;margin-bottom:14px;font-size:13px"><strong>Besoin / Activités – ${esc(state.type)}</strong> – 4 famille, 2 niños, 3 solo/duo/grupo + romantica, nounou, chofer, recogida aeropuerto</div><div class="opt-grid">${list.map(b=>{const sel=state.besoins.includes(b.key);return `<div class="opt-card ${sel?'selected':''}" data-k="${b.key}"><img src="${b.img}" loading="lazy"><div class="opt-text"><strong>${b.label}</strong></div></div>`;}).join('')}</div>
+  ${hasSec?`<div class="extra-box"><span class="field-label">Sécurité – Combien ? (limite 5 + Escort policier)</span><select id="secNb" class="form-field"><option>1 agent</option><option>2 agents</option><option>3 agents</option><option>4 agents</option><option>5 agents</option><option>Escort policier</option></select></div>`:''}
+  ${hasChef?`<div class="extra-box"><span class="field-label">Chef – Préférence culinaire ?</span><div style="display:flex;gap:8px;margin-top:8px"><label style="border:1px solid var(--border);padding:8px 12px;border-radius:20px"><input type="radio" name="chefPref" value="Non" ${state.chefPref==='Non'?'checked':''}> Non</label><label style="border:1px solid var(--border);padding:8px 12px;border-radius:20px"><input type="radio" name="chefPref" value="Oui" ${state.chefPref==='Oui'?'checked':''}> Oui</label></div><div class="${state.chefPref==='Oui'?'conditional-field visible':'conditional-field'}" style="margin-top:8px"><input id="chefDetail" class="form-field" placeholder="Vegana, halal..." value="${esc(state.chefDetail)}"></div></div>`:''}
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:18px"><label><span class="field-label">Arrivée</span><input type="date" id="arr" class="form-field" value="${state.dateArr}"></label><label><span class="field-label">Départ</span><input type="date" id="dep" class="form-field" value="${state.dateDep}"></label></div><div style="margin-top:12px"><label class="field-label">Voyageurs (condicional – aparece porque hay hébergement)</label><input id="voy" class="simple-tel" placeholder="Ex: 2 adultes, 2 enfants" value="${esc(state.voy)}"></div><div style="display:flex;justify-content:space-between;margin-top:20px"><button id="b3" style="background:transparent;border:1px solid var(--border);padding:12px;border-radius:10px">← Retour</button><button class="btn-gold" id="to5">Continuer →</button></div><p id="err" style="color:#9b1c1c"></p></div>`;
+  body.querySelectorAll('.opt-card').forEach(c=>{c.onclick=()=>{const k=c.dataset.k; if(state.besoins.includes(k)) state.besoins=state.besoins.filter(x=>x!==k); else state.besoins.push(k); render(4);};});
+  const sec=document.getElementById('secNb'); if(sec) sec.onchange=e=>state.securiteNb=e.target.value;
+  body.querySelectorAll('input[name=chefPref]').forEach(r=>r.onchange=e=>{state.chefPref=e.target.value;render(4);});
+  ['arr','dep','voy','chefDetail'].forEach(id=>{const el=document.getElementById(id); if(el) el.oninput=el.onchange=e=>{if(id==='arr') state.dateArr=e.target.value; if(id==='dep') state.dateDep=e.target.value; if(id==='voy') state.voy=e.target.value; if(id==='chefDetail') state.chefDetail=e.target.value;};});
+  document.getElementById('b3').onclick=()=>render(3);
+  document.getElementById('to5').onclick=()=>{if(state.besoins.length===0){document.getElementById('err').textContent='Choisissez au moins un Besoin / Activité';return;}render(5);};
+ }else{
+  const isConf=state.conf==='Confidentielle';
+  body.innerHTML=`<div style="padding:24px"><div style="background:#F8F3ED;padding:10px 14px;border-radius:8px;margin-bottom:14px;font-size:12px"><strong>${esc(state.type)} – ${esc(state.zone)} – ${esc(state.zoneDetail)} – ${esc(state.heberg)}</strong><br>${state.besoins.join(', ')}</div><div style="display:flex;gap:10px;margin:12px 0"><label style="flex:1;border:1.5px solid ${!isConf?'#0B1F3A':'var(--border)'};border-radius:10px;padding:10px;text-align:center;cursor:pointer;background:${!isConf?'#0B1F3A;color:#fff':''}"><input type="radio" name="conf" value="Standard" ${!isConf?'checked':''} style="display:none"> Standard</label><label style="flex:1;border:1.5px solid ${isConf?'#0B1F3A':'var(--border)'};border-radius:10px;padding:10px;text-align:center;cursor:pointer;background:${isConf?'#0B1F3A;color:#fff':''}"><input type="radio" name="conf" value="Confidentielle" ${isConf?'checked':''} style="display:none"> Confidentielle</label></div><div style="display:grid;grid-template-columns:1fr 1fr;gap:12px"><div class="${isConf?'conditional-field':'conditional-field visible'}"><label class="field-label">Nom</label><input id="nom" class="simple-tel" value="${esc(state.nom)}"></div><div><label class="field-label">Téléphone * (simple)</label><input id="tel" class="simple-tel" placeholder="+241..." value="${esc(state.tel)}"></div></div><label style="display:block;margin-top:12px"><span class="field-label">Description</span><textarea id="desc" class="form-field" style="min-height:90px">${esc(state.desc)}</textarea></label><div style="margin-top:14px"><span class="field-label">Budget</span><div class="budget-box"><label class="${state.budget==='ouvert'?'selected':''}"><input type="radio" name="budget" value="ouvert" ${state.budget==='ouvert'?'checked':''} style="display:none"> Budget ouvert</label><label class="${state.budget==='defini'?'selected':''}"><input type="radio" name="budget" value="defini" ${state.budget==='defini'?'checked':''} style="display:none"> J'ai un budget</label></div><div class="${state.budget==='defini'?'conditional-field visible':'conditional-field'}" style="margin-top:8px"><input id="bmont" class="form-field" placeholder="Montant FCFA" value="${esc(state.budgetMontant)}"></div></div><div style="display:flex;justify-content:space-between;margin-top:22px"><button id="b4" style="background:transparent;border:1px solid var(--border);padding:12px;border-radius:10px">← Retour</button><div style="display:flex;gap:8px"><button id="wa" class="btn-gold">WhatsApp</button><button id="mail" style="background:#0B1F3A;color:#fff;border:none;padding:12px 18px;border-radius:100px">Email</button></div></div><p id="err" style="color:#9b1c1c"></p></div>`;
+  body.querySelectorAll('input[name=conf]').forEach(r=>r.onchange=e=>{state.conf=e.target.value;render(5);});
+  body.querySelectorAll('input[name=budget]').forEach(r=>r.onchange=e=>{state.budget=e.target.value;render(5);});
+  ['nom','tel','desc','bmont'].forEach(id=>{const el=document.getElementById(id); if(el) el.oninput=e=>{if(id==='nom') state.nom=e.target.value; if(id==='tel') state.tel=e.target.value; if(id==='desc') state.desc=e.target.value; if(id==='bmont') state.budgetMontant=e.target.value;};});
+  document.getElementById('b4').onclick=()=>render(4);
+  document.getElementById('wa').onclick=()=>submit('WhatsApp');document.getElementById('mail').onclick=()=>submit('Email');
+ }
+ document.querySelectorAll('.config-tabs button').forEach((b,i)=>b.classList.toggle('active',i+1===step));
 }
 function submit(src){
-const tel=document.getElementById('tel').value, nom=document.getElementById('nom').value, desc=document.getElementById('desc').value;
-const err=document.getElementById('err');
-if(tel.replace(/\D/g,'').length<8){err.textContent='Téléphone invalide – utilisez +241 ou 06X (sin selector)';return;}
-const conf=document.querySelector('input[name=conf]:checked')?.value||state.conf;
-const msg=`TRAVEL - DEMANDE\\nZone: ${state.zone}\\nType: ${state.type}\\nHeberg: ${state.heberg}\\nDates: ${state.dateArr} -> ${state.dateDep}\\nVoyageurs: ${state.voy} (condicional, aparece porque hay hébergement)\\nTel: ${tel}\\nNom: ${nom}\\nConf: ${conf}\\nDesc: ${desc}`;
-if(src==='WhatsApp'){window.open('https://wa.me/'+WA+'?text='+encodeURIComponent((conf==='confidentielle'?'[CONFIDENTIEL] ':'')+msg),'_blank');}
-else{window.location.href='mailto:magangabridge@gmail.com?subject=Travel '+encodeURIComponent(state.zone)+'&body='+encodeURIComponent(msg);}
-try{fetch(SHEET_URL,{method:'POST',mode:'no-cors',headers:{'Content-Type':'text/plain'},body:JSON.stringify({service:'TRAVEL',zone:state.zone,type:state.type,hebergement:state.heberg,dateArr:state.dateArr,dateDep:state.dateDep,voy:state.voy,tel,nom,conf,desc,source:src})});}catch{}
+ const tel=document.getElementById('tel')?.value||state.tel;
+ if(!tel||tel.replace(/\D/g,'').length<8){document.getElementById('err').textContent='Téléphone invalide – +241...';return;}
+ const msg=`TRAVEL DEMANDE
+Type: ${state.type}
+Zone: ${state.zone} – ${state.zoneDetail} (info como pediste que aparezca)
+Hébergement: ${state.heberg} – 5 apparts + 5 hôtels con 3 fotos
+Besoins: ${state.besoins.join(', ')}
+${state.besoins.includes('Securite')?'Sécurité: '+state.securiteNb+'\n':''}Chef: ${state.chefPref} ${state.chefDetail||''}
+Voyageurs: ${state.voy||'N/A'} (condicional)
+Dates: ${state.dateArr} au ${state.dateDep}
+Conf: ${state.conf}
+Nom: ${state.conf==='Confidentielle'?'[CONFIDENTIEL]':state.nom}
+Tel: ${tel}
+Budget: ${state.budget==='ouvert'?'ouvert':state.budgetMontant}
+Desc: ${state.desc}`;
+ const finalMsg=(state.conf==='Confidentielle'?'[CONFIDENTIEL] ':'')+msg;
+ if(src==='WhatsApp') window.open('https://wa.me/'+WA+'?text='+encodeURIComponent(finalMsg),'_blank');
+ else window.location.href='mailto:magangabridge@gmail.com?subject=Travel '+encodeURIComponent(state.type)+'&body='+encodeURIComponent(finalMsg);
+ try{fetch(SHEET_URL,{method:'POST',mode:'no-cors',headers:{'Content-Type':'text/plain'},body:JSON.stringify({service:'TRAVEL',...state,tel,source:src})});}catch{}
 }
-document.addEventListener('DOMContentLoaded',()=>render(1));
+document.addEventListener('DOMContentLoaded',()=>{render(1);const b=document.getElementById('burgerBtn'),n=document.getElementById('mainNav');b.onclick=()=>{const o=n.classList.toggle('open');b.textContent=o?'✕':'☰';};});
 </script>
 </body>
 </html>
