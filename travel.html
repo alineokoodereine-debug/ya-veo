@@ -39,13 +39,15 @@
 .extra-box{border:1px solid var(--border);background:#fff;border-radius:12px;padding:12px;margin-top:12px}
 .counter{display:flex;align-items:center;justify-content:space-between;border:1px solid var(--border);border-radius:10px;padding:8px 12px;background:#fff;margin-top:8px}
 .counter button{width:32px;height:32px;border-radius:50%;border:1px solid var(--border);background:#fff;cursor:pointer;font-weight:700}
-.recap{background:#0B1F3A;color:#fff;border-radius:12px;padding:14px;margin-bottom:16px;font-size:12.5px;line-height:1.6}
+.recap{background:#0B1F3A;color:#fff;border-radius:12px;padding:14px;margin-bottom:16px;font-size:12.5px;line-height:1.7}
 .recap span{color:#C9A86A}
+.recap .med-badge{display:inline-block;background:#C9A86A;color:#0B1F3A;font-weight:700;padding:2px 8px;border-radius:100px;font-size:11px;margin-left:6px}
 .voiture-opt{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:8px;margin-top:10px}
 .voiture-opt label{border:1.5px solid var(--border);border-radius:12px;overflow:hidden;cursor:pointer;background:#fff;text-align:center}
 .voiture-opt label.selected{border-color:#0B1F3A;box-shadow:0 0 0 2px #C9A86A}
 .voiture-opt img{width:100%;height:70px;object-fit:cover;display:block}
 .voiture-opt span{display:block;padding:6px;font-size:12px;font-weight:600}
+.note-med{background:#FFFEF8;border:1px solid #C9A86A;border-radius:10px;padding:10px 12px;font-size:12.5px;color:#5a4a2e;margin-top:8px}
 @media(max-width:768px){.hero-pano{min-height:78vh;padding:90px 18px 50px}.hotel-grid{grid-template-columns:1fr}.besoin-grid{grid-template-columns:1fr}}
 </style>
 </head>
@@ -79,7 +81,7 @@
 <script>
 const SHEET_URL="https://script.google.com/macros/s/AKfycbww-7Nn7ro4OZ-R1oVuoLSdY6P7OWOHJzLl0I4KNazjOXjGYWlmxFzpq-ti7sHGA2zP/exec";
 const WA="24162516457";
-const state={type:"",zone:"",zoneDetail:"",heberg:"",dateArr:"",dateDep:"",adultes:2,enfants:0,enfantsAges:"",besoins:[],securiteNb:"1 agent",chefPref:"Non",chefDetail:"",voitureType:"",chauffeurDuree:"Tout le séjour",chauffeurDetail:"",conf:"Standard",nom:"",tel:"",desc:"",budget:"ouvert",budgetMontant:""};
+const state={type:"",zone:"",zoneDetail:"",heberg:"",dateArr:"",dateDep:"",adultes:2,enfants:0,enfantsAges:"",besoins:[],securiteNb:"1 agent",chefPref:"Non",chefDetail:"",voitureType:"",chauffeurDuree:"Tout le séjour",chauffeurDetail:"",assistMed:"Non",conf:"Standard",nom:"",tel:"",desc:"",budget:"ouvert",budgetMontant:""};
 
 const TYPES=["Court séjour","Long séjour","Affaires","Familles"];
 const ZONES={
@@ -143,6 +145,24 @@ let activeTab='appart';
 function esc(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
 function besoinList(){return state.type==="Affaires"?BESOINS.Affaires:BESOINS.Familles;}
 
+function buildRecap(){
+  let lignes='';
+  lignes+=`<div><span>Type:</span> ${esc(state.type)}</div>`;
+  lignes+=`<div><span>Zone:</span> ${esc(state.zone)} – ${esc(state.zoneDetail)||'À préciser'}</div>`;
+  lignes+=`<div><span>Hébergement:</span> ${esc(state.heberg)||'Non sélectionné'}</div>`;
+  lignes+=`<div><span>Besoin:</span> ${state.besoins.length?esc(state.besoins.join(', ')):'Aucun (optionnel)'}</div>`;
+  // Seulement si sélectionné
+  if(state.besoins.includes('Voiture') && state.voitureType) lignes+=`<div><span>Voiture:</span> ${esc(state.voitureType)}</div>`;
+  if((state.besoins.includes('Chauffeur')||state.besoins.includes('ChauffeurB')) && state.chauffeurDuree) lignes+=`<div><span>Chauffeur:</span> ${esc(state.chauffeurDuree)} ${esc(state.chauffeurDetail)}</div>`;
+  if(state.besoins.includes('Securite')) lignes+=`<div><span>Sécurité:</span> ${esc(state.securiteNb)}</div>`;
+  if(state.besoins.includes('Chef')) lignes+=`<div><span>Chef:</span> ${esc(state.chefPref)} ${esc(state.chefDetail)}</div>`;
+  if(state.besoins.includes('Nounou')) lignes+=`<div><span>Nounou:</span> ${state.enfants} enfant(s) – ${esc(state.enfantsAges)}</div>`;
+  lignes+=`<div><span>Voyageurs:</span> ${state.adultes} adulte(s), ${state.enfants} enfant(s) ${state.enfantsAges?`(${esc(state.enfantsAges)})`:''}</div>`;
+  lignes+=`<div><span>Dates:</span> ${esc(state.dateArr)||'?'} → ${esc(state.dateDep)||'?'}</div>`;
+  lignes+=`<div style="margin-top:8px;border-top:1px solid rgba(201,168,106,.3);padding-top:8px"><span>Assistance médicale:</span> Incluse <span class="med-badge">✓ Incluse</span><br><span>Besoin spécifique:</span> ${esc(state.assistMed)}${state.assistMed==='Oui'?'<br><em style="color:#E9D9B8">Notre équipe en tiendra compte</em>':''}</div>`;
+  return `<div class="recap">${lignes}</div>`;
+}
+
 function render(step){
  const body=document.getElementById('cfgBody');
  if(step===1){
@@ -170,11 +190,12 @@ function render(step){
   const hasVoiture=state.besoins.includes('Voiture');
   const hasChauffeur=state.besoins.includes('Chauffeur')||state.besoins.includes('ChauffeurB');
   body.innerHTML=`<div style="padding:24px"><div style="background:#F8F3ED;padding:10px 14px;border-radius:8px;margin-bottom:14px;font-size:13px"><strong>Besoin / Activités – ${esc(state.type)}</strong> – Optionnel</div><div class="opt-grid">${list.map(b=>{const sel=state.besoins.includes(b.key);return `<div class="opt-card ${sel?'selected':''}" data-k="${b.key}"><img src="${b.img}"><div class="opt-text"><strong>${b.label}</strong></div></div>`;}).join('')}</div>
-  ${hasSec?`<div class="extra-box"><span class="field-label">Sécurité – Combien ?</span><select id="secNb" class="form-field"><option>1 agent</option><option>2 agents</option><option>3 agents</option><option>4 agents</option><option>5 agents</option><option>Escorte policière</option></select></div>`:''}
+  ${hasSec?`<div class="extra-box"><span class="field-label">Sécurité – Combien ?</span><select id="secNb" class="form-field"><option ${state.securiteNb==='1 agent'?'selected':''}>1 agent</option><option ${state.securiteNb==='2 agents'?'selected':''}>2 agents</option><option ${state.securiteNb==='3 agents'?'selected':''}>3 agents</option><option ${state.securiteNb==='4 agents'?'selected':''}>4 agents</option><option ${state.securiteNb==='5 agents'?'selected':''}>5 agents</option><option ${state.securiteNb==='Escorte policière'?'selected':''}>Escorte policière</option></select></div>`:''}
   ${hasChef?`<div class="extra-box"><span class="field-label">Chef privé – Préférence culinaire ?</span><div style="display:flex;gap:8px;margin-top:8px"><label style="border:1px solid var(--border);padding:8px 12px;border-radius:20px"><input type="radio" name="chefPref" value="Non" ${state.chefPref==='Non'?'checked':''}> Non</label><label style="border:1px solid var(--border);padding:8px 12px;border-radius:20px"><input type="radio" name="chefPref" value="Oui" ${state.chefPref==='Oui'?'checked':''}> Oui</label></div><div class="${state.chefPref==='Oui'?'conditional-field visible':'conditional-field'}" style="margin-top:8px"><input id="chefDetail" class="form-field" placeholder="Végétalien, halal..." value="${esc(state.chefDetail)}"></div></div>`:''}
   ${hasNounou?`<div class="extra-box" style="border-color:#0B1F3A"><span class="field-label">Nounou – Nombre d'enfants et âges</span><input id="enfAges" class="form-field" placeholder="Ex: 2 enfants – 3 ans et 6 ans" value="${esc(state.enfantsAges)}"></div>`:''}
-  ${hasVoiture?`<div class="extra-box" style="border-color:#C9A86A"><span class="field-label">Location voiture – Type de véhicule (sélection comme Mobilité)</span><div class="voiture-opt">${VOITURES.map(v=>`<label class="${state.voitureType===v.id?'selected':''}" data-v="${v.id}"><img src="${v.img}"><span>${v.label}</span></label>`).join('')}</div></div>`:''}
-  ${hasChauffeur?`<div class="extra-box" style="border-color:#0B1F3A"><span class="field-label">Chauffeur – Durée (vous avez demandé: tout le séjour / demi-journée / journée / perso)</span><div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px">${["Tout le séjour","Demi-journée","Journée entière","Personnalisé"].map(d=>`<label style="border:1.5px solid ${state.chauffeurDuree===d?'#0B1F3A':'var(--border)'};padding:10px;border-radius:10px;cursor:pointer;background:${state.chauffeurDuree===d?'#FFFEF8':'#fff'}"><input type="radio" name="chauffDuree" value="${d}" ${state.chauffeurDuree===d?'checked':''} style="display:none"> ${d}</label>`).join('')}</div><div class="${state.chauffeurDuree==='Personnalisé'?'conditional-field visible':'conditional-field'}" style="margin-top:8px"><input id="chauffDetail" class="form-field" placeholder="Ex: 3 jours, horaires 08h-18h, avec nuit..." value="${esc(state.chauffeurDetail)}"></div></div>`:''}
+  ${hasVoiture?`<div class="extra-box" style="border-color:#C9A86A"><span class="field-label">Location voiture – Type de véhicule</span><div class="voiture-opt">${VOITURES.map(v=>`<label class="${state.voitureType===v.id?'selected':''}" data-v="${v.id}"><img src="${v.img}"><span>${v.label}</span></label>`).join('')}</div></div>`:''}
+  ${hasChauffeur?`<div class="extra-box" style="border-color:#0B1F3A"><span class="field-label">Chauffeur – Durée</span><div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px">${["Tout le séjour","Demi-journée","Journée entière","Personnalisé"].map(d=>`<label style="border:1.5px solid ${state.chauffeurDuree===d?'#0B1F3A':'var(--border)'};padding:10px;border-radius:10px;cursor:pointer;background:${state.chauffeurDuree===d?'#FFFEF8':'#fff'}"><input type="radio" name="chauffDuree" value="${d}" ${state.chauffeurDuree===d?'checked':''} style="display:none"> ${d}</label>`).join('')}</div><div class="${state.chauffeurDuree==='Personnalisé'?'conditional-field visible':'conditional-field'}" style="margin-top:8px"><input id="chauffDetail" class="form-field" placeholder="Ex: 3 jours, horaires 08h-18h..." value="${esc(state.chauffeurDetail)}"></div></div>`:''}
+  <div class="extra-box" style="border-color:#C9A86A;background:#FFFEF8"><span class="field-label">Assistance médicale – Incluse dans tous nos séjours</span><div style="display:flex;gap:8px;margin-top:10px"><label style="flex:1;border:1.5px solid ${state.assistMed==='Non'?'#0B1F3A':'var(--border)'};padding:10px;border-radius:10px;cursor:pointer;background:${state.assistMed==='Non'?'#0B1F3A;color:#fff':'#fff'}"><input type="radio" name="assistMed" value="Non" ${state.assistMed==='Non'?'checked':''} style="display:none"> Non, merci</label><label style="flex:1;border:1.5px solid ${state.assistMed==='Oui'?'#0B1F3A':'var(--border)'};padding:10px;border-radius:10px;cursor:pointer;background:${state.assistMed==='Oui'?'#0B1F3A;color:#fff':'#fff'}"><input type="radio" name="assistMed" value="Oui" ${state.assistMed==='Oui'?'checked':''} style="display:none"> Oui, besoin spécifique</label></div>${state.assistMed==='Oui'?`<div class="note-med">✓ Notre équipe en tiendra compte et vous contactera en toute discrétion pour les détails nécessaires. L'assistance médicale de base reste incluse.</div>`:''}</div>
   <div style="margin-top:18px;border-top:1px solid var(--border);padding-top:14px">
     <h4 style="font-size:14px;margin-bottom:10px">Voyageurs – Adultes | Enfants</h4>
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
@@ -188,6 +209,7 @@ function render(step){
   body.querySelectorAll('.opt-card').forEach(c=>{c.onclick=()=>{const k=c.dataset.k; if(state.besoins.includes(k)) state.besoins=state.besoins.filter(x=>x!==k); else state.besoins.push(k); render(4);};});
   body.querySelectorAll('.voiture-opt label').forEach(l=>{l.onclick=()=>{state.voitureType=l.dataset.v; render(4);};});
   body.querySelectorAll('input[name=chauffDuree]').forEach(r=>r.onchange=e=>{state.chauffeurDuree=e.target.value; render(4);});
+  body.querySelectorAll('input[name=assistMed]').forEach(r=>r.onchange=e=>{state.assistMed=e.target.value; render(4);});
   const sec=document.getElementById('secNb'); if(sec) sec.onchange=e=>state.securiteNb=e.target.value;
   body.querySelectorAll('input[name=chefPref]').forEach(r=>r.onchange=e=>{state.chefPref=e.target.value;render(4);});
   document.getElementById('incA')?.addEventListener('click',()=>{state.adultes++;render(4);}); document.getElementById('decA')?.addEventListener('click',()=>{if(state.adultes>1)state.adultes--;render(4);});
@@ -197,8 +219,7 @@ function render(step){
   document.getElementById('to5').onclick=()=>render(5);
  }else{
   const isConf=state.conf==='Confidentielle';
-  const recap=`<div class="recap"><div><span>Type:</span> ${esc(state.type)}</div><div><span>Zone:</span> ${esc(state.zone)} – ${esc(state.zoneDetail)}</div><div><span>Hébergement:</span> ${esc(state.heberg)}</div><div><span>Besoin:</span> ${state.besoins.join(', ')||'Aucun'}</div><div><span>Voiture:</span> ${esc(state.voitureType)||'N/A'}<br><span>Chauffeur:</span> ${esc(state.chauffeurDuree)} ${esc(state.chauffeurDetail)}<br><span>Sécurité:</span> ${esc(state.securiteNb)} ${state.besoins.includes('Chef')?`<br><span>Chef:</span> ${esc(state.chefPref)} ${esc(state.chefDetail)}`:''} ${state.besoins.includes('Nounou')?`<br><span>Nounou:</span> ${state.enfants} enfant(s) – ${esc(state.enfantsAges)}`:''}</div><div><span>Voyageurs:</span> ${state.adultes} adulte(s), ${state.enfants} enfant(s) ${state.enfantsAges?`(${esc(state.enfantsAges)})`:''}</div><div><span>Dates:</span> ${esc(state.dateArr)} → ${esc(state.dateDep)}</div></div>`;
-  body.innerHTML=`<div style="padding:24px">${recap}<div style="display:flex;gap:10px;margin:12px 0"><label style="flex:1;border:1.5px solid ${!isConf?'#0B1F3A':'var(--border)'};border-radius:10px;padding:10px;text-align:center;cursor:pointer;background:${!isConf?'#0B1F3A;color:#fff':''}"><input type="radio" name="conf" value="Standard" ${!isConf?'checked':''} style="display:none"> Standard</label><label style="flex:1;border:1.5px solid ${isConf?'#0B1F3A':'var(--border)'};border-radius:10px;padding:10px;text-align:center;cursor:pointer;background:${isConf?'#0B1F3A;color:#fff':''}"><input type="radio" name="conf" value="Confidentielle" ${isConf?'checked':''} style="display:none"> Confidentielle</label></div><div style="display:grid;grid-template-columns:1fr 1fr;gap:12px"><div class="${isConf?'conditional-field':'conditional-field visible'}"><label class="field-label">Nom complet</label><input id="nom" class="simple-tel" value="${esc(state.nom)}"></div><div><label class="field-label">Téléphone *</label><input id="tel" class="simple-tel" placeholder="+241..." value="${esc(state.tel)}"></div></div><label style="display:block;margin-top:12px"><span class="field-label">Précisions</span><textarea id="desc" class="form-field" style="min-height:90px">${esc(state.desc)}</textarea></label><div style="margin-top:14px"><span class="field-label">Budget</span><div class="budget-box"><label class="${state.budget==='ouvert'?'selected':''}"><input type="radio" name="budget" value="ouvert" ${state.budget==='ouvert'?'checked':''} style="display:none"> Budget ouvert</label><label class="${state.budget==='defini'?'selected':''}"><input type="radio" name="budget" value="defini" ${state.budget==='defini'?'checked':''} style="display:none"> J'ai un budget</label></div><div class="${state.budget==='defini'?'conditional-field visible':'conditional-field'}" style="margin-top:8px"><input id="bmont" class="form-field" placeholder="Montant FCFA" value="${esc(state.budgetMontant)}"></div></div><div style="display:flex;justify-content:space-between;margin-top:22px"><button id="b4" style="background:transparent;border:1px solid var(--border);padding:12px;border-radius:10px">← Retour</button><div style="display:flex;gap:8px"><button id="wa" class="btn-gold">WhatsApp</button><button id="mail" style="background:#0B1F3A;color:#fff;border:none;padding:12px 18px;border-radius:100px">Email</button></div></div><p id="err" style="color:#9b1c1c"></p></div>`;
+  body.innerHTML=`<div style="padding:24px">${buildRecap()}<div style="display:flex;gap:10px;margin:12px 0"><label style="flex:1;border:1.5px solid ${!isConf?'#0B1F3A':'var(--border)'};border-radius:10px;padding:10px;text-align:center;cursor:pointer;background:${!isConf?'#0B1F3A;color:#fff':''}"><input type="radio" name="conf" value="Standard" ${!isConf?'checked':''} style="display:none"> Standard</label><label style="flex:1;border:1.5px solid ${isConf?'#0B1F3A':'var(--border)'};border-radius:10px;padding:10px;text-align:center;cursor:pointer;background:${isConf?'#0B1F3A;color:#fff':''}"><input type="radio" name="conf" value="Confidentielle" ${isConf?'checked':''} style="display:none"> Confidentielle</label></div><div style="display:grid;grid-template-columns:1fr 1fr;gap:12px"><div class="${isConf?'conditional-field':'conditional-field visible'}"><label class="field-label">Nom complet</label><input id="nom" class="simple-tel" value="${esc(state.nom)}"></div><div><label class="field-label">Téléphone *</label><input id="tel" class="simple-tel" placeholder="+241..." value="${esc(state.tel)}"></div></div><label style="display:block;margin-top:12px"><span class="field-label">Précisions</span><textarea id="desc" class="form-field" style="min-height:90px">${esc(state.desc)}</textarea></label><div style="margin-top:14px"><span class="field-label">Budget</span><div class="budget-box"><label class="${state.budget==='ouvert'?'selected':''}"><input type="radio" name="budget" value="ouvert" ${state.budget==='ouvert'?'checked':''} style="display:none"> Budget ouvert</label><label class="${state.budget==='defini'?'selected':''}"><input type="radio" name="budget" value="defini" ${state.budget==='defini'?'checked':''} style="display:none"> J'ai un budget</label></div><div class="${state.budget==='defini'?'conditional-field visible':'conditional-field'}" style="margin-top:8px"><input id="bmont" class="form-field" placeholder="Montant FCFA" value="${esc(state.budgetMontant)}"></div></div><div style="display:flex;justify-content:space-between;margin-top:22px"><button id="b4" style="background:transparent;border:1px solid var(--border);padding:12px;border-radius:10px">← Retour</button><div style="display:flex;gap:8px"><button id="wa" class="btn-gold">WhatsApp</button><button id="mail" style="background:#0B1F3A;color:#fff;border:none;padding:12px 18px;border-radius:100px">Email</button></div></div><p id="err" style="color:#9b1c1c"></p></div>`;
   body.querySelectorAll('input[name=conf]').forEach(r=>r.onchange=e=>{state.conf=e.target.value;render(5);});
   body.querySelectorAll('input[name=budget]').forEach(r=>r.onchange=e=>{state.budget=e.target.value;render(5);});
   ['nom','tel','desc','bmont'].forEach(id=>{const el=document.getElementById(id); if(el) el.oninput=e=>{if(id==='nom') state.nom=e.target.value; if(id==='tel') state.tel=e.target.value; if(id==='desc') state.desc=e.target.value; if(id==='bmont') state.budgetMontant=e.target.value;};});
@@ -217,10 +238,10 @@ Hébergement: ${state.heberg}
 Besoins: ${state.besoins.join(', ')||'Aucun'}
 Voiture: ${state.voitureType||'N/A'}
 Chauffeur: ${state.chauffeurDuree} ${state.chauffeurDetail}
-Sécurité: ${state.securiteNb}
-Chef: ${state.chefPref} ${state.chefDetail||''}
+${state.besoins.includes('Securite')?`Sécurité: ${state.securiteNb}\n`:''}${state.besoins.includes('Chef')?`Chef: ${state.chefPref} ${state.chefDetail}\n`:''}
 Voyageurs: ${state.adultes} adultes, ${state.enfants} enfants (${state.enfantsAges||'N/A'})
 Dates: ${state.dateArr} au ${state.dateDep}
+Assistance médicale: Incluse – Besoin spécifique: ${state.assistMed}
 Confidentialité: ${state.conf}
 Nom: ${state.conf==='Confidentielle'?'[CONFIDENTIEL]':state.nom}
 Tel: ${tel}
