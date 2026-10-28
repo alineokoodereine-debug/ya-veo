@@ -30,6 +30,13 @@
 .budget-box label{flex:1;border:1px solid var(--border);border-radius:10px;padding:10px 12px;cursor:pointer;font-size:13px;background:#fff;text-align:center}
 .budget-box label.selected{border-color:#0B1F3A;box-shadow:0 0 0 2px #C9A86A;background:#0B1F3A;color:#fff}
 .extra-box{border:1px solid var(--border);background:#fff;border-radius:12px;padding:12px;margin-top:12px}
+.recap{background:#0B1F3A;color:#fff;border-radius:12px;padding:14px;margin-bottom:16px;font-size:12.5px;line-height:1.7}
+.recap span{color:#C9A86A}
+.voiture-opt{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:8px;margin-top:10px}
+.voiture-opt label{border:1.5px solid var(--border);border-radius:12px;overflow:hidden;cursor:pointer;background:#fff;text-align:center}
+.voiture-opt label.selected{border-color:#0B1F3A;box-shadow:0 0 0 2px #C9A86A}
+.voiture-opt img{width:100%;height:70px;object-fit:cover;display:block}
+.voiture-opt span{display:block;padding:6px;font-size:12px;font-weight:600}
 @media(max-width:768px){.hero-pano{min-height:78vh;padding:90px 18px 50px}.hero-pano h1{font-size:34px !important}.besoin-grid{grid-template-columns:1fr}.opt-card img{width:72px;min-width:72px;height:72px}}
 </style>
 </head>
@@ -46,7 +53,7 @@
 <div class="hero-pano-content">
 <span class="eyebrow">L’Adresse Conciergerie</span>
 <h1>Conciergerie Personnalisée</h1>
-<h2>Personnes conditional – Chef vegana fix – Fotos mismo tamaño</h2>
+<h2>Besoin → Personnaliser → Demande – avec Récapitulatif</h2>
 <div class="hero-btns"><a class="btn-gold" href="#cfg">Demander</a></div>
 </div>
 </section>
@@ -68,8 +75,18 @@ const state={
   prefCul:"Non", prefDetail:"", 
   securiteNb:"1 agent",
   djDuree:"", djStyle:"Mix généraliste", danseDuree:"", danseNb:"2",
+  voitureType:"", voitureDuree:"Courte journée", voitureDureeDetail:"", voitureJours:"1",
+  chauffeurDuree:"Courte journée", chauffeurJours:"1", chauffeurDetail:"",
   conf:"Standard", nom:"", tel:"", description:"", budget:"ouvert", budgetMontant:""
 };
+
+const VOITURES=[
+ {id:"Berline",label:"Berline",img:"https://images.unsplash.com/photo-1552519507-da3b142c6e3d?w=300&q=80"},
+ {id:"SUV",label:"SUV",img:"https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=300&q=80"},
+ {id:"4x4",label:"4x4",img:"https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?w=300&q=80"},
+ {id:"Minivan",label:"Minivan",img:"https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?w=300&q=80"},
+ {id:"Prestige",label:"Prestige",img:"https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=300&q=80"}
+];
 
 const DATA={
   Quotidien:[
@@ -79,7 +96,8 @@ const DATA={
     {key:"Entretien",label:"Entretien du domicile",desc:"Petits travaux, maintenance",img:"https://images.unsplash.com/photo-1581578731548-c64695cc6952?w=200&q=80",needPerson:false},
     {key:"Menage",label:"Ménage & Rangement",desc:"Haut standing, équipe vérifiée",img:"https://images.unsplash.com/photo-1527515637462-cff94eecc1ac?w=200&q=80",needPerson:false},
     {key:"Nounou",label:"Nounou & Garde d'enfants",desc:"Journée, soirée",img:"https://images.unsplash.com/photo-1596462502278-27bfdc403348?w=200&q=80",needPerson:true,personLabel:"Nombre d'enfants",personPlaceholder:"Ex: 2 enfants, 3 ans et 5 ans"},
-    {key:"Voiture",label:"Voiture & Chauffeur",desc:"Déplacement quotidien",img:"https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?w=200&q=80",needPerson:false},
+    {key:"Voiture",label:"Location voiture",desc:"Service indépendant – Type + Durée",img:"https://images.unsplash.com/photo-1494976388531-d1058494cdd8?w=200&q=80",needPerson:false},
+    {key:"Chauffeur",label:"Chauffeur privé",desc:"Service indépendant – Durée",img:"https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?w=200&q=80",needPerson:false},
     {key:"Chef",label:"Chef privé",desc:"Dîner à domicile",img:"https://images.unsplash.com/photo-1556910103-1c02745a30bf?w=200&q=80",needPerson:true,personLabel:"Nombre de convives",personPlaceholder:"Ex: 6 convives"},
     {key:"AutreQuo",label:"Autre type de service – Précisez",desc:"Décrivez votre besoin",img:"https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=200&q=80",needPerson:false}
   ],
@@ -87,7 +105,9 @@ const DATA={
     {key:"Assistant",label:"Assistant administratif / Bilingue",desc:"Secrétariat, traduction, RDV",img:"https://images.unsplash.com/photo-1521791136064-7986c2920216?w=200&q=80",needPerson:false},
     {key:"Securite",label:"Sécurité – Agent privé",desc:"Limite 5 + Escort policier",img:"https://images.unsplash.com/photo-1593113598332-cd288d649433?w=200&q=80",needPerson:false},
     {key:"Reunion",label:"Organisation Réunion / Séminaire",desc:"Salle, traiteur, matériel",img:"https://images.unsplash.com/photo-1515187029135-18ee286d815b?w=200&q=80",needPerson:true,personLabel:"Nombre de participants",personPlaceholder:"Ex: 12 participants"},
-    {key:"Deplacement",label:"Déplacement d'affaires + Chauffeur",desc:"Transferts",img:"https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?w=200&q=80",needPerson:false},
+    {key:"Deplacement",label:"Déplacement d'affaires",desc:"Transferts",img:"https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?w=200&q=80",needPerson:false},
+    {key:"Voiture",label:"Location voiture",desc:"Service indépendant – Type + Durée",img:"https://images.unsplash.com/photo-1494976388531-d1058494cdd8?w=200&q=80",needPerson:false},
+    {key:"Chauffeur",label:"Chauffeur d'affaires",desc:"Service indépendant – Durée",img:"https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?w=200&q=80",needPerson:false},
     {key:"AccueilVIP",label:"Accueil VIP Aéroport",desc:"Fast-track",img:"https://images.unsplash.com/photo-1436491865332-7a61a109cc05?w=200&q=80",needPerson:true,personLabel:"Nombre de voyageurs",personPlaceholder:"Ex: 2 voyageurs"},
     {key:"Installation",label:"Installation expatrié / Bureau",desc:"Logement, école",img:"https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=200&q=80",needPerson:false}
   ],
@@ -99,11 +119,15 @@ const DATA={
     {key:"Danse",label:"Danseuses / Danseurs / Groupe tradi",desc:"Spectacle",img:"https://images.unsplash.com/photo-1518834107812-67b0b288f04a?w=200&q=80",needPerson:false},
     {key:"PhotoVideo",label:"Photographe / Vidéaste",desc:"Reportage discret",img:"https://images.unsplash.com/photo-1519741497674-611481863552?w=200&q=80",needPerson:false},
     {key:"Chapiteau",label:"Location Chapiteau / Mobilier",desc:"Tentes, chaises",img:"https://images.unsplash.com/photo-1519167758481-83f550bb49b3?w=200&q=80",needPerson:true,personLabel:"Nombre d'invités",personPlaceholder:"Ex: 80 invités"},
+    {key:"Voiture",label:"Location voiture événement",desc:"Type + Durée",img:"https://images.unsplash.com/photo-1494976388531-d1058494cdd8?w=200&q=80",needPerson:false},
+    {key:"Chauffeur",label:"Chauffeur événement",desc:"Durée",img:"https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?w=200&q=80",needPerson:false},
     {key:"MC",label:"Maître de cérémonie / Animateur",desc:"Animation soirée",img:"https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&q=80",needPerson:false}
   ],
   Personnalisée:[
     {key:"SurMesure",label:"Demande entièrement personnalisée",desc:"Expliquez-nous tout",img:"https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=200&q=80",needPerson:false},
-    {key:"ConciergePerso",label:"Concierge dédié 24/7",desc:"Un interlocuteur unique",img:"https://images.unsplash.com/photo-1551836022-deb4988cc6c0?w=200&q=80",needPerson:false}
+    {key:"ConciergePerso",label:"Concierge dédié 24/7",desc:"Un interlocuteur unique",img:"https://images.unsplash.com/photo-1551836022-deb4988cc6c0?w=200&q=80",needPerson:false},
+    {key:"Voiture",label:"Location voiture",desc:"Service indépendant",img:"https://images.unsplash.com/photo-1494976388531-d1058494cdd8?w=200&q=80",needPerson:false},
+    {key:"Chauffeur",label:"Chauffeur privé",desc:"Service indépendant",img:"https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?w=200&q=80",needPerson:false}
   ]
 };
 
@@ -112,9 +136,21 @@ function getPersonInfo(){
   const list=DATA[state.besoin]||[];
   const selected=list.filter(s=>state.services.includes(s.key)&&s.needPerson);
   if(selected.length===0) return null;
-  // prioridad: Nounou > Chef > Fête > resto
   const prio=selected.find(s=>s.key==='Nounou')||selected.find(s=>s.key.includes('Chef'))||selected[0];
   return prio;
+}
+function buildRecap(){
+  let lignes=`<div><span>Besoin:</span> ${esc(state.besoin)}</div>`;
+  lignes+=`<div><span>Services:</span> ${state.services.length?esc(state.services.join(', ')):'Aucun'}</div>`;
+  const p=getPersonInfo(); if(p && state.personnes) lignes+=`<div><span>${esc(p.personLabel)}:</span> ${esc(state.personnes)}</div>`;
+  if(state.services.includes('Securite')) lignes+=`<div><span>Sécurité:</span> ${esc(state.securiteNb)}</div>`;
+  if(state.services.includes('Voiture')) lignes+=`<div><span>Voiture:</span> ${esc(state.voitureType||'À choisir')} – ${esc(state.voitureDuree)} ${state.voitureDuree==='Jour'?'('+esc(state.voitureJours)+' jour(s) max 7)':state.voitureDureeDetail?`(${esc(state.voitureDureeDetail)})`:''}</div>`;
+  if(state.services.includes('Chauffeur')) lignes+=`<div><span>Chauffeur:</span> ${esc(state.chauffeurDuree)} ${state.chauffeurDuree==='Jour'?'('+esc(state.chauffeurJours)+' jour(s) max 7)':esc(state.chauffeurDetail)}</div>`;
+  if(state.services.includes('DJ')) lignes+=`<div><span>DJ:</span> ${esc(state.djDuree)} – ${esc(state.djStyle)}</div>`;
+  if(state.services.includes('Danse')) lignes+=`<div><span>Danse:</span> ${esc(state.danseNb)} – ${esc(state.danseDuree)}</div>`;
+  if(state.services.includes('Chef')||state.services.includes('ChefFete')) lignes+=`<div><span>Chef:</span> ${esc(state.prefCul)} ${esc(state.prefDetail)}</div>`;
+  if(state.ville||state.lieu) lignes+=`<div><span>Lieu:</span> ${esc(state.ville)} ${esc(state.lieu)?'– '+esc(state.lieu):''}</div>`;
+  return `<div class="recap">${lignes}</div>`;
 }
 
 function render(step){
@@ -133,18 +169,39 @@ function render(step){
     const hasSec=state.services.includes('Securite');
     const hasDJ=state.services.includes('DJ');
     const hasDanse=state.services.includes('Danse');
+    const hasVoiture=state.services.includes('Voiture');
+    const hasChauffeur=state.services.includes('Chauffeur');
     const personInfo=getPersonInfo();
     body.innerHTML=`<div style="padding:24px">
-      <div style="background:#F8F3ED;padding:10px 14px;border-radius:8px;margin-bottom:14px;font-size:13px"><strong>${esc(state.besoin)}</strong> – Sélectionnez un ou plusieurs services (sans limite)</div>
+      <div style="background:#F8F3ED;padding:10px 14px;border-radius:8px;margin-bottom:14px;font-size:13px"><strong>${esc(state.besoin)}</strong> – Sélectionnez un ou plusieurs services (Voiture et Chauffeur sont indépendants)</div>
       <div class="opt-grid">${list.map(s=>{
         const sel=state.services.includes(s.key);
         return `<div class="opt-card ${sel?'selected':''}" data-key="${s.key}"><img src="${s.img}" loading="lazy" alt="${s.label}"><div class="opt-text"><strong>${s.label}</strong><small>${s.desc}${s.needPerson?' – '+s.personLabel:''}</small></div></div>`;
       }).join('')}</div>
 
-      ${hasSec?`<div class="extra-box"><span class="field-label">Sécurité – Combien d'agents ? (limite 5 + Escort policier)</span>
+      ${hasSec?`<div class="extra-box"><span class="field-label">Sécurité – Combien d'agents ?</span>
       <select id="secNb" class="form-field" style="margin-top:8px">
-        <option>1 agent</option><option>2 agents</option><option>3 agents</option><option>4 agents</option><option>5 agents</option><option>Escort policier (plus de 5 / besoin officiel)</option>
+        <option ${state.securiteNb==='1 agent'?'selected':''}>1 agent</option><option ${state.securiteNb==='2 agents'?'selected':''}>2 agents</option><option ${state.securiteNb==='3 agents'?'selected':''}>3 agents</option><option ${state.securiteNb==='4 agents'?'selected':''}>4 agents</option><option ${state.securiteNb==='5 agents'?'selected':''}>5 agents</option><option ${state.securiteNb==='Escort policier (plus de 5 / besoin officiel)'?'selected':''}>Escort policier (plus de 5 / besoin officiel)</option>
       </select></div>`:''}
+
+      ${hasVoiture?`<div class="extra-box" style="border-color:#C9A86A"><span class="field-label">Location voiture – Type de véhicule (comme Travel)</span>
+        <div class="voiture-opt">${VOITURES.map(v=>`<label class="${state.voitureType===v.id?'selected':''}" data-v="${v.id}"><img src="${v.img}"><span>${v.label}</span></label>`).join('')}</div>
+        <div style="margin-top:12px"><span class="field-label">Durée de location – Courte journée / Jour (max 7 jours) / Personnalisé</span>
+          <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-top:8px">
+            ${["Courte journée","Jour","Personnalisé"].map(d=>`<label style="border:1.5px solid ${state.voitureDuree===d?'#0B1F3A':'var(--border)'};padding:10px;border-radius:10px;cursor:pointer;text-align:center;background:${state.voitureDuree===d?'#0B1F3A;color:#fff':'#fff'}"><input type="radio" name="voitDuree" value="${d}" ${state.voitureDuree===d?'checked':''} style="display:none"> ${d}</label>`).join('')}
+          </div>
+          <div class="${state.voitureDuree==='Jour'?'conditional-field visible':'conditional-field'}" style="margin-top:8px"><label class="field-label">Nombre de jours (max 7)</label><input id="voitureJours" type="number" min="1" max="7" class="form-field" value="${esc(state.voitureJours)}"></div>
+          <div class="${state.voitureDuree==='Personnalisé'?'conditional-field visible':'conditional-field'}" style="margin-top:8px"><input id="voitureDetail" class="form-field" placeholder="Ex: 3 jours, avec chauffeur, livraison Glass..." value="${esc(state.voitureDureeDetail)}"></div>
+        </div>
+      </div>`:''}
+
+      ${hasChauffeur?`<div class="extra-box" style="border-color:#0B1F3A"><span class="field-label">Chauffeur – Pour combien de temps ? (indépendant de la voiture)</span>
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-top:8px">
+          ${["Courte journée","Jour","Personnalisé"].map(d=>`<label style="border:1.5px solid ${state.chauffeurDuree===d?'#0B1F3A':'var(--border)'};padding:10px;border-radius:10px;cursor:pointer;text-align:center;background:${state.chauffeurDuree===d?'#0B1F3A;color:#fff':'#fff'}"><input type="radio" name="chauffDuree" value="${d}" ${state.chauffeurDuree===d?'checked':''} style="display:none"> ${d}</label>`).join('')}
+        </div>
+        <div class="${state.chauffeurDuree==='Jour'?'conditional-field visible':'conditional-field'}" style="margin-top:8px"><label class="field-label">Nombre de jours (max 7)</label><input id="chauffJours" type="number" min="1" max="7" class="form-field" value="${esc(state.chauffeurJours)}"></div>
+        <div class="${state.chauffeurDuree==='Personnalisé'?'conditional-field visible':'conditional-field'}" style="margin-top:8px"><input id="chauffDetail" class="form-field" placeholder="Ex: 08h-18h, avec nuit, trajet Port-Gentil..." value="${esc(state.chauffeurDetail)}"></div>
+      </div>`:''}
 
       ${hasDJ?`<div class="extra-box"><span class="field-label">DJ – Pour combien de temps ?</span>
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:8px">
@@ -161,13 +218,13 @@ function render(step){
       </div>`:''}
 
       <div style="margin-top:22px;border-top:1px solid var(--border);padding-top:18px">
-        <h4 style="font-size:14px;margin-bottom:10px">Ville & Lieu de Résidence (non obligatoire – clients à l'étranger acceptés)</h4>
+        <h4 style="font-size:14px;margin-bottom:10px">Ville & Lieu de Résidence (non obligatoire)</h4>
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
           <label><span class="field-label">Ville</span><input id="ville" class="form-field" placeholder="Libreville, Port-Gentil, Paris..." value="${esc(state.ville)}"></label>
           <label><span class="field-label">Lieu de Résidence</span><input id="lieu" class="form-field" placeholder="Glass, Batterie IV..." value="${esc(state.lieu)}"></label>
         </div>
         
-        ${personInfo?`<label style="margin-top:14px;display:block" class="conditional-field visible"><span class="field-label">${esc(personInfo.personLabel)} * (aparece porque elegiste ${personInfo.label})</span><input id="pers" class="simple-tel" placeholder="${esc(personInfo.personPlaceholder)}" value="${esc(state.personnes)}"></label>`:`<div class="conditional-field" id="noPerson" style="margin-top:12px;color:var(--muted);font-size:12px">Sélectionnez Nounou, Chef ou Fête pour voir le champ personnes (ahora condicional como pediste)</div>`}
+        ${personInfo?`<label style="margin-top:14px;display:block" class="conditional-field visible"><span class="field-label">${esc(personInfo.personLabel)} *</span><input id="pers" class="simple-tel" placeholder="${esc(personInfo.personPlaceholder)}" value="${esc(state.personnes)}"></label>`:''}
         
         <div class="${hasChef?'conditional-field visible':'conditional-field'}" style="margin-top:16px;border:1px solid var(--border);padding:12px;border-radius:12px;background:#fff">
           <label class="field-label">Avez-vous une préférence culinaire ?</label>
@@ -181,13 +238,16 @@ function render(step){
         </div>
       </div>
 
-      <div style="display:flex;justify-content:space-between;margin-top:22px"><button id="b1" style="background:transparent;border:1px solid var(--border);padding:12px;border-radius:10px">← Retour</button><button class="btn-gold" id="to3">Personnaliser →</button></div><p id="err" style="color:#9b1c1c;margin-top:10px"></p></div>`;
+      <div style="display:flex;justify-content:space-between;margin-top:22px"><button id="b1" style="background:transparent;border:1px solid var(--border);padding:12px;border-radius:10px">← Retour</button><button class="btn-gold" id="to3">Continuer →</button></div><p id="err" style="color:#9b1c1c;margin-top:10px"></p></div>`;
 
     body.querySelectorAll('.opt-card').forEach(c=>{
       c.onclick=()=>{const k=c.dataset.key; if(state.services.includes(k)) state.services=state.services.filter(x=>x!==k); else state.services.push(k); render(2);};
     });
+    body.querySelectorAll('.voiture-opt label').forEach(l=>l.onclick=()=>{state.voitureType=l.dataset.v; render(2);});
+    body.querySelectorAll('input[name=voitDuree]').forEach(r=>r.onchange=e=>{state.voitureDuree=e.target.value; render(2);});
+    body.querySelectorAll('input[name=chauffDuree]').forEach(r=>r.onchange=e=>{state.chauffeurDuree=e.target.value; render(2);});
     const secEl=document.getElementById('secNb'); if(secEl) secEl.onchange=e=>state.securiteNb=e.target.value;
-    ['djDuree','danseDuree','danseNb'].forEach(id=>{const el=document.getElementById(id); if(el) el.oninput=e=>state[id]=e.target.value; const s=document.getElementById('djStyle'); if(s) s.onchange=e=>state.djStyle=e.target.value;});
+    ['djDuree','danseDuree','danseNb','voitureJours','voitureDetail','chauffJours','chauffDetail'].forEach(id=>{const el=document.getElementById(id); if(el) el.oninput=e=>{state[id]=e.target.value; if(id==='voitureJours'&&parseInt(e.target.value)>7) {state.voitureJours='7'; el.value='7';} if(id==='chauffJours'&&parseInt(e.target.value)>7){state.chauffJours='7'; el.value='7';}}; const s=document.getElementById('djStyle'); if(s) s.onchange=e=>state.djStyle=e.target.value;});
     body.querySelectorAll('input[name=pref]').forEach(r=>r.onchange=e=>{state.prefCul=e.target.value; render(2);});
     ['ville','lieu','pers','prefDetail'].forEach(id=>{const el=document.getElementById(id); if(el) el.oninput=e=>{if(id==='ville') state.ville=e.target.value; if(id==='lieu') state.lieu=e.target.value; if(id==='pers') state.personnes=e.target.value; if(id==='prefDetail') state.prefDetail=e.target.value;};});
     document.getElementById('b1').onclick=()=>render(1);
@@ -195,6 +255,7 @@ function render(step){
       const info=getPersonInfo();
       if(info && !document.getElementById('pers')?.value){document.getElementById('err').textContent=info.personLabel+' requis pour '+info.label; return;}
       if(state.services.length===0){document.getElementById('err').textContent='Sélectionnez au moins un service';return;}
+      if(state.services.includes('Voiture') && !state.voitureType){document.getElementById('err').textContent='Choisissez le type de voiture';return;}
       render(3);
     };
 
@@ -203,7 +264,7 @@ function render(step){
     const personInfo=getPersonInfo();
     const hasChef=state.services.includes('Chef')||state.services.includes('ChefFete');
     body.innerHTML=`<div style="padding:24px">
-      <div style="background:#F8F3ED;padding:10px 14px;border-radius:8px;margin-bottom:14px;font-size:13px"><strong>${esc(state.besoin)} – ${state.services.join(', ')}</strong> ${personInfo?`– ${personInfo.personLabel}: ${esc(state.personnes)}`:''}</div>
+      ${buildRecap()}
       <div style="display:flex;gap:10px;margin:12px 0">
         <label style="flex:1;border:1.5px solid ${!isConf?'#0B1F3A':'var(--border)'};border-radius:10px;padding:10px;text-align:center;cursor:pointer;background:${!isConf?'#0B1F3A;color:#fff':''}"><input type="radio" name="conf" value="Standard" ${!isConf?'checked':''} style="display:none"> Standard</label>
         <label style="flex:1;border:1.5px solid ${isConf?'#0B1F3A':'var(--border)'};border-radius:10px;padding:10px;text-align:center;cursor:pointer;background:${isConf?'#0B1F3A;color:#fff':''}"><input type="radio" name="conf" value="Confidentielle" ${isConf?'checked':''} style="display:none"> Confidentielle 🔒</label>
@@ -217,7 +278,7 @@ function render(step){
         <label><span class="field-label">Lieu de Résidence</span><input id="lieu3" class="form-field" value="${esc(state.lieu)}"></label>
       </div>
       ${personInfo?`<div style="margin-top:12px"><label class="field-label">${esc(personInfo.personLabel)} (confirmé)</label><input id="pers3" class="form-field" value="${esc(state.personnes)}"></div>`:''}
-      ${hasChef?`<div style="margin-top:12px;border:1px solid var(--border);padding:10px;border-radius:10px;background:#fff"><span class="field-label">Préférence culinaire: ${esc(state.prefCul)} ${state.prefDetail?'- '+esc(state.prefDetail):''}</span><br><small style="color:var(--muted)">Vegana / Végétarien etc – ahora sí se guarda hasta el final como me dijiste</small></div>`:''}
+      ${hasChef?`<div style="margin-top:12px;border:1px solid var(--border);padding:10px;border-radius:10px;background:#fff"><span class="field-label">Préférence culinaire: ${esc(state.prefCul)} ${state.prefDetail?'- '+esc(state.prefDetail):''}</span></div>`:''}
       <label style="display:block;margin-top:12px"><span class="field-label">Description (facultatif)</span><textarea id="desc" class="form-field" style="min-height:90px">${esc(state.description)}</textarea></label>
       <div style="margin-top:18px"><span class="field-label">Budget</span>
         <div class="budget-box"><label class="${state.budget==='ouvert'?'selected':''}"><input type="radio" name="budget" value="ouvert" ${state.budget==='ouvert'?'checked':''} style="display:none"> Budget ouvert</label><label class="${state.budget==='defini'?'selected':''}"><input type="radio" name="budget" value="defini" ${state.budget==='defini'?'checked':''} style="display:none"> J'ai un budget</label></div>
@@ -240,12 +301,11 @@ function submit(src){
   const personInfo=getPersonInfo();
   const msg=`CONCIERGERIE ${state.besoin}
 Services: ${state.services.join(', ')}
-${personInfo?personInfo.personLabel+': '+state.personnes+'\n':''}Sécurité: ${state.securiteNb}
-DJ: ${state.djDuree||'N/A'} ${state.djStyle||''}
+${personInfo?personInfo.personLabel+': '+state.personnes+'\n':''}${state.services.includes('Securite')?`Sécurité: ${state.securiteNb}\n`:''}${state.services.includes('Voiture')?`Voiture: ${state.voitureType} – ${state.voitureDuree} ${state.voitureDuree==='Jour'?state.voitureJours+' jours':state.voitureDureeDetail}\n`:''}${state.services.includes('Chauffeur')?`Chauffeur: ${state.chauffeurDuree} ${state.chauffeurDuree==='Jour'?state.chauffeurJours+' jours':state.chauffeurDetail}\n`:''}DJ: ${state.djDuree||'N/A'} ${state.djStyle||''}
 Danse: ${state.danseNb} – ${state.danseDuree||'N/A'}
 Ville: ${state.ville}
 Lieu: ${state.lieu}
-Pref culinaire: ${state.prefCul} ${state.prefDetail||''} (fix vegana ahora sí aparece)
+Pref culinaire: ${state.prefCul} ${state.prefDetail||''}
 Conf: ${state.conf}
 Nom: ${state.conf==='Confidentielle'?'[CONFIDENTIEL]':state.nom}
 Tel: ${tel}
