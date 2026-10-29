@@ -15,7 +15,7 @@
 .hero-pano-content{position:relative;z-index:2;max-width:920px}
 .form-field,.simple-tel{width:100%;padding:12px 14px;border:1px solid #d6dbe4;border-radius:10px;font:inherit;background:#fff}
 .field-label{font-size:13px;font-weight:600;color:var(--navy);margin-bottom:6px;display:block}
-.conditional-field{display:none}.conditional-field.visible{display:block;animation:fadeIn .3s}@keyframes fadeIn{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:translateY(0)}}
+.conditional-field{display:none}.conditional-field.visible{display:block;tion:fadeIn .3s}@keyframes fadeIn{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:translateY(0)}}
 .opt-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:12px}
 .opt-card{border:1.5px solid var(--border);border-radius:14px;padding:0;overflow:hidden;background:#fff;cursor:pointer;transition:.2s;display:flex;align-items:stretch;min-height:88px}
 .opt-card.selected{border-color:#0B1F3A;box-shadow:0 0 0 2px #C9A86A;background:#FFFEF8}
@@ -98,15 +98,15 @@ const VOITURES=[
 ];
 
 const EVENTS=[
-  {key:"Fete",label:"Fête – Anniversaire / Baby shower / Mariage",desc:"Organisation complète",img:"https://images.unsplash.com/photo-1511795409834-ef04bbd61622?w=200&q=80",needPerson:true,personLabel:"Nombre d'invités",ph:"Ex: 50 invités"},
-  {key:"Deco",label:"Décoration & Fleurs",desc:"Thème, table, arche",img:"https://images.unsplash.com/photo-1527529482837-4698179dc6ce?w=200&q=80",needPerson:false},
-  {key:"ChefFete",label:"Chef privé + Serveurs événement",desc:"Buffet, cocktail",img:"https://images.unsplash.com/photo-1556910103-1c02745a30bf?w=200&q=80",needPerson:true,personLabel:"Nombre de convives",ph:"Ex: 30 convives"},
+  {key:"Fete",label:"Fête – Anniversaire / Baby shower / Mariage",desc:"Organisation complète",img:"b11.jpg",needPerson:true,personLabel:"Nombre d'invités",ph:"Ex: 50 invités"},
+  {key:"Deco",label:"Décoration & Fleurs",desc:"Thème, table, arche",img:"b12.jpg",needPerson:false},
+  {key:"ChefFete",label:"Chef privé + Serveurs événement",desc:"Buffet, cocktail",img:"b8.jpg",needPerson:true,personLabel:"Nombre de convives",ph:"Ex: 30 convives"},
   {key:"DJ",label:"DJ / Son & Lumière",desc:"Matériel + technicien",img:"https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=200&q=80",needPerson:false},
   {key:"PhotoVideo",label:"Photographe / Vidéaste",desc:"Reportage discret",img:"https://images.unsplash.com/photo-1519741497674-611481863552?w=200&q=80",needPerson:false},
   {key:"Chapiteau",label:"Location Chapiteau / Mobilier",desc:"Tentes, chaises",img:"https://images.unsplash.com/photo-1519167758481-83f550bb49b3?w=200&q=80",needPerson:true,personLabel:"Nombre d'invités",ph:"Ex: 80 invités"},
   {key:"Voiture",label:"Location voiture événement",desc:"Type + Durée – Indépendant",img:"https://images.unsplash.com/photo-1494976388531-d1058494cdd8?w=200&q=80",needPerson:false},
   {key:"Chauffeur",label:"Chauffeur événement",desc:"Durée – Indépendant",img:"https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?w=200&q=80",needPerson:false},
-  {key:"MC",label:"Maître de cérémonie / Animateur",desc:"Animation soirée",img:"https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&q=80",needPerson:false}
+  {key:"MC",label:"Maître de cérémonie / Animateur",desc:"Animation soirée",img:"b9.jpg",needPerson:false}
 ];
 
 const FETES=["Baby shower","Anniversaire","Mariage","Réunion familiale","Fête surprise","Fiançailles","Enterrement de vie de célibataire"];
