@@ -37,7 +37,7 @@
 .voiture-opt label.selected{border-color:#0B1F3A;box-shadow:0 0 0 2px #C9A86A}
 .voiture-opt img{width:100%;height:70px;object-fit:cover;display:block}
 .voiture-opt span{display:block;padding:6px;font-size:12px;font-weight:600}
-@media(max-width:768px){.hero-pano{min-height:78vh;padding:90px 18px 50px}.hero-pano h1{font-size:34px !important}.besoin-grid{grid-template-columns:1fr}.opt-card img{width:72px;min-width:72px;height:72px}}
+@media(max-width:768px){.hero-pano{min-height:78vh;padding:90px 18px 50px}.hero-pano h1{font-size:34px !important}.besoin-grid{grid-template-columns:1fr 1fr}.opt-card img{width:72px;min-width:72px;height:72px}}
 </style>
 </head>
 <body>
@@ -98,30 +98,8 @@ const DATA={
     {key:"Nounou",label:"Nounou & Garde d'enfants",desc:"Journée, soirée",img:"b7.jpg",needPerson:true,personLabel:"Nombre d'enfants",personPlaceholder:"Ex: 2 enfants, 3 ans et 5 ans"},
     {key:"Voiture",label:"Location voiture",desc:"Service indépendant – Type + Durée",img:"https://images.unsplash.com/photo-1494976388531-d1058494cdd8?w=200&q=80",needPerson:false},
     {key:"Chauffeur",label:"Chauffeur privé",desc:"Service indépendant – Durée",img:"https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?w=200&q=80",needPerson:false},
-    {key:"Chef",label:"Chef privé",desc:"Dîner à domicile",img:"https://images.unsplash.com/photo-1556910103-1c02745a30bf?w=200&q=80",needPerson:true,personLabel:"Nombre de convives",personPlaceholder:"Ex: 6 convives"},
+    {key:"Chef",label:"Chef privé",desc:"Dîner à domicile",img:"b8.jpg",needPerson:true,personLabel:"Nombre de convives",personPlaceholder:"Ex: 6 convives"},
     {key:"AutreQuo",label:"Autre type de service – Précisez",desc:"Décrivez votre besoin",img:"https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=200&q=80",needPerson:false}
-  ],
-  Business:[
-    {key:"Assistant",label:"Assistant administratif / Bilingue",desc:"Secrétariat, traduction, RDV",img:"https://images.unsplash.com/photo-1521791136064-7986c2920216?w=200&q=80",needPerson:false},
-    {key:"Securite",label:"Sécurité – Agent privé",desc:"Limite 5 + Escort policier",img:"https://images.unsplash.com/photo-1593113598332-cd288d649433?w=200&q=80",needPerson:false},
-    {key:"Reunion",label:"Organisation Réunion / Séminaire",desc:"Salle, traiteur, matériel",img:"https://images.unsplash.com/photo-1515187029135-18ee286d815b?w=200&q=80",needPerson:true,personLabel:"Nombre de participants",personPlaceholder:"Ex: 12 participants"},
-    {key:"Deplacement",label:"Déplacement d'affaires",desc:"Transferts",img:"https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?w=200&q=80",needPerson:false},
-    {key:"Voiture",label:"Location voiture",desc:"Service indépendant – Type + Durée",img:"https://images.unsplash.com/photo-1494976388531-d1058494cdd8?w=200&q=80",needPerson:false},
-    {key:"Chauffeur",label:"Chauffeur d'affaires",desc:"Service indépendant – Durée",img:"https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?w=200&q=80",needPerson:false},
-    {key:"AccueilVIP",label:"Accueil VIP Aéroport",desc:"Fast-track",img:"https://images.unsplash.com/photo-1436491865332-7a61a109cc05?w=200&q=80",needPerson:true,personLabel:"Nombre de voyageurs",personPlaceholder:"Ex: 2 voyageurs"},
-    {key:"Installation",label:"Installation expatrié / Bureau",desc:"Logement, école",img:"https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=200&q=80",needPerson:false}
-  ],
-  Événement:[
-    {key:"Fete",label:"Fête – Anniversaire / Baby shower / Mariage",desc:"Organisation complète",img:"https://images.unsplash.com/photo-1511795409834-ef04bbd61622?w=200&q=80",needPerson:true,personLabel:"Nombre d'invités",personPlaceholder:"Ex: 50 invités"},
-    {key:"Deco",label:"Décoration & Fleurs",desc:"Thème, table, arche",img:"https://images.unsplash.com/photo-1527529482837-4698179dc6ce?w=200&q=80",needPerson:false},
-    {key:"ChefFete",label:"Chef privé + Serveurs événement",desc:"Buffet, cocktail",img:"https://images.unsplash.com/photo-1556910103-1c02745a30bf?w=200&q=80",needPerson:true,personLabel:"Nombre de convives",personPlaceholder:"Ex: 30 convives"},
-    {key:"DJ",label:"DJ / Son & Lumière",desc:"Matériel + technicien",img:"https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=200&q=80",needPerson:false},
-    {key:"Danse",label:"Danseuses / Danseurs / Groupe tradi",desc:"Spectacle",img:"https://images.unsplash.com/photo-1518834107812-67b0b288f04a?w=200&q=80",needPerson:false},
-    {key:"PhotoVideo",label:"Photographe / Vidéaste",desc:"Reportage discret",img:"https://images.unsplash.com/photo-1519741497674-611481863552?w=200&q=80",needPerson:false},
-    {key:"Chapiteau",label:"Location Chapiteau / Mobilier",desc:"Tentes, chaises",img:"https://images.unsplash.com/photo-1519167758481-83f550bb49b3?w=200&q=80",needPerson:true,personLabel:"Nombre d'invités",personPlaceholder:"Ex: 80 invités"},
-    {key:"Voiture",label:"Location voiture événement",desc:"Type + Durée",img:"https://images.unsplash.com/photo-1494976388531-d1058494cdd8?w=200&q=80",needPerson:false},
-    {key:"Chauffeur",label:"Chauffeur événement",desc:"Durée",img:"https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?w=200&q=80",needPerson:false},
-    {key:"MC",label:"Maître de cérémonie / Animateur",desc:"Animation soirée",img:"https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&q=80",needPerson:false}
   ],
   Personnalisée:[
     {key:"SurMesure",label:"Demande entièrement personnalisée",desc:"Expliquez-nous tout",img:"https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=200&q=80",needPerson:false},
@@ -157,11 +135,11 @@ function render(step){
   const body=document.getElementById('cfgBody');
   if(step===1){
     body.innerHTML=`<div style="padding:24px">
-    <p style="font-size:13px;color:#665f57;margin-bottom:14px">Choisissez le type de demande qui correspond le mieux à votre besoin.</p>
+    <p style="font-size:13px;color:#665f57;margin-bottom:14px">Choisissez le type de demande – Quotidien ou Personnalisée (Business et Événement sont sur leurs pages dédiées).</p>
     <div class="besoin-grid">${Object.keys(DATA).map(k=>`<div class="besoin-card ${state.besoin===k?'selected':''}" data-k="${k}">${k}</div>`).join('')}</div>
     <div style="text-align:right;margin-top:20px"><button class="btn-gold" id="to2">Continuer →</button></div><p id="err" style="color:#9b1c1c;margin-top:10px"></p></div>`;
     body.querySelectorAll('.besoin-card').forEach(c=>c.onclick=()=>{state.besoin=c.dataset.k; state.services=[]; render(1);});
-    document.getElementById('to2').onclick=()=>{if(!state.besoin){document.getElementById('err').textContent='Choisissez Quotidien / Business / Événement / Personnalisée';return;} render(2);};
+    document.getElementById('to2').onclick=()=>{if(!state.besoin){document.getElementById('err').textContent='Choisissez Quotidien ou Personnalisée';return;} render(2);};
 
   }else if(step===2){
     const list=DATA[state.besoin]||[];
