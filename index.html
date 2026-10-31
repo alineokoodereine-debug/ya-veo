@@ -133,11 +133,11 @@
 <script>
 const abosGrid=document.getElementById('abosGrid');
 const plans=[{nom:"Carte Premium",prix:"150 000",page:"abonnement-premium.html"},{nom:"Carte Luxe",prix:"350 000",page:"abonnement-luxe.html"},{nom:"Carte Prestige",prix:"1 050 000",page:"abonnement-prestige.html"}];
-abosGrid.innerHTML=plans.map(p=>`<article class="abonnement-card"><span class="badge-abonnement">p.nom</span><h3>{p.nom}</h3><div class="price-abonnement">p.prix<small>FCFA/mois</small></div><aclass="btn-whatsapp"style="display:block;text-align:center;text-decoration:none;margin-top:12px"href="{p.page}">Savoir plus</a><a class="btn-gold" style="display:block;text-align:center;margin-top:8px;border-radius:100px;padding:12px" href="https://wa.me/24162516457?text=${encodeURIComponent('Je souhaite '+p.nom)}">Solliciter</a></article>`).join('');
+abosGrid.innerHTML=plans.map(p=>`<article class="abonnement-card"><span class="badge-abonnement">${p.nom}</span><h3>${p.nom}</h3><div class="price-abonnement">${p.prix}<small> FCFA/mois</small></div><a class="btn-whatsapp" style="display:block;text-align:center;text-decoration:none;margin-top:12px" href="${p.page}">Savoir plus</a><a class="btn-gold" style="display:block;text-align:center;margin-top:8px;border-radius:100px;padding:12px" href="https://wa.me/24162516457?text=${encodeURIComponent('Je souhaite '+p.nom)}">Solliciter</a></article>`).join('');
 const burger=document.getElementById('burgerBtn'),nav=document.getElementById('mainNav');
 burger.addEventListener('click',()=>{const o=nav.classList.toggle('open');burger.textContent=o?'✕':'☰';});
 const track=document.getElementById('reviewsTrack');let auto=setInterval(()=>{track.scrollLeft+=0.6;if(track.scrollLeft>=track.scrollWidth-track.clientWidth-10)track.scrollLeft=0;},30);
 track.addEventListener('touchstart',()=>clearInterval(auto),{passive:true});
 </script>
 </body>
-</html>
+</html>  
