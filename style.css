@@ -124,8 +124,11 @@ a[href^="tel"],a[href^="mailto"],a[href*="wa.me"]{color:inherit !important;text-
 .reviews-section{background:#F8F6F2;padding:80px 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border);overflow:hidden}
 .reviews-header{text-align:center;max-width:700px;margin:0 auto 40px;padding:0 24px}
 .reviews-header h2{font-size:clamp(30px,4vw,44px);color:var(--navy);line-height:1.05}
-.reviews-track{display:flex;gap:18px;overflow-x:auto;padding:10px 24px 30px;scroll-snap-type:x mandatory;scrollbar-width:none}
-.reviews-track::-webkit-scrollbar{display:none}
+.reviews-marquee{width:100%;overflow:hidden}
+.reviews-track{display:flex;gap:18px;width:max-content;overflow:visible;padding:10px 24px 30px;scroll-snap-type:none;scrollbar-width:none;animation:reviews-marquee 38s linear infinite;will-change:transform}
+.reviews-track:hover,.reviews-track:focus-within{animation-play-state:paused}
+@keyframes reviews-marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+@media(prefers-reduced-motion:reduce){.reviews-track{animation:none;transform:none}}
 .review-card{flex:0 0 320px;scroll-snap-align:start;background:#fff;border:1px solid var(--border);border-radius:20px;padding:22px}
 
 /* PARTENAIRES */
