@@ -13,6 +13,7 @@
 <style>
 .hero-pano{position:relative;min-height:84vh;display:flex;align-items:center;justify-content:center;text-align:center;color:#fff;overflow:hidden;padding:120px 20px 80px}
 .hero-pano-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0}
+.hero-pano-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;z-index:0}
 .hero-pano-overlay{position:absolute;inset:0;background:linear-gradient(180deg,rgba(11,31,58,.5),rgba(11,31,58,.85));z-index:1}
 .hero-pano-content{position:relative;z-index:2;max-width:900px}
 .services-intro{background:#F8F6F2;padding:80px 0 60px;text-align:center;border-bottom:1px solid var(--border)}
@@ -36,8 +37,11 @@
 }
 .reviews-section{background:#fff;padding:70px 0;overflow:hidden;border-top:1px solid var(--border)}
 .reviews-header{text-align:center;padding:0 20px;margin-bottom:30px}
-.reviews-track{display:flex;gap:18px;overflow-x:auto;padding:10px 20px 30px;scroll-snap-type:x mandatory;scrollbar-width:none}
-.reviews-track::-webkit-scrollbar{display:none}
+.reviews-marquee{width:100%;overflow:hidden}
+.reviews-track{display:flex;gap:18px;width:max-content;overflow:visible;padding:10px 20px 30px;scroll-snap-type:none;scrollbar-width:none;animation:reviews-marquee 38s linear infinite;will-change:transform}
+.reviews-track:hover,.reviews-track:focus-within{animation-play-state:paused}
+@keyframes reviews-marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+@media(prefers-reduced-motion:reduce){.reviews-track{animation:none;transform:none}}
 .review-card{flex:0 0 320px;scroll-snap-align:start;background:#F8F6F2;border:1px solid var(--border);border-radius:20px;padding:22px}
 @media(max-width:560px){.review-card{flex:0 0 84vw}}
 .partners-section{background:#F8F6F2;padding:70px 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
@@ -66,6 +70,9 @@
 
 <section class="hero-pano">
 <img class="hero-pano-img" src="b1.jpg" alt="Libreville" onerror="this.src='https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=1600&q=80'">
+ <video class="hero-pano-video" autoplay muted loop playsinline preload="metadata" poster="b1.jpg" aria-label="Présentation de L’Adresse SARL">
+  <source src="hero.mp4" type="video/mp4">
+ </video>
 <div class="hero-pano-overlay"></div>
 <div class="hero-pano-content">
 <span class="eyebrow">Glass · Libreville · Port-Gentil</span>
@@ -103,11 +110,13 @@
 
 <section class="reviews-section" id="avis">
 <div class="reviews-header"><small style="letter-spacing:.28em;text-transform:uppercase;color:#9a7940;font-weight:700;font-size:11px">Témoignages</small><h2>Ils nous font confiance</h2><p style="color:var(--muted);font-size:13px">Avis fictifs – animés</p></div>
-<div class="reviews-track" id="reviewsTrack">
+<div class="reviews-marquee">
+  <div class="reviews-track" id="reviewsTrack" aria-label="Avis de nos clients">
 <article class="review-card"><div style="color:#C9A86A">★★★★★</div><p style="font-family:'Cormorant Garamond';font-style:italic;margin:10px 0">"Service impeccable pour nos déplacements. Chauffeur à l'heure, SUV très confortable."</p><strong style="font-size:13px">Marie K. · Libreville</strong></article>
 <article class="review-card"><div style="color:#C9A86A">★★★★★</div><p style="font-family:'Cormorant Garamond';font-style:italic;margin:10px 0">"Villa pour ma famille à Glass. En 2h tout était organisé."</p><strong style="font-size:13px">Jean-Paul O. · Port-Gentil</strong></article>
 <article class="review-card"><div style="color:#C9A86A">★★★★★</div><p style="font-family:'Cormorant Garamond';font-style:italic;margin:10px 0">"Chef privé à domicile. Número de personas gestionado automáticamente. Bravo !"</p><strong style="font-size:13px">Sarah L. · Événement</strong></article>
 <article class="review-card"><div style="color:#C9A86A">★★★★★</div><p style="font-family:'Cormorant Garamond';font-style:italic;margin:10px 0">"Teléfono sin selector, mucho más simple. Appartement Premium muy limpio."</p><strong style="font-size:13px">Fatou T. · Expatriée</strong></article>
+</div>
 </div>
 </section>
 
@@ -136,8 +145,11 @@ const plans=[{nom:"Carte Premium",prix:"150 000",page:"abonnement-premium.html"}
 abosGrid.innerHTML=plans.map(p=>`<article class="abonnement-card"><span class="badge-abonnement">${p.nom}</span><h3>${p.nom}</h3><div class="price-abonnement">${p.prix}<small> FCFA/mois</small></div><a class="btn-whatsapp" style="display:block;text-align:center;text-decoration:none;margin-top:12px" href="${p.page}">Savoir plus</a><a class="btn-gold" style="display:block;text-align:center;margin-top:8px;border-radius:100px;padding:12px" href="https://wa.me/24162516457?text=${encodeURIComponent('Je souhaite '+p.nom)}">Solliciter</a></article>`).join('');
 const burger=document.getElementById('burgerBtn'),nav=document.getElementById('mainNav');
 burger.addEventListener('click',()=>{const o=nav.classList.toggle('open');burger.textContent=o?'✕':'☰';});
-const track=document.getElementById('reviewsTrack');let auto=setInterval(()=>{track.scrollLeft+=0.6;if(track.scrollLeft>=track.scrollWidth-track.clientWidth-10)track.scrollLeft=0;},30);
-track.addEventListener('touchstart',()=>clearInterval(auto),{passive:true});
+const track=document.getElementById('reviewsTrack');
+const originalReviews=[...track.children];
+originalReviews.forEach(card=>{const clone=card.cloneNode(true);clone.setAttribute('aria-hidden','true');track.appendChild(clone);});
+track.addEventListener('touchstart',()=>{track.style.animationPlayState='paused';},{passive:true});
+track.addEventListener('touchend',()=>{track.style.animationPlayState='running';},{passive:true});
 </script>
 </body>
-</html>              
+</html>                     
